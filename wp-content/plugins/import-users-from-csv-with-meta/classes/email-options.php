@@ -15,8 +15,6 @@ class ACUI_Email_Options{
 	?>
 		<form method="POST" enctype="multipart/form-data" action="" accept-charset="utf-8">
 		<h3><?php _e('Mail options','import-users-from-csv-with-meta'); ?></h3>
-
-		<p class="description"><?php _e( 'You can set your own SMTP and other mail details', 'import-users-from-csv-with-meta' ); ?> <a href="<?php echo admin_url( 'tools.php?page=acui-smtp' ); ?>" target="_blank"><?php _e( 'here', 'import-users-from-csv-with-meta' ); ?></a>.
 		
 		<table class="optiontable form-table">
 			<tbody>

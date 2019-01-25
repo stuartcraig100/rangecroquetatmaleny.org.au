@@ -3,8 +3,8 @@ Contributors: carazo, hornero
 Donate link: http://paypal.me/codection
 Tags: csv, import, importer, meta data, meta, user, users, user meta,  editor, profile, custom, fields, delimiter, update, insert
 Requires at least: 3.4
-Tested up to: 5.0.0
-Stable tag: 1.12.2
+Tested up to: 5.0.3
+Stable tag: 1.12.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,11 +28,14 @@ Clean and easy-to-use Import users plugin. It includes custom user meta to be in
 
 In Codection we have more plugins, please take a look to them.
 
-*	[RedSys Gateway for WooCommerce Pro a plugin to connect your WooCommerce to RedSys](http://codection.com/producto/redsys-gateway-for-woocommerce) (premium)
-*	[Ceca Gateway for WooCommerce Pro a plugin to connect your WooCommerce to Ceca](http://codection.com/producto/ceca-gateway-for-woocommerce-pro/) (premium)
-*	[BBVA Bancomer for WooCommerce Pro a plugin to connect your WooCommerce to BBVA Bancomer](http://codection.com/producto/bbva-bancomer-mexico-gateway-for-woocommerce-pro/) (premium)
-*	[RedSys Button for WordPress a plugin to receive payments using RedSys in WordPress without using WooCommerce](http://codection.com/producto/redsys-button-wordpress/) (premium)
+*	[RedSys Gateway for WooCommerce Pro a plugin to connect your WooCommerce to RedSys](https://codection.com/producto/redsys-gateway-for-woocommerce) (premium)
+*	[Ceca Gateway for WooCommerce Pro a plugin to connect your WooCommerce to Ceca](https://codection.com/producto/ceca-gateway-for-woocommerce-pro/) (premium)
+*	[BBVA Bancomer for WooCommerce Pro a plugin to connect your WooCommerce to BBVA Bancomer](https://codection.com/producto/bbva-bancomer-mexico-gateway-for-woocommerce-pro/) (premium)
+*	[RedSys Button for WordPress a plugin to receive payments using RedSys in WordPress without using WooCommerce](https://codection.com/producto/redsys-button-wordpress/) (premium)
+*	[RedSys Gateway for Contact Form 7 a plugin to receive payments using RedSys in WordPress using the popular contact plugin Contact Form 7](https://codection.com/producto/redsys-gateway-for-contact-form-7/) (premium)
+*	[Ceca Gateway for Contact Form 7 a plugin to receive payments using Ceca in WordPress using the popular contact plugin Contact Form 7](https://codection.com/producto/ceca-gateway-for-contact-form-7/) (premium)
 *	[RedSys Gateway for WP Booking Calendar Pro a plugin to receive payments using RedSys in WordPress using WP Booking Calendar Pro](https://codection.com/producto/redsys-gateway-for-wp-booking-calendar-pro/) (premium)
+*	[RedSys Gateway for Goodlayers Tourmaster Pro a plugin to receive payments using RedSys in WordPress using Goodlayers Tourmaster Pro](https://codection.com/producto/redsys-gateway-for-goodlayers-tourmaster-pro/) (premium)
 *	[Clean Login a plugin to create your own register, log in, lost password and update profile forms](https://wordpress.org/plugins/clean-login/) (free)
 
 ## **Basics**
@@ -59,7 +62,7 @@ Plugin will automatically detect:
 
 * Charset and set it to **UTF-8** to prevent problems with non-ASCII characters.
 * It also will **auto detect line-ending** to prevent problems with different OS.
-* Finally, it will **detect the delimiter** being used in CSV file ("," or ";" or "|")
+* Finally, it will **detect the delimiter** being used in CSV file
 
 == Screenshots ==
 
@@ -70,6 +73,22 @@ Plugin will automatically detect:
 5. Extra profile information (user meta)
 
 == Changelog ==
+
+= 1.12.3.1 =
+*	Fatal error fixed in frontend tab
+
+= 1.12.3 =
+*	Integration with Paid Membership Pro improved thanks to @joneiseman (https://wordpress.org/support/topic/import-paid-membership-pro-fields-not-working/#post-11110984)
+
+= 1.12.2.3 =
+*	Readme updated
+
+= 1.12.2.2 =
+*	Readme fixed
+
+= 1.12.2.1 =
+*	SMTP settings removed, old link was yet placed and caused misunderstandings, thanks to @paulabender for the notice
+*	Tested up to WordPress 5.0.3
 
 = 1.12.2 =
 *	Extra check to avoid problems with CSV bad formed
@@ -555,7 +574,6 @@ Plugin will automatically detect:
 = 1.1.7 =
 *	Fixed problems with \n, \r and \n\r inside CSV fields. Thanks to Ted Stresen-Reuter for his help. We have changed our way to parse CSV files, now we use SplFileObject and we can solve this problem.
 
-=======
 = 1.2 =
 *	From this version, plugin can both insert new users and update new ones. Thanks to Nick Gallop from Weston Graphics.
 
@@ -565,7 +583,6 @@ Plugin will automatically detect:
 = 1.1.7 =
 *	Fixed problems with \n, \r and \n\r inside CSV fields. Thanks to Ted Stresen-Reuter for his help. We have changed our way to parse CSV files, now we use SplFileObject and we can solve this problem.
 
->>>>>>> .r1121403
 = 1.1.6 =
 *	You can import now user_registered but always in the correct format Y-m-d H:i:s
 
@@ -671,7 +688,7 @@ You can get:
 *	Premium support [writing directly to contacto@codection.com](mailto:contacto@codection.com).
 
 = Customizations, addons, develops... =
-[Write u directly to contacto@codection.com](mailto:contacto@codection.com).
+[Write us directly to contacto@codection.com](mailto:contacto@codection.com).
 
 == Installation ==
 

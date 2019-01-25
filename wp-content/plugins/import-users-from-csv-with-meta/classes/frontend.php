@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; 
 
 class ACUI_Frontend{
-	function admin_gui(){
+	public static function admin_gui(){
 		$send_mail_frontend = get_option( "acui_frontend_send_mail");
 		$send_mail_updated_frontend = get_option( "acui_frontend_send_mail_updated");
 		$role = get_option( "acui_frontend_role");

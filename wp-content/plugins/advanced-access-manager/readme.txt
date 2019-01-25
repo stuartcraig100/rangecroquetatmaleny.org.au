@@ -3,7 +3,7 @@ Contributors: vasyltech
 Tags: access control, membership, backend menu, user role, restricted content, security, jwt
 Requires at least: 4.0
 Tested up to: 5.0.3
-Stable tag: 5.8
+Stable tag: 5.8.1
 
 All you need to manage access to you WordPress websites on frontend, backend and API levels for any role, user or visitors.
 
@@ -46,6 +46,7 @@ https://www.youtube.com/watch?v=mj5Xa_Wc16Y
 * [limited] URI Access. Allow or deny access to any page of you website by the page URL as well as how to redirect user when access is denied;
 * [free] Manage access to RESTful or XML-RPC individual endpoints for any role, user or visitors.
 * [free] JWT authentication. Authenticate user with WordPress RESTful API and use received JWT token for further requests. Fid out more from [Hot to authenticate WordPress user with JWT token](https://aamplugin.com/help/how-to-authenticate-wordpress-user-with-jwt-token)
+* [free] Login with URL. For more information check [WordPress: Temporary User Account, Login With URL & JWT Token](https://aamplugin.com/article/wordpress-temporary-user-account-login-with-url-jwt-token) article.
 * [free] Content Filter. Filter or replace parts of your content with AAM shortcodes. Find out more from [How to filter WordPress post content](https://aamplugin.com/help/how-to-filter-wordpress-post-content) article;
 * [free] Login/Logout Redirects. Define custom login and logout redirect for any user or role;
 * [free] 404 Redirect. Redefine where user should be redirected when page does not exist. Find out more from [How to redirect on WordPress 404 error](https://aamplugin.com/help/how-to-redirect-on-wordpress-404-error);
@@ -77,6 +78,10 @@ https://www.youtube.com/watch?v=mj5Xa_Wc16Y
 11. Improve your website security
 
 == Changelog ==
+
+= 5.8.1 =
+* Fixed bug that causes fatal error with Policy editor on Linux servers
+* Profiled and improved several bottlenecks that may speed-up website load up to 300 milliseconds 
 
 = 5.8 =
 * Fixed the bug with Access Policy settings inheritance mechanism

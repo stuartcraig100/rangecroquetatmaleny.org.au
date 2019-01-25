@@ -218,15 +218,19 @@ class AAM_Backend_Filter {
      * @return array
      */
     public function filterRoles($roles) {
+        static $levels = array(); // to speed-up the execution
+        
         $userLevel = AAM::getUser()->getMaxLevel();
         
         //filter roles
         foreach($roles as $id => $role) {
             if (!empty($role['capabilities']) && is_array($role['capabilities'])) {
-                $roleLevel = AAM_Core_API::maxLevel($role['capabilities']);
-                if ($userLevel < $roleLevel) {
+                if (!isset($levels[$id])) {
+                    $levels[$id] = AAM_Core_API::maxLevel($role['capabilities']);
+                }
+                if ($userLevel < $levels[$id]) {
                     unset($roles[$id]);
-                } elseif ($userLevel === $roleLevel && $this->filterSameLevel()) {
+                } elseif ($userLevel === $levels[$id] && $this->filterSameLevel()) {
                     unset($roles[$id]);
                 }
             }

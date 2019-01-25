@@ -216,11 +216,13 @@ final class AAM_Core_API {
      * @access public
      */
     public static function getAllCapabilities() {
-        $caps = array();
+        static $caps = array();
         
-        foreach (self::getRoles()->role_objects as $role) {
-            if (is_array($role->capabilities)) {
-                $caps = array_merge($caps, $role->capabilities);
+        if (empty($caps)) {
+            foreach (self::getRoles()->role_objects as $role) {
+                if (is_array($role->capabilities)) {
+                    $caps = array_merge($caps, $role->capabilities);
+                }
             }
         }
         

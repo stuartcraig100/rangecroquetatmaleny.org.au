@@ -163,9 +163,11 @@ class DUPX_UpdateEngine
 
                 // Get a list of columns in this table
                 $fields = mysqli_query($conn, 'DESCRIBE ' . mysqli_real_escape_string($conn, $table));
-                while ($column = mysqli_fetch_array($fields)) {
-                    $columns[$column['Field']] = $column['Key'] == 'PRI' ? true : false;
-                }
+				if (DUPX_U::isTraversable($fields)) {
+					while ($column = mysqli_fetch_array($fields)) {
+						$columns[$column['Field']] = $column['Key'] == 'PRI' ? true : false;
+					}
+				}
 
                 // Count the number of rows we have in the table if large we'll split into blocks
                 $row_count = mysqli_query($conn, "SELECT COUNT(*) FROM `".mysqli_real_escape_string($conn, $table)."`");
@@ -231,6 +233,8 @@ class DUPX_UpdateEngine
                         foreach ($columns as $column => $primary_key) {
                             $report['scan_cells']++;
                             if (!isset($row[$column]))  continue;
+
+                            $safe_column = '`'.mysqli_real_escape_string($conn, $column).'`';
                             $edited_data = $data_to_fix = $row[$column];
                             $base64converted = false;
                             $txt_found = false;
@@ -239,7 +243,7 @@ class DUPX_UpdateEngine
                             //Added this here to add all columns to $where_sql
                             //The if statement with $txt_found would skip additional columns -TG
                             if($is_unkeyed && ! empty($data_to_fix)) {
-                                $where_sql[] = $column . ' = "' . mysqli_real_escape_string($conn, $data_to_fix) . '"';
+                                $where_sql[] = $safe_column . ' = "' . mysqli_real_escape_string($conn, $data_to_fix) . '"';
                             }
 
                             //Only replacing string values
@@ -295,13 +299,13 @@ class DUPX_UpdateEngine
                                 if ($base64converted) {
                                     $edited_data = base64_encode($edited_data);
                                 }
-                                $upd_col[] = $column;
-                                $upd_sql[] = $column . ' = "' . mysqli_real_escape_string($conn, $edited_data) . '"';
+                                $upd_col[] = $safe_column;
+                                $upd_sql[] = $safe_column . ' = "' . mysqli_real_escape_string($conn, $edited_data) . '"';
                                 $upd = true;
                             }
 
                             if ($primary_key) {
-                                $where_sql[] = $column . ' = "' . mysqli_real_escape_string($conn, $data_to_fix) . '"';
+                                $where_sql[] = $safe_column . ' = "' . mysqli_real_escape_string($conn, $data_to_fix) . '"';
                             }
                         }
 
@@ -366,6 +370,7 @@ class DUPX_UpdateEngine
     {
         // some unseriliased data cannot be re-serialised eg. SimpleXMLElements
         try {
+            DUPX_Handler::$should_log = false;
             if (is_string($data) && ($unserialized = @unserialize($data)) !== false) {
                 $data = self::recursiveUnserializeReplace($from, $to, $unserialized, true, $objArr, $fixpartials);
             } elseif (is_array($data)) {
@@ -407,6 +412,7 @@ class DUPX_UpdateEngine
                         if (isset($_tmp->$key)) {
                             $_tmp->$key = self::recursiveUnserializeReplace($from, $to, $value, false, $objArr);
                         } else {
+
                             // $key is like \0
                             $int_key = intval($key);
                             if ($key == $int_key && isset($_tmp->$int_key)) {
@@ -425,6 +431,7 @@ class DUPX_UpdateEngine
                 }
             }
 
+            DUPX_Handler::$should_log = true;
             if ($serialised) {
                 return serialize($data);
             }

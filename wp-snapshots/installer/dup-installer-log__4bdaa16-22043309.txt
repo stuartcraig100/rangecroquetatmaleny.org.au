@@ -1,0 +1,228 @@
+********************************************************************************
+* DUPLICATOR-LITE: Install-Log
+* STEP-1 START @ 12:05:42
+* VERSION: 1.3.4
+* NOTICE: Do NOT post to public sites or forums!!
+********************************************************************************
+PHP:		7.2.14 | SAPI: litespeed
+PHP MEMORY:	5000M | SUHOSIN: disabled
+SERVER:		LiteSpeed
+DOC ROOT:	/home/rangecro/public_html
+DOC ROOT 755:	true
+LOG FILE 644:	false
+REQUEST URL:	http://rangecroquetatmaleny.org.au/dup-installer/main.installer.php
+SAFE MODE :	0
+CONFIG MODE :	NEW
+--------------------------------------
+PRE-EXTRACT-CHECKS
+--------------------------------------
+- PASS: Apache '.htaccess' not found - no backup needed.
+- PASS: Microsoft IIS 'web.config' not found - no backup needed.
+- PASS: WordFence '.user.ini' not found - no backup needed.
+--------------------------------------
+ARCHIVE SETUP
+--------------------------------------
+NAME:	20190122_rangecroquetclub_4bdaa1618fb4ec7e3326_20190122043309_archive.daf
+SIZE:	131.61MB
+
+>>> DupArchive Extraction Complete
+
+--------------------------------------
+DUPARCHIVE EXTRACTION STATUS
+--------------------------------------
+Archive extracted with no errors.
+
+--------------------------------------
+POST-EXTACT-CHECKS
+--------------------------------------
+PERMISSION UPDATES:
+    -DIRS:  '755'
+    -FILES: '644'
+
+STEP-1 COMPLETE @ 12:05:42 - RUNTIME: 0.3586 sec.
+
+
+
+********************************************************************************
+* DUPLICATOR-LITE INSTALL-LOG
+* STEP-2 START @ 12:07:06
+* NOTICE: Do NOT post to public sites or forums!!
+********************************************************************************
+--------------------------------------
+DATABASE-ENVIRONMENT
+--------------------------------------
+MYSQL VERSION:	This Server: 10.2.19 -- Build Server: 5.7.23
+FILE SIZE:	dup-database__4bdaa16-22043309.sql (496.27KB)
+TIMEOUT:	5000
+MAXPACK:	268435456
+SQLMODE:	NOT_SET
+NEW SQL FILE:	[/home/rangecro/public_html/dup-installer/dup-installer-data__4bdaa16-22043309.sql]
+COLLATE FB:	Off
+*** PHP Warning Message: count(): Parameter must be an array or an object that implements Countable (Code: 2, line 351 in /home/rangecro/public_html/dup-installer/ctrls/ctrl.s2.dbinstall.php)
+--------------------------------------
+DATABASE RESULTS
+--------------------------------------
+DB VIEWS:	enabled
+DB PROCEDURES:	enabled
+ERRORS FOUND:	0
+DROPPED TABLES:	0
+RENAMED TABLES:	0
+QUERIES RAN:	2267
+
+jupiter_bsk_pdf_manager_cats: (3)
+jupiter_bsk_pdf_manager_pdfs: (5)
+jupiter_bsk_pdf_manager_relationships: (5)
+jupiter_commentmeta: (0)
+jupiter_comments: (0)
+jupiter_duplicator_packages: (0)
+jupiter_em_bookings: (0)
+jupiter_em_events: (14)
+jupiter_em_locations: (1)
+jupiter_em_meta: (2)
+jupiter_em_tickets: (0)
+jupiter_em_tickets_bookings: (0)
+jupiter_links: (0)
+jupiter_options: (606)
+jupiter_participants_database: (1)
+jupiter_participants_database_fields: (19)
+jupiter_participants_database_groups: (4)
+jupiter_postmeta: (1092)
+jupiter_posts: (256)
+jupiter_revisr: (19)
+jupiter_sm_sessions: (1)
+jupiter_term_relationships: (108)
+jupiter_term_taxonomy: (11)
+jupiter_termmeta: (0)
+jupiter_terms: (11)
+jupiter_usermeta: (44)
+jupiter_users: (2)
+jupiter_wpgmza: (1)
+jupiter_wpgmza_categories: (0)
+jupiter_wpgmza_category_maps: (0)
+jupiter_wpgmza_circles: (0)
+jupiter_wpgmza_maps: (1)
+jupiter_wpgmza_nominatim_geocode_cache: (1)
+jupiter_wpgmza_polygon: (0)
+jupiter_wpgmza_polylines: (0)
+jupiter_wpgmza_rectangles: (0)
+smackuci_events: (0)
+smackuci_history: (0)
+wp_ultimate_csv_importer_log_values: (0)
+wp_ultimate_csv_importer_manageshortcodes: (0)
+wp_ultimate_csv_importer_shortcodes_statusrel: (0)
+Removed '16' cache/transient rows
+
+INSERT DATA RUNTIME: 0.6891 sec.
+STEP-2 COMPLETE @ 12:07:07 - RUNTIME: 0.7035 sec.
+
+
+
+********************************************************************************
+DUPLICATOR-LITE INSTALL-LOG
+STEP-3 START @ 12:07:18
+NOTICE: Do NOT post to public sites or forums
+********************************************************************************
+CHARSET SERVER:	latin1
+CHARSET CLIENT:	utf8
+
+--------------------------------------
+SERIALIZER ENGINE
+[*] scan every column
+[~] scan only text columns
+[^] no searchable columns
+--------------------------------------
+jupiter_bsk_pdf_manager_cats~ (3)
+jupiter_bsk_pdf_manager_pdfs~ (5)
+jupiter_bsk_pdf_manager_relationships~ (5)
+jupiter_commentmeta^ (0)
+jupiter_comments^ (0)
+jupiter_duplicator_packages^ (0)
+jupiter_em_bookings^ (0)
+jupiter_em_events~ (14)
+jupiter_em_locations~ (1)
+jupiter_em_meta~ (2)
+jupiter_em_tickets^ (0)
+jupiter_em_tickets_bookings^ (0)
+jupiter_links^ (0)
+jupiter_options~ (606)
+jupiter_participants_database~ (1)
+jupiter_participants_database_fields~ (19)
+jupiter_participants_database_groups~ (4)
+jupiter_postmeta~ (1092)
+jupiter_posts~ (256)
+jupiter_revisr~ (19)
+jupiter_sm_sessions~ (1)
+jupiter_term_relationships~ (108)
+jupiter_term_taxonomy~ (11)
+jupiter_termmeta^ (0)
+jupiter_terms~ (11)
+jupiter_usermeta~ (44)
+jupiter_users~ (2)
+jupiter_wpgmza~ (1)
+jupiter_wpgmza_categories^ (0)
+jupiter_wpgmza_category_maps^ (0)
+jupiter_wpgmza_circles^ (0)
+jupiter_wpgmza_maps~ (1)
+jupiter_wpgmza_nominatim_geocode_cache~ (1)
+jupiter_wpgmza_polygon^ (0)
+jupiter_wpgmza_polylines^ (0)
+jupiter_wpgmza_rectangles^ (0)
+smackuci_events^ (0)
+smackuci_history^ (0)
+wp_ultimate_csv_importer_log_values^ (0)
+wp_ultimate_csv_importer_manageshortcodes^ (0)
+wp_ultimate_csv_importer_shortcodes_statusrel^ (0)
+--------------------------------------
+Search1:	'@localhost' 
+Change1:	'@rangecroquetatmaleny.org.au' 
+Search2:	'%40localhost' 
+Change2:	'%40rangecroquetatmaleny.org.au' 
+Search3:	'D:/wamp64/www/rangecroquetclub' 
+Change3:	'/home/rangecro/public_html' 
+Search4:	'D:\/wamp64\/www\/rangecroquetclub' 
+Change4:	'\/home\/rangecro\/public_html' 
+Search5:	'D%3A%2Fwamp64%2Fwww%2Frangecroquetclub%2F' 
+Change5:	'%2Fhome%2Frangecro%2Fpublic_html%2F' 
+Search6:	'D:\wamp64\www\rangecroquetclub' 
+Change6:	'/home/rangecro/public_html' 
+Search7:	'D:\\wamp64\\www\\rangecroquetclub' 
+Change7:	'\/home\/rangecro\/public_html' 
+Search8:	'D%3A%5Cwamp64%5Cwww%5Crangecroquetclub' 
+Change8:	'%2Fhome%2Frangecro%2Fpublic_html' 
+Search9:	'//localhost/rangecroquetclub' 
+Change9:	'//rangecroquetatmaleny.org.au' 
+Search10:	'\/\/localhost\/rangecroquetclub' 
+Change10:	'\/\/rangecroquetatmaleny.org.au' 
+Search11:	'%2F%2Flocalhost%2Frangecroquetclub' 
+Change11:	'%2F%2Frangecroquetatmaleny.org.au' 
+Search12:	'https://rangecroquetatmaleny.org.au' 
+Change12:	'http://rangecroquetatmaleny.org.au' 
+Search13:	'https:\/\/rangecroquetatmaleny.org.au' 
+Change13:	'http:\/\/rangecroquetatmaleny.org.au' 
+Search14:	'https%3A%2F%2Frangecroquetatmaleny.org.au' 
+Change14:	'http%3A%2F%2Frangecroquetatmaleny.org.au' 
+SCANNED:	Tables:41 	|	 Rows:2207 	|	 Cells:14440 
+UPDATED:	Tables:2 	|	 Rows:277 	|	 Cells:316 
+ERRORS:		0 
+RUNTIME:	0.169900 sec
+
+====================================
+CONFIGURATION FILE UPDATES:
+====================================
+
+UPDATED WP-CONFIG ARK FILE:
+ - '/home/rangecro/public_html/wp-config.php'
+- PASS: Successfully created a new .htaccess file.
+- PASS: Existing Apache 'htaccess.orig' was removed
+- PASS: Existing Microsoft IIS 'web.config.orig' was removed
+
+====================================
+NOTICES
+====================================
+
+No General Notices Found
+
+
+STEP-3 COMPLETE @ 12:07:18 - RUNTIME: 0.1792 sec. 
+
+

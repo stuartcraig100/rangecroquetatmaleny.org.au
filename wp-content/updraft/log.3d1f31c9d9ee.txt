@@ -1,0 +1,333 @@
+0000.000 (0) Opened log file at time: Fri, 25 Jan 2019 00:09:45 +0000 on http://rangecroquetatmaleny.org.au
+0000.002 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.16.4 WP: 5.0.3 PHP: 7.2.14 (litespeed, Linux s11.cpcloud.com.au 3.10.0-714.10.2.lve1.5.19.7.el7.x86_64 #1 SMP Fri Sep 28 08:37:09 EDT 2018 x86_64) MySQL: 10.2.19-MariaDB-cll-lve WPLANG: en_US Server: LiteSpeed safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 34.4M | 36.3M) multisite: N openssl: OpenSSL 1.0.2k  26 Jan 2017 mcrypt: N LANG:  ZipArchive::addFile: Y
+0000.055 (0) Free space on disk containing Updraft's temporary directory: 1094605.8 MB
+0000.057 (0) Tasks: Backup files: 1 (schedule: daily) Backup DB:  (schedule: daily)
+0000.057 (0) Processed schedules. Combining jobs from identical schedules. Tasks now: Backup files: 1 Backup DB: 1
+0000.059 (0) Semaphore (fd, jupiter_options) being initialised
+0000.061 (0) Requesting semaphore lock (fd) (apparently not via scheduler)
+0000.062 (0) Set semaphore last lock (fd) time to 2019-01-25 00:09:45
+0000.062 (0) Semaphore lock (fd) complete
+0000.065 (0) Backup run: resumption=0, nonce=3d1f31c9d9ee, file_nonce=3d1f31c9d9ee begun at=1548374985 (0s ago), job type=backup
+0000.066 (0) Scheduling a resumption (1) after 300 seconds (1548375285) in case this run gets aborted
+0000.074 (0) Checking if we have a zip executable available
+0000.074 (0) Testing: /usr/bin/zip
+0000.083 (0) Output: zip warning: binziptest/test.zip not found or empty
+0000.084 (0) Output: adding: binziptest/subdir1/	(in=0) (out=0) (stored 0%)
+0000.085 (0) Output: adding: binziptest/subdir1/subdir2/	(in=0) (out=0) (stored 0%)
+0000.085 (0) Output: adding: binziptest/subdir1/subdir2/test.html	(in=131) (out=107) (deflated 18%)
+0000.086 (0) Output: total bytes=131, compressed=107 -> 18% savings
+0000.093 (0) Output: adding: binziptest/subdir1/subdir2/test2.html	(in=138) (out=113) (deflated 18%)
+0000.094 (0) Output: total bytes=269, compressed=220 -> 18% savings
+0000.100 (0) Working binary zip found: /usr/bin/zip
+0000.101 (0) Zip engine: found/will use a binary zip: /usr/bin/zip
+0000.101 (0) Creation of backups of directories: beginning
+0000.103 (0) Beginning creation of dump of plugins (split every: 400 MB)
+0000.226 (0) Total entities for the zip file: 647 directories, 3988 files (0 skipped as non-modified), 75.8 MB
+0000.229 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 100 files added (on-disk size: 0 KB)
+0000.232 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 200 files added (on-disk size: 0 KB)
+0000.235 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 300 files added (on-disk size: 0 KB)
+0000.238 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 400 files added (on-disk size: 0 KB)
+0000.241 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 500 files added (on-disk size: 0 KB)
+0000.241 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (7.5 MB, 3988 files batched, 501 (501) added so far); re-opening (prior size: 0 KB)
+0002.153 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: size is now: 3.20 MB
+0002.157 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 600 files added (on-disk size: 3286.4 KB)
+0002.160 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 700 files added (on-disk size: 3286.4 KB)
+0002.163 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 800 files added (on-disk size: 3286.4 KB)
+0002.166 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 900 files added (on-disk size: 3286.4 KB)
+0002.175 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 1000 files added (on-disk size: 3286.4 KB)
+0002.175 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (16.4 MB, 3988 files batched, 501 (1002) added so far); re-opening (prior size: 3286.4 KB)
+0013.821 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: size is now: 8.40 MB
+0013.826 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 1100 files added (on-disk size: 8597 KB)
+0013.829 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 1200 files added (on-disk size: 8597 KB)
+0013.832 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 1300 files added (on-disk size: 8597 KB)
+0013.908 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 1400 files added (on-disk size: 8597 KB)
+0013.918 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 1500 files added (on-disk size: 8597 KB)
+0013.919 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (5.4 MB, 3988 files batched, 501 (1503) added so far); re-opening (prior size: 8597 KB)
+0021.981 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: size is now: 10.10 MB
+0021.999 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 1600 files added (on-disk size: 10358.4 KB)
+0022.002 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 1700 files added (on-disk size: 10358.4 KB)
+0022.005 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 1800 files added (on-disk size: 10358.4 KB)
+0022.008 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 1900 files added (on-disk size: 10358.4 KB)
+0022.012 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 2000 files added (on-disk size: 10358.4 KB)
+0022.012 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (10.3 MB, 3988 files batched, 501 (2004) added so far); re-opening (prior size: 10358.4 KB)
+0032.860 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: size is now: 13.50 MB
+0032.864 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 2100 files added (on-disk size: 13840 KB)
+0036.171 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 2.0 seconds have passed since the last write (2.3 MB, 97 (2101) files added so far); re-opening (prior size: 13840 KB)
+0042.537 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 2200 files added (on-disk size: 14525.8 KB)
+0042.540 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 2300 files added (on-disk size: 14525.8 KB)
+0042.543 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 2400 files added (on-disk size: 14525.8 KB)
+0042.545 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 2500 files added (on-disk size: 14525.8 KB)
+0042.548 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 2600 files added (on-disk size: 14525.8 KB)
+0042.549 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (10.5 MB, 3988 files batched, 501 (2602) added so far); re-opening (prior size: 14525.8 KB)
+0049.065 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: size is now: 18.20 MB
+0049.069 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 2700 files added (on-disk size: 18671.9 KB)
+0049.072 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 2800 files added (on-disk size: 18671.9 KB)
+0052.064 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 2.0 seconds have passed since the last write (2.7 MB, 199 (2801) files added so far); re-opening (prior size: 18671.9 KB)
+0060.452 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 2900 files added (on-disk size: 19723.4 KB)
+0060.460 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 3000 files added (on-disk size: 19723.4 KB)
+0060.464 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 3100 files added (on-disk size: 19723.4 KB)
+0060.469 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 3200 files added (on-disk size: 19723.4 KB)
+0060.476 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 3300 files added (on-disk size: 19723.4 KB)
+0060.490 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (16.3 MB, 3988 files batched, 501 (3302) added so far); re-opening (prior size: 19723.4 KB)
+0073.297 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: size is now: 23.70 MB
+0073.301 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 3400 files added (on-disk size: 24261.7 KB)
+0073.304 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 3500 files added (on-disk size: 24261.7 KB)
+0073.307 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 3600 files added (on-disk size: 24261.7 KB)
+0073.310 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 3700 files added (on-disk size: 24261.7 KB)
+0073.313 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 3800 files added (on-disk size: 24261.7 KB)
+0073.313 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (2.8 MB, 3988 files batched, 501 (3803) added so far); re-opening (prior size: 24261.7 KB)
+0084.060 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip.tmp: 3900 files added (on-disk size: 25250.6 KB)
+0084.946 (0) Created plugins zip (0) - 25744.9 KB in 84.8 s (303.6 KB/s) (sha1: d0cafa276178de47236c43d1e4570bf7b6bc184b, sha256: 2fc8c938a321c67f4863d46081e2902de128b83ca03ce13aee07c965df16bc5a)
+0084.947 (0) Beginning creation of dump of themes (split every: 400 MB)
+0085.042 (0) Total entities for the zip file: 417 directories, 2217 files (0 skipped as non-modified), 14.8 MB
+0085.046 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 100 files added (on-disk size: 0 KB)
+0085.048 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 200 files added (on-disk size: 0 KB)
+0085.051 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 300 files added (on-disk size: 0 KB)
+0085.054 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 400 files added (on-disk size: 0 KB)
+0085.056 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 500 files added (on-disk size: 0 KB)
+0085.057 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (5.3 MB, 2217 files batched, 501 (501) added so far); re-opening (prior size: 0 KB)
+0085.422 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: size is now: 1.30 MB
+0085.426 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 600 files added (on-disk size: 1370.1 KB)
+0085.429 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 700 files added (on-disk size: 1370.1 KB)
+0085.432 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 800 files added (on-disk size: 1370.1 KB)
+0085.434 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 900 files added (on-disk size: 1370.1 KB)
+0085.437 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 1000 files added (on-disk size: 1370.1 KB)
+0085.438 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (5.8 MB, 2217 files batched, 501 (1002) added so far); re-opening (prior size: 1370.1 KB)
+0085.933 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: size is now: 3.40 MB
+0085.938 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 1100 files added (on-disk size: 3516.8 KB)
+0085.941 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 1200 files added (on-disk size: 3516.8 KB)
+0085.944 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 1300 files added (on-disk size: 3516.8 KB)
+0085.947 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 1400 files added (on-disk size: 3516.8 KB)
+0085.951 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 1500 files added (on-disk size: 3516.8 KB)
+0085.952 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (3.5 MB, 2217 files batched, 501 (1503) added so far); re-opening (prior size: 3516.8 KB)
+0086.250 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: size is now: 5.60 MB
+0086.255 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 1600 files added (on-disk size: 5700.6 KB)
+0086.257 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 1700 files added (on-disk size: 5700.6 KB)
+0086.260 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 1800 files added (on-disk size: 5700.6 KB)
+0086.263 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 1900 files added (on-disk size: 5700.6 KB)
+0086.266 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 2000 files added (on-disk size: 5700.6 KB)
+0086.267 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (0.1 MB, 2217 files batched, 501 (2004) added so far); re-opening (prior size: 5700.6 KB)
+0088.466 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 2100 files added (on-disk size: 5895.3 KB)
+0088.469 (0) Zip: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip.tmp: 2200 files added (on-disk size: 5895.3 KB)
+0089.813 (0) Created themes zip (0) - 5976 KB in 4.8 s (1241.8 KB/s) (sha1: 6949150d06681e658720815b3e67daab9c7daedd, sha256: 2c2b88e29c894bdecb4ef9a2b874d19f14943ac82f61ada18b699381d8f9d451)
+0089.814 (0) Exclusion option setting (uploads): backup*,*backups,backwpup*,wp-clone,snapshots
+0089.815 (0) Looking for candidates to backup in: /home/rangecro/public_html/wp-content/uploads
+0089.815 (0) finding files: 2018: adding to list (1)
+0089.816 (0) finding files: 2019: adding to list (2)
+0089.816 (0) finding files: bsk-pdf-manager: adding to list (3)
+0089.817 (0) finding files: jupiterx: adding to list (4)
+0089.817 (0) finding files: participants-database: adding to list (5)
+0089.818 (0) finding files: revisr-backups: skipping: excluded by options (glob)
+0089.818 (0) finding files: smack_uci_uploads: adding to list (6)
+0089.819 (0) Beginning creation of dump of uploads (split every: 400 MB)
+0089.875 (0) Total entities for the zip file: 16 directories, 57 files (0 skipped as non-modified), 38.8 MB
+0089.877 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 25 MB added on this batch (29.7 MB, 57 files batched, 36 (36) added so far); re-opening (prior size: 0 KB)
+0116.052 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-uploads.zip.tmp: size is now: 29.40 MB
+0116.063 (0) A useful amount of data was added after this amount of zip processing: 26.5 s (normalised: 22.3 s, rate: 1146.1 KB/s)
+0141.420 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-uploads.zip.tmp: size is now: 37.90 MB
+0142.194 (0) Created uploads zip (0) - 38771.9 KB in 52.3 s (741 KB/s) (sha1: e765b6e7849b3e475366d992db26f35414e830ba, sha256: fb5c119aa151a0dc8b3271469116e77f81f9f90f88fd7c276b2ac026ef96e161)
+0142.195 (0) Beginning backup of other directories found in the content directory (index: 0)
+0142.196 (0) Exclusion option setting (others): upgrade,cache,updraft,backup*,*backups,mysql.sql,debug.log
+0142.196 (0) Looking for candidates to backup in: /home/rangecro/public_html/wp-content
+0142.197 (0) finding files: plugins: skipping: this is the plugins directory
+0142.197 (0) finding files: themes: skipping: this is the themes directory
+0142.198 (0) finding files: upgrade: skipping: excluded by options
+0142.198 (0) finding files: uploads: skipping: this is the uploads directory
+0142.199 (0) finding files: index.php: adding to list (1)
+0142.199 (0) finding files: updraft: skipping: this is the updraft directory
+0142.254 (0) Total entities for the zip file: 0 directories, 1 files (0 skipped as non-modified), 0 MB
+0142.264 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-others.zip.tmp: size is now: 0.00 MB
+0142.279 (0) Created others zip (0) - 0.2 KB in 0 s (7 KB/s) (sha1: 429e8228fb9744dd3639497c0d8ef561b7550775, sha256: d29207dcea13bf29b75658793b9770af29ceb344450899052827b5e1da11a4cb)
+0142.282 (0) Saving backup status to database (elements: 8)
+0142.283 (0) Beginning creation of database dump (WordPress DB)
+0142.285 (0) Testing potential mysqldump binary: /usr/bin/mysqldump
+0142.316 (0) Output: /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;\n/*!40103 SET TIME_ZONE='+00:00' */;\n/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;\n/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;\n/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;\n/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;\nDROP TABLE IF EXISTS `jupiter_options`;\n/*!40101 SET @saved_cs_client     = @@character_set_client */;\n/*!40101 SET character_set_client = utf8 */ (truncated - 1244 bytes total)
+0142.319 (0) Binary mysqldump: error (code: 5)
+0142.320 (0) Testing potential mysqldump binary: /bin/mysqldump
+0142.340 (0) Output: /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;\n/*!40103 SET TIME_ZONE='+00:00' */;\n/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;\n/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;\n/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;\n/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;\nDROP TABLE IF EXISTS `jupiter_options`;\n/*!40101 SET @saved_cs_client     = @@character_set_client */;\n/*!40101 SET character_set_client = utf8 */ (truncated - 1244 bytes total)
+0142.343 (0) Binary mysqldump: error (code: 5)
+0142.358 (0) Table jupiter_options: Total expected rows (approximate): 686
+0142.532 (0) Table jupiter_options: Total rows added: 682 in 0.17 seconds
+0142.533 (0) Table jupiter_options: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_options.table.gz - 150.9 KB)
+0142.536 (0) Table jupiter_users: Total expected rows (approximate): 2
+0142.538 (0) Table jupiter_users: Total rows added: 2 in 0.00 seconds
+0142.539 (0) Table jupiter_users: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_users.table.gz - 0.6 KB)
+0142.541 (0) Table jupiter_usermeta: Total expected rows (approximate): 44
+0142.543 (0) Table jupiter_usermeta: Total rows added: 44 in 0.00 seconds
+0142.544 (0) Table jupiter_usermeta: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_usermeta.table.gz - 1.9 KB)
+0142.548 (0) Table jupiter_commentmeta: Total expected rows (approximate): 0
+0142.549 (0) Table jupiter_commentmeta: Total rows added: 0 in 0.00 seconds
+0142.550 (0) Table jupiter_commentmeta: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_commentmeta.table.gz - 0.4 KB)
+0142.553 (0) Table jupiter_comments: Total expected rows (approximate): 0
+0142.554 (0) Table jupiter_comments: Total rows added: 0 in 0.00 seconds
+0142.555 (0) Table jupiter_comments: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_comments.table.gz - 0.5 KB)
+0142.560 (0) Table jupiter_links: Total expected rows (approximate): 0
+0142.562 (0) Table jupiter_links: Total rows added: 0 in 0.00 seconds
+0142.563 (0) Table jupiter_links: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_links.table.gz - 0.4 KB)
+0142.566 (0) Table jupiter_postmeta: Total expected rows (approximate): 1092
+0142.586 (0) Table jupiter_postmeta: Total rows added: 1092 in 0.02 seconds
+0146.315 (0) Table jupiter_postmeta: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_postmeta.table.gz - 10.7 KB)
+0146.318 (0) Table jupiter_posts: Total expected rows (approximate): 257
+0146.328 (0) Table jupiter_posts: Total rows added: 257 in 0.01 seconds
+0146.331 (0) Table jupiter_posts: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_posts.table.gz - 19.3 KB)
+0146.346 (0) Table jupiter_term_relationships: Total expected rows (approximate): 109
+0146.349 (0) Table jupiter_term_relationships: Total rows added: 109 in 0.00 seconds
+0146.349 (0) Table jupiter_term_relationships: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_term_relationships.table.gz - 0.7 KB)
+0146.353 (0) Table jupiter_term_taxonomy: Total expected rows (approximate): 11
+0146.355 (0) Table jupiter_term_taxonomy: Total rows added: 11 in 0.00 seconds
+0146.355 (0) Table jupiter_term_taxonomy: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_term_taxonomy.table.gz - 0.5 KB)
+0146.359 (0) Table jupiter_termmeta: Total expected rows (approximate): 0
+0146.360 (0) Table jupiter_termmeta: Total rows added: 0 in 0.00 seconds
+0146.361 (0) Table jupiter_termmeta: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_termmeta.table.gz - 0.4 KB)
+0146.364 (0) Table jupiter_terms: Total expected rows (approximate): 11
+0146.366 (0) Table jupiter_terms: Total rows added: 11 in 0.00 seconds
+0146.367 (0) Table jupiter_terms: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_terms.table.gz - 0.5 KB)
+0146.370 (0) Table jupiter_bsk_pdf_manager_cats: Total expected rows (approximate): 3
+0146.372 (0) Table jupiter_bsk_pdf_manager_cats: Total rows added: 3 in 0.00 seconds
+0146.373 (0) Table jupiter_bsk_pdf_manager_cats: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_bsk_pdf_manager_cats.table.gz - 0.5 KB)
+0146.376 (0) Table jupiter_bsk_pdf_manager_pdfs: Total expected rows (approximate): 5
+0146.379 (0) Table jupiter_bsk_pdf_manager_pdfs: Total rows added: 5 in 0.00 seconds
+0146.379 (0) Table jupiter_bsk_pdf_manager_pdfs: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_bsk_pdf_manager_pdfs.table.gz - 0.7 KB)
+0146.382 (0) Table jupiter_bsk_pdf_manager_relationships: Total expected rows (approximate): 5
+0146.385 (0) Table jupiter_bsk_pdf_manager_relationships: Total rows added: 5 in 0.00 seconds
+0146.385 (0) Table jupiter_bsk_pdf_manager_relationships: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_bsk_pdf_manager_relationships.table.gz - 0.4 KB)
+0146.388 (0) Table jupiter_duplicator_packages: Total expected rows (approximate): 0
+0146.390 (0) Table jupiter_duplicator_packages: Total rows added: 0 in 0.00 seconds
+0146.391 (0) Table jupiter_duplicator_packages: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_duplicator_packages.table.gz - 0.4 KB)
+0146.394 (0) Table jupiter_em_bookings: Total expected rows (approximate): 0
+0146.395 (0) Table jupiter_em_bookings: Total rows added: 0 in 0.00 seconds
+0146.396 (0) Table jupiter_em_bookings: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_bookings.table.gz - 0.5 KB)
+0146.399 (0) Table jupiter_em_events: Total expected rows (approximate): 14
+0146.402 (0) Table jupiter_em_events: Total rows added: 14 in 0.00 seconds
+0146.403 (0) Table jupiter_em_events: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_events.table.gz - 1.3 KB)
+0146.405 (0) Table jupiter_em_locations: Total expected rows (approximate): 1
+0146.408 (0) Table jupiter_em_locations: Total rows added: 1 in 0.00 seconds
+0146.408 (0) Table jupiter_em_locations: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_locations.table.gz - 0.6 KB)
+0146.411 (0) Table jupiter_em_meta: Total expected rows (approximate): 2
+0146.414 (0) Table jupiter_em_meta: Total rows added: 2 in 0.00 seconds
+0146.414 (0) Table jupiter_em_meta: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_meta.table.gz - 0.5 KB)
+0146.418 (0) Table jupiter_em_tickets: Total expected rows (approximate): 0
+0146.420 (0) Table jupiter_em_tickets: Total rows added: 0 in 0.00 seconds
+0146.420 (0) Table jupiter_em_tickets: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_tickets.table.gz - 0.4 KB)
+0146.423 (0) Table jupiter_em_tickets_bookings: Total expected rows (approximate): 0
+0146.425 (0) Table jupiter_em_tickets_bookings: Total rows added: 0 in 0.00 seconds
+0146.426 (0) Table jupiter_em_tickets_bookings: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_tickets_bookings.table.gz - 0.4 KB)
+0146.429 (0) Table jupiter_participants_database: Total expected rows (approximate): 1
+0146.431 (0) Table jupiter_participants_database: Total rows added: 1 in 0.00 seconds
+0146.432 (0) Table jupiter_participants_database: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_participants_database.table.gz - 0.6 KB)
+0146.434 (0) Table jupiter_participants_database_fields: Total expected rows (approximate): 19
+0146.437 (0) Table jupiter_participants_database_fields: Total rows added: 19 in 0.00 seconds
+0146.438 (0) Table jupiter_participants_database_fields: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_participants_database_fields.table.gz - 1.3 KB)
+0146.442 (0) Table jupiter_participants_database_groups: Total expected rows (approximate): 4
+0146.445 (0) Table jupiter_participants_database_groups: Total rows added: 4 in 0.00 seconds
+0146.446 (0) Table jupiter_participants_database_groups: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_participants_database_groups.table.gz - 0.5 KB)
+0146.450 (0) Table jupiter_revisr: Total expected rows (approximate): 19
+0146.453 (0) Table jupiter_revisr: Total rows added: 19 in 0.00 seconds
+0146.453 (0) Table jupiter_revisr: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_revisr.table.gz - 0.9 KB)
+0146.456 (0) Table jupiter_sm_sessions: Total expected rows (approximate): 1
+0146.458 (0) Table jupiter_sm_sessions: Total rows added: 1 in 0.00 seconds
+0146.459 (0) Table jupiter_sm_sessions: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_sm_sessions.table.gz - 1 KB)
+0146.463 (0) Table jupiter_wpgmza: Total expected rows (approximate): 0
+0146.465 (0) Table jupiter_wpgmza: Total rows added: 1 in 0.00 seconds
+0146.466 (0) Table jupiter_wpgmza: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza.table.gz - 0.5 KB)
+0146.469 (0) Table jupiter_wpgmza_categories: Total expected rows (approximate): 0
+0146.471 (0) Table jupiter_wpgmza_categories: Total rows added: 0 in 0.00 seconds
+0146.472 (0) Table jupiter_wpgmza_categories: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_categories.table.gz - 0.3 KB)
+0146.476 (0) Table jupiter_wpgmza_category_maps: Total expected rows (approximate): 0
+0146.478 (0) Table jupiter_wpgmza_category_maps: Total rows added: 0 in 0.00 seconds
+0146.478 (0) Table jupiter_wpgmza_category_maps: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_category_maps.table.gz - 0.3 KB)
+0146.482 (0) Table jupiter_wpgmza_circles: Total expected rows (approximate): 0
+0146.484 (0) Table jupiter_wpgmza_circles: Total rows added: 0 in 0.00 seconds
+0146.485 (0) Table jupiter_wpgmza_circles: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_circles.table.gz - 0.3 KB)
+0146.488 (0) Table jupiter_wpgmza_maps: Total expected rows (approximate): 0
+0146.491 (0) Table jupiter_wpgmza_maps: Total rows added: 1 in 0.00 seconds
+0146.491 (0) Table jupiter_wpgmza_maps: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_maps.table.gz - 0.9 KB)
+0146.495 (0) Table jupiter_wpgmza_nominatim_geocode_cache: Total expected rows (approximate): 0
+0146.497 (0) Table jupiter_wpgmza_nominatim_geocode_cache: Total rows added: 1 in 0.00 seconds
+0146.498 (0) Table jupiter_wpgmza_nominatim_geocode_cache: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_nominatim_geocode_cache.table.gz - 0.8 KB)
+0146.502 (0) Table jupiter_wpgmza_polygon: Total expected rows (approximate): 0
+0146.504 (0) Table jupiter_wpgmza_polygon: Total rows added: 0 in 0.00 seconds
+0146.504 (0) Table jupiter_wpgmza_polygon: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_polygon.table.gz - 0.4 KB)
+0146.508 (0) Table jupiter_wpgmza_polylines: Total expected rows (approximate): 0
+0146.510 (0) Table jupiter_wpgmza_polylines: Total rows added: 0 in 0.00 seconds
+0146.510 (0) Table jupiter_wpgmza_polylines: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_polylines.table.gz - 0.3 KB)
+0146.514 (0) Table jupiter_wpgmza_rectangles: Total expected rows (approximate): 0
+0146.516 (0) Table jupiter_wpgmza_rectangles: Total rows added: 0 in 0.00 seconds
+0146.517 (0) Table jupiter_wpgmza_rectangles: finishing file (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_rectangles.table.gz - 0.3 KB)
+0146.518 (0) Skipping table (lacks our prefix (jupiter_)): smackuci_events
+0146.518 (0) Skipping table (lacks our prefix (jupiter_)): smackuci_history
+0146.519 (0) Skipping table (lacks our prefix (jupiter_)): wp_ultimate_csv_importer_log_values
+0146.520 (0) Skipping table (lacks our prefix (jupiter_)): wp_ultimate_csv_importer_manageshortcodes
+0146.520 (0) Skipping table (lacks our prefix (jupiter_)): wp_ultimate_csv_importer_shortcodes_statusrel
+0146.522 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_options.table.gz (1/41): adding to final database dump
+0146.554 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_users.table.gz (2/41): adding to final database dump
+0146.557 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_usermeta.table.gz (3/41): adding to final database dump
+0146.558 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_commentmeta.table.gz (4/41): adding to final database dump
+0146.559 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_comments.table.gz (5/41): adding to final database dump
+0146.559 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_links.table.gz (6/41): adding to final database dump
+0146.560 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_postmeta.table.gz (7/41): adding to final database dump
+0146.563 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_posts.table.gz (8/41): adding to final database dump
+0146.568 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_term_relationships.table.gz (9/41): adding to final database dump
+0146.569 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_term_taxonomy.table.gz (10/41): adding to final database dump
+0146.573 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_termmeta.table.gz (11/41): adding to final database dump
+0146.574 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_terms.table.gz (12/41): adding to final database dump
+0146.575 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_bsk_pdf_manager_cats.table.gz (13/41): adding to final database dump
+0146.575 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_bsk_pdf_manager_pdfs.table.gz (14/41): adding to final database dump
+0146.576 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_bsk_pdf_manager_relationships.table.gz (15/41): adding to final database dump
+0146.577 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_duplicator_packages.table.gz (16/41): adding to final database dump
+0146.577 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_bookings.table.gz (17/41): adding to final database dump
+0146.578 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_events.table.gz (18/41): adding to final database dump
+0146.579 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_locations.table.gz (19/41): adding to final database dump
+0146.579 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_meta.table.gz (20/41): adding to final database dump
+0146.580 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_tickets.table.gz (21/41): adding to final database dump
+0146.580 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_em_tickets_bookings.table.gz (22/41): adding to final database dump
+0146.581 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_participants_database.table.gz (23/41): adding to final database dump
+0146.582 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_participants_database_fields.table.gz (24/41): adding to final database dump
+0146.582 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_participants_database_groups.table.gz (25/41): adding to final database dump
+0146.583 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_revisr.table.gz (26/41): adding to final database dump
+0146.587 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_sm_sessions.table.gz (27/41): adding to final database dump
+0146.587 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza.table.gz (28/41): adding to final database dump
+0146.588 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_categories.table.gz (29/41): adding to final database dump
+0146.589 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_category_maps.table.gz (30/41): adding to final database dump
+0146.590 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_circles.table.gz (31/41): adding to final database dump
+0146.590 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_maps.table.gz (32/41): adding to final database dump
+0146.591 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_nominatim_geocode_cache.table.gz (33/41): adding to final database dump
+0146.592 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_polygon.table.gz (34/41): adding to final database dump
+0146.593 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_polylines.table.gz (35/41): adding to final database dump
+0146.593 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db-table-jupiter_wpgmza_rectangles.table.gz (36/41): adding to final database dump
+0146.594 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db.gz: finished writing out complete database file (184 KB)
+0146.600 (0) Total database tables backed up: 36 (backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db.gz, size: 195960, sha256)
+0146.608 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+0146.608 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+0146.609 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+0146.609 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-others.zip: others: This file has not yet been successfully uploaded: will queue
+0146.610 (0) backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db.gz: db: This file has not yet been successfully uploaded: will queue
+0146.610 (0) Saving backup history. Total backup size: 69 MB
+0146.612 (0) Requesting upload of the files that have not yet been successfully uploaded (5)
+0146.619 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0146.620 (0) No remote despatch: user chose no remote backup service
+0146.620 (0) Recording as successfully uploaded: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-plugins.zip
+0146.622 (0) Recording as successfully uploaded: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-themes.zip
+0146.623 (0) Recording as successfully uploaded: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-uploads.zip
+0146.624 (0) Recording as successfully uploaded: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-others.zip
+0146.625 (0) Recording as successfully uploaded: backup_2019-01-25-1009_Range_Croquet_Club_3d1f31c9d9ee-db.gz
+0146.627 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0146.628 (0) Number of backup sets in history: 1; groups (db): 1
+0146.629 (0) Examining (for databases) backup set with group_id=0, nonce=3d1f31c9d9ee, datestamp=1548374985 (Jan 25 2019 00:09:45)
+0146.629 (0) This backup set is the backup set just made, so will not be deleted.
+0146.629 (0) Number of backup sets in history: 1; groups (files): 1
+0146.630 (0) Examining (for files) backup set with nonce=3d1f31c9d9ee, datestamp=1548374985 (Jan 25 2019 00:09:45)
+0146.630 (0) This backup set is the backup set just made, so will not be deleted.
+0146.630 (0) This backup set is the backup set just made, so will not be deleted.
+0146.630 (0) This backup set is the backup set just made, so will not be deleted.
+0146.630 (0) This backup set is the backup set just made, so will not be deleted.
+0146.630 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0146.631 (0) Retain: saving new backup history (sets now: 1) and finishing retain operation
+0146.633 (0) Resume backup (3d1f31c9d9ee, 0): finish run
+0146.634 (0) Decremented the semaphore (fd) by 1
+0146.635 (0) Semaphore (fd) unlocked
+0146.636 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0146.638 (0) Fetching RSS news feed
+0146.876 (0) Fetched RSS news feed; result is a: SimplePie
+0146.911 (0) Sending email ('Files and database (Full backup)') report (attachments: 0, size: 0 KB) to: stuar...
+0147.232 (0) The backup apparently succeeded and is now complete

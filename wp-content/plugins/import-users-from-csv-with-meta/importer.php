@@ -711,7 +711,7 @@ function acui_options(){
 		break;
 
 		case 'frontend':
-			ACUI_Frotend::admin_gui();	
+			ACUI_Frontend::admin_gui();	
 		break;
 
 		case 'columns':
