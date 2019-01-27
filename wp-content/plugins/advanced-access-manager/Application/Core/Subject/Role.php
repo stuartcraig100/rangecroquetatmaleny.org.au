@@ -39,7 +39,7 @@ class AAM_Core_Subject_Role extends AAM_Core_Subject {
 
         return $role;
     }
-
+    
     /**
      * Delete User Role 
      *

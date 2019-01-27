@@ -42,9 +42,9 @@ class AAM_Backend_Feature_Subject_User {
             $response['recordsFiltered'] = $result->get_total();
 
             foreach ($result->get_results() as $row) {
-                $response['data'][] = $this->prepareRow(
-                        new AAM_Core_Subject_User($row->ID)
-                );
+                $user = new AAM_Core_Subject_User($row->ID);
+                $user->initialize(true);
+                $response['data'][] = $this->prepareRow($user);
             }
         }
 

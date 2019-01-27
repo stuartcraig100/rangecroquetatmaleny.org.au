@@ -114,6 +114,10 @@ class AAM_Backend_Manager {
         //control admin area
         add_action('admin_init', array($this, 'adminInit'));
         
+        //password reset feature
+        add_filter('show_password_fields', array($this, 'canChangePassword'), 10, 2);
+        add_action('check_passwords', array($this, 'canUpdatePassword'), 10, 3);
+        
         //admin toolbar
         if (AAM::isAAM()) {
             add_action('wp_after_admin_bar_render', array($this, 'cacheAdminBar'));
@@ -136,6 +140,47 @@ class AAM_Backend_Manager {
             AAM_Core_Console::add(
                 'AAM requires PHP version 5.3.0 or higher to function properly'
             );
+        }
+    }
+    
+    /**
+     * 
+     * @param boolean $result
+     * @param type $user
+     * @return boolean
+     */
+    public function canChangePassword($result, $user) {
+        $isProfile = $user->ID === get_current_user_id();
+        if ($isProfile) {
+            if (AAM_Core_API::capabilityExists('change_own_password') 
+                && !AAM::getUser()->hasCapability('change_own_password')) {
+                $result = false;
+            }
+        } elseif (AAM_Core_API::capabilityExists('change_passwords') 
+                && !AAM::getUser()->hasCapability('change_passwords')) {
+            $result = false;
+        }
+        
+        return $result;
+    }
+    
+    /**
+     * 
+     * @param type $login
+     * @param type $password
+     */
+    public function canUpdatePassword($login, &$password, &$password2) {
+        $userId    = AAM_Core_Request::post('user_id');
+        $isProfile = $userId === get_current_user_id();
+        
+        if ($isProfile) {
+            if (AAM_Core_API::capabilityExists('change_own_password') 
+                && !AAM::getUser()->hasCapability('change_own_password')) {
+                $password = $password2 = null;
+            }
+        } elseif (AAM_Core_API::capabilityExists('change_passwords') 
+                && !AAM::getUser()->hasCapability('change_passwords')) {
+            $password = $password2 = null;
         }
     }
     

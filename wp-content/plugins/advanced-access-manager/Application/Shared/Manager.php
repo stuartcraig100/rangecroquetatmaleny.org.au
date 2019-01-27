@@ -113,7 +113,12 @@ class AAM_Shared_Manager {
      */
     public function init() {
         //check URI
-        self::$_instance->checkURIAccess();
+        $this->checkURIAccess();
+        
+        //check Media Access if needed
+        if (AAM_Core_Request::get('aam-media')) {
+            AAM_Core_Media::bootstrap()->authorize();
+        }
             
         //register CPT AAM_E_Product
         register_post_type('aam_policy', array(

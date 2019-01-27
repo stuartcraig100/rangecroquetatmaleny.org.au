@@ -55,7 +55,11 @@ class AAM_Core_Object_Policy extends AAM_Core_Object {
     }
     
     /**
+     * Initialize the policy rules for current subject
      * 
+     * @return void
+     * 
+     * @access public
      */
     public function initialize() {
         $subject = $this->getSubject();
@@ -81,17 +85,24 @@ class AAM_Core_Object_Policy extends AAM_Core_Object {
         // Load statements for policies
         $subjectId  = $subject->getUID();
         $subjectId .= ($subject->getId() ? ".{$subject->getId()}" : '');
+        
         $this->load($subjectId, $option);
     }
     
     /**
+     * Load all defined policies for specified subject
      * 
+     * @param string $subjectId
+     * @param array  $policies
+     * 
+     * @return void
+     * 
+     * @access public
      */
     public function load($subjectId, $policies) {
         $resources = array();
         $features  = array();
-        
-        $list = $this->parsePolicy($subjectId, $policies);
+        $list      = $this->parsePolicy($subjectId, $policies);
         
         // Evaluate all Statements first
         foreach($list['Statements'] as $statement) {
@@ -279,370 +290,12 @@ class AAM_Core_Object_Policy extends AAM_Core_Object {
         $result = true;
         
         if (!empty($statement['Condition']) && !is_scalar($statement['Condition'])) {
-            foreach($statement['Condition'] as $type => $conditions) {
-                switch(strtolower($type)) {
-                    case 'between':
-                        $result = $result && $this->evaluateBetweenConditions($conditions);
-                        break;
-                    
-                    case 'equals':
-                        $result = $result && $this->evaluateEqualsConditions($conditions);
-                        break;
-                    
-                    case 'notequals':
-                        $result = $result && $this->evaluateNotEqualsConditions($conditions);
-                        break;
-                    
-                    case 'greater':
-                        $result = $result && $this->evaluateGreaterConditions($conditions);
-                        break;
-                    
-                    case 'less':
-                        $result = $result && $this->evaluateLessConditions($conditions);
-                        break;
-                    
-                    case 'greaterorequals':
-                        $result = $result && $this->evaluateGreaterOrEqualsConditions($conditions);
-                        break;
-                    
-                    case 'lessorequals':
-                        $result = $result && $this->evaluateLessOrEqualsConditions($conditions);
-                        break;
-                    
-                    case 'in':
-                        $result = $result && $this->evaluateInConditions($conditions);
-                        break;
-                    
-                    case 'notin':
-                        $result = $result && $this->evaluateNotInConditions($conditions);
-                        break;
-                    
-                    case 'like':
-                        $result = $result && $this->evaluateLikeConditions($conditions);
-                        break;
-                    
-                    case 'notlike':
-                        $result = $result && $this->evaluateNotLikeConditions($conditions);
-                        break;
-                    
-                    case 'regex':
-                        $result = $result && $this->evaluateRegexConditions($conditions);
-                        break;
-                    
-                    default:
-                        $result = $result && apply_filters('aam-statement-conditions-filter', false, $conditions);
-                        break;
-                }
-            }
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateBetweenConditions($conditions) {
-        $result = false;
-        
-        foreach($this->prepareConditions($conditions) as $left => $right) {
-            foreach((array)$right as $subset) {
-                $min = (is_array($subset) ? array_shift($subset) : $subset);
-                $max = (is_array($subset) ? end($subset) : $subset);
-
-                $result = $result || ($left >= $min && $left <= $max);
-            }
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateEqualsConditions($conditions) {
-        $result = false;
-        
-        foreach($this->prepareConditions($conditions) as $left => $right) {
-            $result = $result || ($left === $right);
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateNotEqualsConditions($conditions) {
-        return !$this->evaluateEqualsConditions($conditions);
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateGreaterConditions($conditions) {
-        $result = false;
-        
-        foreach($this->prepareConditions($conditions) as $left => $right) {
-            $result = $result || ($left > $right);
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateLessConditions($conditions) {
-        $result = false;
-        
-        foreach($this->prepareConditions($conditions) as $left => $right) {
-            $result = $result || ($left < $right);
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateGreaterOrEqualsConditions($conditions) {
-        $result = false;
-        
-        foreach($this->prepareConditions($conditions) as $left => $right) {
-            $result = $result || ($left >= $right);
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateLessOrEqualsConditions($conditions) {
-        $result = false;
-        
-        foreach($this->prepareConditions($conditions) as $left => $right) {
-            $result = $result || ($left <= $right);
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateInConditions($conditions) {
-        $result = false;
-        
-        foreach($this->prepareConditions($conditions) as $left => $right) {
-            $result = $result || in_array($left, (array) $right, true);
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateNotInConditions($conditions) {
-        return !$this->evaluateInConditions($conditions);
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateLikeConditions($conditions) {
-        $result = false;
-        
-        foreach($this->prepareConditions($conditions) as $left => $right) {
-            foreach((array)$right as $el) {
-                $result = $result || preg_match('@^' . str_replace('\*', '.*', preg_quote($el)) . '$@', $left);
-            }
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateNotLikeConditions($conditions) {
-        return !$this->evaluateLikeConditions($conditions);
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return type
-     */
-    protected function evaluateRegexConditions($conditions) {
-        $result = false;
-        
-        foreach($this->prepareConditions($conditions) as $left => $right) {
-            $result = $result || preg_match($right, $left);
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * 
-     * @param type $conditions
-     * @return array
-     */
-    protected function prepareConditions($conditions) {
-        $result = array();
-        
-        if (is_array($conditions)) {
-            foreach($conditions as $left => $right) {
-                $left  = $this->parseTokens($left);
-                $right = $this->parseTokens($right);
-                
-                $result[$left] = $right;
-            }
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * 
-     * @param type $chunk
-     * @return boolean
-     */
-    protected function parseTokens($chunk) {
-        if (is_scalar($chunk)) {
-            if (preg_match_all('/(\$\{[^}]+\})/', $chunk, $match)) {
-                $chunk = $this->replaceTokens($chunk, $match[1]);
-            }
-        } elseif (is_array($chunk) || is_object($chunk)) {
-            foreach($chunk as &$value) {
-                $value = $this->parseTokens($value);
-            }
-        } else {
-            $chunk = false;
-        }
-        
-        return $chunk;
-    }
-    
-    /**
-     * 
-     * @param type $str
-     * @param type $tokens
-     * @return type
-     */
-    protected function replaceTokens($str, $tokens) {
-        foreach($tokens as $token) {
-            $str = str_replace(
-                $token, 
-                $this->evaluateToken(
-                    preg_replace('/^\$\{([^}]+)\}$/', '${1}', $token)
-                ), 
-                $str
+            $result = AAM_Core_Policy_Condition::getInstance()->evaluate(
+                    $statement['Condition']
             );
         }
         
-        return $str;
-    }
-    
-    /**
-     * 
-     * @param type $token
-     * @param type $value
-     */
-    protected function evaluateToken($token, $value = null) {
-        $parts = explode('.', $token);
-        
-        switch($parts[0]) {
-            case 'USER':
-                $value = $this->getUserValue($parts[1], $value);
-                break;
-            
-            case 'DATETIME':
-                $value = $this->getDateTimeValue($parts[1], $value);
-                break;
-            
-            case 'GET':
-                $value = AAM_Core_Request::get($parts[1], $value);
-                break;
-            
-            case 'POST':
-                $value = AAM_Core_Request::post($parts[1], $value);
-                break;
-            
-            case 'COOKIE':
-                $value = AAM_Core_Request::cookie($parts[1], $value);
-                break;
-            
-            case 'CALLBACK':
-                $value = (is_callable($parts[1]) ? call_user_func($parts[1]) : $value);
-                break;
-            
-            default:
-                $value = apply_filters('aam-evaluate-token-filter', $value, $parts[1]);
-                break;
-        }
-        
-        return $value;
-    }
-    
-    /**
-     * 
-     * @param type $prop
-     * @param type $value
-     * @return type
-     */
-    protected function getUserValue($prop, $value = null) {
-        $user = AAM::api()->getUser();
-        
-        switch($prop) {
-            case 'IPAddress':
-                $value = AAM_Core_Request::server('REMOTE_IP');
-                break;
-            
-            case 'Authenticated':
-                $value = $user->isVisitor() ? false : true;
-                break;
-            
-            default:
-                $value = $user->{$prop};
-                break;
-        }
-        
-        return $value;
-    }
-    
-    /**
-     * 
-     * @param type $prop
-     * @return type
-     */
-    protected function getDateTimeValue($prop) {
-        return date($prop);
+        return $result;
     }
     
     /**
@@ -758,11 +411,34 @@ class AAM_Core_Object_Policy extends AAM_Core_Object {
      * @return type
      */
     public function getResources(AAM_Core_Subject $subject = null) {
+        return $this->getList(self::$resources, $subject);
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getFeatures(AAM_Core_Subject $subject = null) {
+        return $this->getList(self::$features, $subject);
+    }
+    
+    /**
+     * Get list from source
+     * 
+     * @param array            $source
+     * @param AAM_Core_Subject $subject
+     * 
+     * @return array
+     * 
+     * @access protected
+     * @since v5.8.2
+     */
+    protected function getList(&$source, AAM_Core_Subject $subject = null) {
         $response = array();
         
         if (is_null($subject)) {
-            if (!isset(self::$resources['__combined'])) {
-                foreach(self::$resources as $resources) {
+            if (!isset($source['__combined'])) {
+                foreach($source as $resources) {
                     foreach ($resources as $id => $props) {
                         if (!empty($props['Unset'])) {
                             if (isset($response[$id])) { // Clear the entire chain
@@ -773,44 +449,16 @@ class AAM_Core_Object_Policy extends AAM_Core_Object {
                         }
                     }
                 }
-                self::$resources['__combined'] = $response;
+                $source['__combined'] = $response;
             } else {
-                $response = self::$resources['__combined'];
+                $response = $source['__combined'];
             }
         } else {
             $subjectId  = $subject->getUID();
             $subjectId .= ($subject->getId() ? ".{$subject->getId()}" : '');
             
-            if (isset(self::$resources[$subjectId])) {
-                $response = self::$resources[$subjectId];
-            }
-        }
-        
-        return $response;
-    }
-    
-    /**
-     * 
-     * @return type
-     */
-    public function getFeatures(AAM_Core_Subject $subject = null) {
-        $response = array();
-        
-        if (is_null($subject)) {
-            if (!isset(self::$features['__combined'])) {
-                foreach(self::$features as $features) {
-                    $response = array_merge($features, $response);
-                }
-                self::$features['__combined'] = $response;
-            } else {
-                $response = self::$features['__combined'];
-            }
-        } else {
-            $subjectId  = $subject->getUID();
-            $subjectId .= ($subject->getId() ? ".{$subject->getId()}" : '');
-            
-            if (isset(self::$features[$subjectId])) {
-                $response = self::$features[$subjectId];
+            if (isset($source[$subjectId])) {
+                $response = $source[$subjectId];
             }
         }
         

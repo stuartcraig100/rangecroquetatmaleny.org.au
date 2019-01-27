@@ -226,12 +226,14 @@ class AAM_Core_Subject_User extends AAM_Core_Subject {
     /**
      * 
      */
-    public function loadCapabilities() {
+    public function initialize($isolated = false) {
         $subject = $this->getSubject();
         
         // Retrieve all capabilities set in Access Policy
         // Load Capabilities from the policy
-        $stms = AAM_Core_Policy_Manager::getInstance()->find("/^Capability:/i");
+        $stms = AAM_Core_Policy_Manager::getInstance()->find(
+            "/^Capability:/i", ($isolated ? $this : null)
+        );
 
         $policyCaps = array();
         
@@ -242,9 +244,42 @@ class AAM_Core_Subject_User extends AAM_Core_Subject {
             }
         }
         
+        // Load Roles from the policy
+        $stms = AAM_Core_Policy_Manager::getInstance()->find(
+            "/^Role:/i", ($isolated ? $this : null)
+        );
+
+        $roles    = (array) $subject->roles;
+        
+        $allRoles = AAM_Core_API::getRoles();
+        $roleCaps = array();
+        
+        foreach($stms as $key => $stm) {
+            $chunks = explode(':', $key);
+            
+            if ($stm['Effect'] === 'allow') {
+                if (!in_array($chunks[1], $roles, true)) {
+                    if ($allRoles->is_role($chunks[1])) {
+                        $roleCaps = array_merge($roleCaps, $allRoles->get_role($chunks[1])->capabilities);
+                        $roleCaps[] = $chunks[1];
+                    }
+                    $roles[] = $chunks[1];
+                }
+            } elseif (in_array($chunks[1], $roles, true)) {
+                // Make sure that we delete all instanses of the role
+                foreach($roles as $i => $role){ 
+                    if ($role === $chunks[1]) {
+                        unset($roles[$i]);
+                    }
+                }
+            }
+        }
+        
+        $subject->roles = $roles;
+        
         //reset the user capabilities
-        $subject->allcaps = array_merge($subject->allcaps, $policyCaps,  $this->aamCaps);
-        $subject->caps    = array_merge($subject->caps, $policyCaps,  $this->aamCaps);
+        $subject->allcaps = array_merge($subject->allcaps, $roleCaps, $policyCaps,  $this->aamCaps);
+        $subject->caps    = array_merge($subject->caps, $roleCaps, $policyCaps,  $this->aamCaps);
     }
 
     /**
@@ -268,24 +303,7 @@ class AAM_Core_Subject_User extends AAM_Core_Subject {
      * @access public
      */
     public function hasCapability($capability) {
-        // Priority #1: capability that has been explicitely set
-        if (isset($this->aamCaps[$capability])) {
-            $result = !empty($this->aamCaps[$capability]);
-        } else {
-            // Priority #2: capability that has been defined in policy
-            // Override by policy if is set
-            $stm = AAM::api()->getPolicyManager()->find(
-                    "/^Capability:{$capability}$/i", $this
-            );
-            if (!empty($stm)) {
-                $val = end($stm);
-                $result = ($val['Effect'] === 'allow' ? 1 : 0);
-            } else {
-                $result = user_can($this->getSubject(), $capability);
-            }
-        }
-        
-        return $result;
+        return user_can($this->getSubject(), $capability);
     }
 
     /**

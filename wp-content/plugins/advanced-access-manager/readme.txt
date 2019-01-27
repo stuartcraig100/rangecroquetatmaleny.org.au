@@ -3,7 +3,7 @@ Contributors: vasyltech
 Tags: access control, membership, backend menu, user role, restricted content, security, jwt
 Requires at least: 4.0
 Tested up to: 5.0.3
-Stable tag: 5.8.1
+Stable tag: 5.8.2
 
 All you need to manage access to you WordPress websites on frontend, backend and API levels for any role, user or visitors.
 
@@ -78,6 +78,15 @@ https://www.youtube.com/watch?v=mj5Xa_Wc16Y
 11. Improve your website security
 
 == Changelog ==
+
+= 5.8.2 =
+* Fixed numerous bugs with access control for media
+* Added support for change_own_password capability
+* Added support for change_passwords capability
+* Added type casting to the Access Policy document
+* Added new resource `Role` to the Access Policy
+* Refactored internal Access Policy implementation
+* Improved performance
 
 = 5.8.1 =
 * Fixed bug that causes fatal error with Policy editor on Linux servers

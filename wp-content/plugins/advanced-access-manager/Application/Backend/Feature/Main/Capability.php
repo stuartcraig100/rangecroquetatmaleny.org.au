@@ -252,9 +252,12 @@ class AAM_Backend_Feature_Main_Capability extends AAM_Backend_Feature_Abstract {
     protected function retrieveAllCaps() {
         $response = array();
         
+        $subject  = AAM_Backend_Subject::getInstance()->get();
+        $subject->initialize(true);
+        
         // Load also capabilities defined in policy
         $stms = AAM_Core_Policy_Manager::getInstance()->find(
-            "/^Capability:/i", AAM_Backend_Subject::getInstance()->get()
+            "/^Capability:/i", $subject
         );
         
         $policyCaps = array();

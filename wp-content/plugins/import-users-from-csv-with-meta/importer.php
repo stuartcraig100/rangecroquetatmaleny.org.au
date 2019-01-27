@@ -737,5 +737,9 @@ function acui_options(){
 		case 'help':
 			ACUI_Help::message();
 		break;
+
+		default:
+			do_action( 'acui_tab_action_' . $tab );
+		break;
 	}
 }
