@@ -143,15 +143,19 @@ class ACUI_Email_Template{
 	}
 
 	function save_post( $post_id ){
+		if( 'acui_email_template' != $_POST['post_type'] ) {
+			return $post_id;
+		}
+
+		if( !isset( $_POST['acui_email_template_attachment'] )){
+			return $post_id;
+		}
+
 		if( !wp_verify_nonce( $_POST['acui_email_template_attachment'], 'acui_email_template_attachment' ) ) {
 			return $post_id;
 		}
 		
 		if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return $post_id;
-		}
-		
-		if( 'acui_email_template' != $_POST['post_type'] ) {
 			return $post_id;
 		}
 
