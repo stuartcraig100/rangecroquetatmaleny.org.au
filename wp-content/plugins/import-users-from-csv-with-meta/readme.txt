@@ -4,7 +4,7 @@ Donate link: http://paypal.me/codection
 Tags: csv, import, importer, meta data, meta, user, users, user meta,  editor, profile, custom, fields, delimiter, update, insert
 Requires at least: 3.4
 Tested up to: 5.0.3
-Stable tag: 1.12.6
+Stable tag: 1.12.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,9 @@ Plugin will automatically detect:
 5. Extra profile information (user meta)
 
 == Changelog ==
+
+= 1.12.6.1 =
+*	Plugin is now compatible with plugins that change login url, thanks to @2candela2 (https://wordpress.org/support/topic/make-it-compatible-with-plugins-that-change-login-url/)
 
 = 1.12.6 =
 *	wpml-config.xml added to improve compatibility with WPML

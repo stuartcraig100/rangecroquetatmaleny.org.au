@@ -556,12 +556,14 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 						$body_mail = get_option( "acui_mail_body" );
 						$subject = get_option( "acui_mail_subject" );
 												
-						$body_mail = str_replace( "**loginurl**", "<a href='" . home_url() . "/wp-login.php" . "'>" . home_url() . "/wp-login.php" . "</a>", $body_mail );
+						$body_mail = str_replace( "**loginurl**", wp_login_url(), $body_mail );
 						$body_mail = str_replace( "**username**", $user_login, $body_mail );
 						$body_mail = str_replace( "**lostpasswordurl**", wp_lostpassword_url(), $body_mail );
 						
-						if( !is_wp_error( $key ) )
-							$body_mail = str_replace( "**passwordreseturl**", network_site_url( 'wp-login.php?action=rp&key=' . $key . '&login=' . rawurlencode( $user_login ), 'login' ), $body_mail );
+						if( !is_wp_error( $key ) ){
+							$passwordreseturl = apply_filters( 'acui_email_passwordreseturl', network_site_url( 'wp-login.php?action=rp&key=' . $key . '&login=' . rawurlencode( $user_login ), 'login' ) );
+							$body_mail = str_replace( "**passwordreseturl**", $passwordreseturl, $body_mail );
+						}
 						
 						if( empty( $password ) && !$created ) 
 							$password = __( 'Password has not been changed', 'import-users-from-csv-with-meta' );
