@@ -64,6 +64,7 @@ class ACUI_Cron{
 		<form method="POST" enctype="multipart/form-data" action="" accept-charset="utf-8">
 			<table class="form-table">
 				<tbody>
+
 				<tr class="form-field">
 					<th scope="row"><label for="path_to_file"><?php _e( "Path of file that are going to be imported", 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
@@ -71,6 +72,7 @@ class ACUI_Cron{
 						<p class="description"><?php _e( 'You have to introduce the path to file, i.e.:', 'import-users-from-csv-with-meta' ); ?> <?php $upload_dir = wp_upload_dir(); echo $upload_dir["path"]; ?>/test.csv</p>
 					</td>
 				</tr>
+
 				<tr class="form-field form-required">
 					<th scope="row"><label for="period"><?php _e( 'Period', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>	
@@ -82,18 +84,21 @@ class ACUI_Cron{
 						<p class="description"><?php _e( 'How often the event should reoccur?', 'import-users-from-csv-with-meta' ); ?></p>
 					</td>
 				</tr>
+
 				<tr class="form-field form-required">
 					<th scope="row"><label for="cron-activated"><?php _e( 'Activate periodical import?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
 						<input type="checkbox" name="cron-activated" value="yes" <?php if( $cron_activated == true ) echo "checked='checked'"; ?>/>
 					</td>
 				</tr>
+
 				<tr class="form-field form-required">
 					<th scope="row"><label for="send-mail-cron"><?php _e( 'Send mail when using periodical import?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
 						<input type="checkbox" name="send-mail-cron" value="yes" <?php if( $send_mail_cron == true ) echo "checked='checked'"; ?>/>
 					</td>
 				</tr>
+
 				<tr class="form-field form-required">
 					<th scope="row"><label for="send-mail-updated"><?php _e( 'Send mail also to users that are being updated?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
@@ -141,6 +146,7 @@ class ACUI_Cron{
 						</div>
 					</td>
 				</tr>
+
 				<tr class="form-field form-required">
 					<th scope="row"><label for="role"><?php _e( 'Role', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
@@ -163,6 +169,7 @@ class ACUI_Cron{
 						<p class="description"><?php _e( 'Which role would be used to import users?', 'import-users-from-csv-with-meta' ); ?></p>
 					</td>
 				</tr>
+
 				<tr class="form-field form-required">
 					<th scope="row"><label for="update-roles-existing-users"><?php _e( 'Update roles for existing users?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
@@ -183,6 +190,7 @@ class ACUI_Cron{
 						</div>
 					</td>
 				</tr>
+
 				<tr class="form-field form-required move-file-cron-cell">
 					<th scope="row"><label for="move-file-cron"><?php _e( 'Auto rename after move?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
@@ -194,13 +202,15 @@ class ACUI_Cron{
 							<p class="description"><?php _e( 'Your file will be renamed after moved, so you will not lost any version of it. The way to rename will be append the time stamp using this date format: YmdHis.', 'import-users-from-csv-with-meta'); ?></p>
 						</div>
 					</td>
-				</tr>			
+				</tr>	
+
 				<tr class="form-field form-required">
 					<th scope="row"><label for="log"><?php _e( 'Last actions of schedule task', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
 						<pre><?php echo $log; ?></pre>
 					</td>
 				</tr>
+				
 				</tbody>
 			</table>
 			<input class="button-primary" type="submit" value="<?php _e( 'Save schedule options', 'import-users-from-csv-with-meta'); ?>"/>

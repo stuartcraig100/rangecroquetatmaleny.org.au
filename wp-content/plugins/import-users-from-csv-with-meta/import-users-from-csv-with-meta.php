@@ -3,7 +3,7 @@
 Plugin Name:	Import users from CSV with meta
 Plugin URI:		https://www.codection.com
 Description:	This plugins allows to import users using CSV files to WP database automatically
-Version:		1.12.6.1
+Version:		1.13.1
 Author:			codection
 Author URI: 	https://codection.com
 License:     	GPL2
@@ -101,6 +101,7 @@ function acui_activate(){
 	add_option( "acui_cron_send_mail", false );
 	add_option( "acui_cron_send_mail_updated", false );
 	add_option( "acui_cron_delete_users", false );
+	add_option( "acui_cron_delete_users_assign_posts" );
 	add_option( "acui_cron_path_to_file" );
 	add_option( "acui_cron_path_to_move" );
 	add_option( "acui_cron_path_to_move_auto_rename" );
@@ -112,6 +113,8 @@ function acui_activate(){
 	
 	add_option( "acui_frontend_send_mail", false );
 	add_option( "acui_frontend_send_mail_updated", false );
+	add_option( "acui_frontend_delete_users", false );
+	add_option( "acui_frontend_delete_users_assign_posts" );	
 	add_option( "acui_frontend_role" );
 
 	add_option( "acui_manually_send_mail", false );
@@ -149,6 +152,7 @@ function acui_delete_options(){
 	delete_option( "acui_cron_send_mail" );
 	delete_option( "acui_cron_send_mail_updated" );
 	delete_option( "acui_cron_delete_users" );
+	delete_option( "acui_cron_delete_users_assign_posts" );
 	delete_option( "acui_cron_path_to_file" );
 	delete_option( "acui_cron_path_to_move" );
 	delete_option( "acui_cron_path_to_move_auto_rename" );
@@ -160,6 +164,8 @@ function acui_delete_options(){
 
 	delete_option( "acui_frontend_send_mail" );
 	delete_option( "acui_frontend_send_mail_updated" );
+	delete_option( "acui_frontend_delete_users" );
+	delete_option( "acui_frontend_delete_users_assign_posts" );	
 	delete_option( "acui_frontend_role" );
 
 	delete_option( "acui_manually_send_mail" );
@@ -282,11 +288,11 @@ function acui_admin_tabs( $current = 'homepage' ) {
     $tabs = array( 
     		'homepage' => __( 'Import', 'import-users-from-csv-with-meta' ), 
     		'frontend' => __( 'Frontend', 'import-users-from-csv-with-meta' ), 
+    		'cron' => __( 'Cron import', 'import-users-from-csv-with-meta' ), 
     		'columns' => __( 'Extra profile fields', 'import-users-from-csv-with-meta' ), 
     		'mail-options' => __( 'Mail options', 'import-users-from-csv-with-meta' ), 
     		'smtp-settings' => __( 'SMTP settings (deprecated)', 'import-users-from-csv-with-meta' ), 
     		'doc' => __( 'Documentation', 'import-users-from-csv-with-meta' ), 
-    		'cron' => __( 'Cron import', 'import-users-from-csv-with-meta' ), 
     		'donate' => __( 'Donate/Patreon', 'import-users-from-csv-with-meta' ), 
     		'shop' => __( 'Shop', 'import-users-from-csv-with-meta' ), 
     		'help' => __( 'Hire an expert', 'import-users-from-csv-with-meta' )
@@ -339,15 +345,11 @@ function acui_fileupload_process( $form_data, $is_cron = false, $is_frontend  = 
 
 		foreach ( $uploadfiles['name'] as $key => $value ) {
 
-		  // look only for uploded files
 		  if ($uploadfiles['error'][$key] == 0) {
 			$filetmp = $uploadfiles['tmp_name'][$key];
 
-			//clean filename and extract extension
 			$filename = $uploadfiles['name'][$key];
 
-			// get file info
-			// @fixme: wp checks the file extension....
 			$filetype = wp_check_filetype( basename( $filename ), array('csv' => 'text/csv') );
 			$filetitle = preg_replace('/\.[^.]+$/', '', basename( $filename ) );
 			$filename = $filetitle . '.' . $filetype['ext'];
@@ -358,10 +360,6 @@ function acui_fileupload_process( $form_data, $is_cron = false, $is_frontend  = 
 			  return;
 			}
 
-			/**
-			 * Check if the filename already exist in the directory and rename the
-			 * file if necessary
-			 */
 			$i = 0;
 			while ( file_exists( $upload_dir['path'] .'/' . $filename ) ) {
 			  $filename = $filetitle . '_' . $i . '.' . $filetype['ext'];
@@ -369,17 +367,11 @@ function acui_fileupload_process( $form_data, $is_cron = false, $is_frontend  = 
 			}
 			$filedest = $upload_dir['path'] . '/' . $filename;
 
-			/**
-			 * Check write permissions
-			 */
 			if ( !is_writeable( $upload_dir['path'] ) ) {
 			  wp_die( __( 'Unable to write to directory. Is this directory writable by the server?', 'import-users-from-csv-with-meta' ));
 			  return;
 			}
 
-			/**
-			 * Save temporary file to uploads dir
-			 */
 			if ( !@move_uploaded_file($filetmp, $filedest) ){
 			  wp_die( __( 'Error, the file', 'import-users-from-csv-with-meta' ) . " $filetmp " . __( 'could not moved to', 'import-users-from-csv-with-meta' ) . " : $filedest");
 			  continue;
@@ -415,8 +407,19 @@ function acui_manage_frontend_process( $form_data ){
 	else
 		update_option( "acui_frontend_send_mail_updated", false );
 
-	update_option( "acui_frontend_activate_users_wp_members", $form_data["activate_users_wp_members"] );
-	update_option( "acui_frontend_role", $form_data["acui_frontend_role"] );
+	if( isset( $form_data["delete-users-frontend"] ) && $form_data["delete-users-frontend"] == "yes" )
+		update_option( "acui_frontend_delete_users", true );
+	else
+		update_option( "acui_frontend_delete_users", false );
+
+	update_option( "acui_frontend_delete_users_assign_posts", $form_data["delete-users-assign-posts-frontend"] );
+
+	if( isset( $form_data["activate-users-wp-members-frontend"] ) )
+		update_option( "acui_frontend_activate_users_wp_members", $form_data["activate-users-wp-members-frontend"] );
+	else
+		update_option( "acui_frontend_activate_users_wp_members", 'no_activate' );
+
+	update_option( "acui_frontend_role", $form_data["role-frontend"] );
 	?>
 	<div class="updated">
        <p><?php _e( 'Settings updated correctly', 'import-users-from-csv-with-meta' ) ?></p>

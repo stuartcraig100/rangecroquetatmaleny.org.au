@@ -4,10 +4,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class ACUI_Frontend{
 	public static function admin_gui(){
-		$send_mail_frontend = get_option( "acui_frontend_send_mail");
-		$send_mail_updated_frontend = get_option( "acui_frontend_send_mail_updated");
-		$role = get_option( "acui_frontend_role");
-		$activate_users_wp_members = get_option( "acui_frontend_activate_users_wp_members");
+		$send_mail_frontend = get_option( "acui_frontend_send_mail" );
+		$send_mail_updated_frontend = get_option( "acui_frontend_send_mail_updated" );
+		$delete_users_frontend = get_option( "acui_frontend_delete_users" );
+		$delete_users_assign_posts_frontend = get_option( "acui_frontend_delete_users_assign_posts" );
+		$role = get_option( "acui_frontend_role" );
+		$activate_users_wp_members = get_option( "acui_frontend_activate_users_wp_members" );
 
 		if( empty( $send_mail_frontend ) )
 			$send_mail_frontend = false;
@@ -20,6 +22,7 @@ class ACUI_Frontend{
 		<form method="POST" enctype="multipart/form-data" action="" accept-charset="utf-8">
 			<table class="form-table">
 				<tbody>
+
 				<tr class="form-field">
 					<th scope="row"><label for=""><?php _e( 'Use this shortcode in any page or post', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
@@ -27,18 +30,50 @@ class ACUI_Frontend{
 						<input class="button-primary" type="button" id="copy_to_clipboard" value="<?php _e( 'Copy to clipboard', 'import-users-from-csv-with-meta'); ?>"/>
 					</td>
 				</tr>
+
 				<tr class="form-field form-required">
 					<th scope="row"><label for="send-mail-frontend"><?php _e( 'Send mail when using frontend import?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
 						<input type="checkbox" name="send-mail-frontend" value="yes" <?php if( $send_mail_frontend == true ) echo "checked='checked'"; ?>/>
 					</td>
 				</tr>
+
 				<tr class="form-field form-required">
 					<th scope="row"><label for="send-mail-updated-frontend"><?php _e( 'Send mail also to users that are being updated?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
 						<input type="checkbox" name="send-mail-updated-frontend" value="yes" <?php if( $send_mail_updated_frontend == true ) echo "checked='checked'"; ?>/>
 					</td>
 				</tr>
+
+				<tr class="form-field form-required">
+					<th scope="row"><label for="delete-users-frontend"><?php _e( 'Delete users that are not present in the CSV?', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<div style="float:left;">
+							<input type="checkbox" name="delete-users-frontend" value="yes" <?php if( $delete_users_frontend == true ) echo "checked='checked'"; ?>/>
+						</div>
+						<div style="margin-left:25px;">
+							<select id="delete-users-assign-posts-frontend" name="delete-users-assign-posts-frontend">
+								<?php
+									if( $delete_users_assign_posts_frontend == '' )
+										echo "<option selected='selected' value=''>" . __( 'Delete posts of deled users without assing to any user', 'import-users-from-csv-with-meta' ) . "</option>";
+									else
+										echo "<option value=''>" . __( 'Delete posts of deled users without assing to any user', 'import-users-from-csv-with-meta' ) . "</option>";
+
+									$blogusers = get_users();
+									
+									foreach ( $blogusers as $bloguser ) {
+										if( $bloguser->ID == $delete_users_assign_posts_frontend )
+											echo "<option selected='selected' value='{$bloguser->ID}'>{$bloguser->display_name}</option>";
+										else
+											echo "<option value='{$bloguser->ID}'>{$bloguser->display_name}</option>";
+									}
+								?>
+							</select>
+							<p class="description"><?php _e( 'After delete users, we can choose if we want to assign their posts to another user. Please do not delete them or posts will be deleted.', 'import-users-from-csv-with-meta' ); ?></p>
+						</div>
+					</td>
+				</tr>
+
 				<tr class="form-field form-required">
 					<th scope="row"><label for="role"><?php _e( 'Role', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
@@ -67,7 +102,7 @@ class ACUI_Frontend{
 				<tr class="form-field form-required">
 					<th scope="row"><label>Activate user when they are being imported?</label></th>
 					<td>
-						<select name="activate_users_wp_members">
+						<select name="activate-users-wp-members-frontend">
 							<option value="no_activate" <?php selected( $activate_users_wp_members,'no_activate', true ); ?>><?php _e( 'Do not activate users', 'import-users-from-csv-with-meta' ); ?></option>
 							<option value="activate"  <?php selected( $activate_users_wp_members,'activate', true ); ?>><?php _e( 'Activate users when they are being imported', 'import-users-from-csv-with-meta' ); ?></option>
 						</select>

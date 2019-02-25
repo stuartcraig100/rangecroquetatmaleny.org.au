@@ -21,7 +21,7 @@ class ACUI_Doc{
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><?php _e( 'id', 'import-users-from-csv-with-meta' ); ?></th>
+				<th scope="row"><?php _e( 'id (column id)', 'import-users-from-csv-with-meta' ); ?></th>
 				<td><?php _e( 'You can use a column called id in order to make inserts or updates of an user using the ID used by WordPress in the wp_users table. We have two different cases:', 'import-users-from-csv-with-meta' ); ?>
 					<ul style="list-style:disc outside none; margin-left:2em;">
 						<li><?php _e( "If id <strong>doesn't exist in your users table</strong>: WordPress core does not allow us insert it, so it will throw an error of kind: invalid_user_id", 'import-users-from-csv-with-meta' ); ?></li>
@@ -30,7 +30,7 @@ class ACUI_Doc{
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><?php _e( "Passwords", 'import-users-from-csv-with-meta' ); ?></th>
+				<th scope="row"><?php _e( "Passwords (column password)", 'import-users-from-csv-with-meta' ); ?></th>
 				<td><?php _e( "A string that contains user passwords. We have different options for this case:", 'import-users-from-csv-with-meta' ); ?>
 					<ul style="list-style:disc outside none; margin-left:2em;">
 						<li><?php _e( "If you <strong>don't create a column for passwords</strong>: passwords will be generated automatically", 'import-users-from-csv-with-meta' ); ?></li>
@@ -39,7 +39,7 @@ class ACUI_Doc{
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><?php _e( "Roles", 'import-users-from-csv-with-meta' ); ?></th>
+				<th scope="row"><?php _e( "Roles (column role)", 'import-users-from-csv-with-meta' ); ?></th>
 				<td><?php _e( "Plugin can import roles from the CSV. This is how it works:", 'import-users-from-csv-with-meta' ); ?>
 					<ul style="list-style:disc outside none; margin-left:2em;">
 						<li><?php _e( "If you <strong>don't create a column for roles</strong>: roles would be chosen from the 'Default role' field in import screen.", 'import-users-from-csv-with-meta' ); ?></li>

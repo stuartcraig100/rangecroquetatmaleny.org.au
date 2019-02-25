@@ -96,8 +96,16 @@ class ACUI_Email_Template{
 	function email_template_selected(){
 		check_ajax_referer( 'codection-security', 'security' );
 		$email_template = get_post( intval( $_POST['email_template_selected'] ) );
-		
-		echo json_encode( array( 'id' => $email_template->ID, 'title' => $email_template->post_title, 'content' => wpautop( $email_template->post_content ) ) );
+		$attachment_id = get_post_meta( $email_template->ID, 'email_template_attachment_id', true );
+
+		echo json_encode( array( 
+			'id' => $email_template->ID, 
+			'title' => $email_template->post_title, 
+			'content' => wpautop( $email_template->post_content ),
+			'attachment_id' => $attachment_id,
+			'attachment_url' => wp_get_attachment_url( $attachment_id ),
+		) );
+
 		die();
 	}
 
@@ -142,6 +150,9 @@ class ACUI_Email_Template{
 	}
 
 	function save_post( $post_id ){
+		if( !isset( $_POST['acui_email_template_attachment'] ) )
+			return $post_id;
+
 		if( !wp_verify_nonce( $_POST['acui_email_template_attachment'], 'acui_email_template_attachment' ) ) {
 			return $post_id;
 		}

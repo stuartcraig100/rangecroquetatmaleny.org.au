@@ -116,6 +116,28 @@ class ACUI_Homepage{
 					</td>
 				</tr>
 
+				<tr class="form-field form-required">
+					<th scope="row"><label for="delete_users"><?php _e( 'Delete users that are not present in the CSV?', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<div style="float:left;">
+							<input type="checkbox" name="delete_users" value="yes"/>
+						</div>
+						<div style="margin-left:25px;">
+							<select id="delete_users_assign_posts" name="delete_users_assign_posts">
+								<option value=''><?php _e( 'Delete posts of deled users without assing to any user', 'import-users-from-csv-with-meta' ); ?></option>
+								<?php
+									$blogusers = get_users();
+									
+									foreach ( $blogusers as $bloguser ) {
+										echo "<option value='{$bloguser->ID}'>{$bloguser->display_name}</option>";
+									}
+								?>
+							</select>
+							<p class="description"><?php _e( 'After delete users, we can choose if we want to assign their posts to another user. Please do not delete them or posts will be deleted.', 'import-users-from-csv-with-meta' ); ?></p>
+						</div>
+					</td>
+				</tr>
+
 				<?php if( is_plugin_active( 'buddypress/bp-loader.php' ) ):
 
 					if( !class_exists( "BP_XProfile_Group" ) ){
@@ -257,13 +279,13 @@ class ACUI_Homepage{
 					<li><label>Además ahora un <a href="https://codection.com/25-de-descuento-en-el-mejor-hosting-en-espanol-con-webempresa/">25% de descuento</a>.</label></li>
 				</ul>
 				<a href="https://codection.com/25-de-descuento-en-el-mejor-hosting-en-espanol-con-webempresa/" target="_blank">
-					<img src="<?php echo plugin_dir_url( __FILE__ ); ?>assets/webempresa_logo.png">
+					<img src="<?php echo plugins_url(); ?>/import-users-from-csv-with-meta/assets/webempresa_logo.png">
 				</a>
 			</div>
 			<?php else: ?>
 			<div class="sidebar_section" style="padding:0 !important;border:none !important;background:none !important;">
 				<a href="https://codection.com/how-to-transfer-your-website-to-inmotion-hosting/" target="_blank">
-					<img src="<?php echo plugin_dir_url( __FILE__ ); ?>assets/codection-inmotion.png">
+					<img src="<?php echo plugins_url(); ?>/import-users-from-csv-with-meta/assets/codection-inmotion.png">
 				</a>
 			</div>
 			<?php endif; ?>

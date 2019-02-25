@@ -55,7 +55,7 @@ class ACUI_Email_Options{
 		<?php if( $enable_email_templates && wp_count_posts( 'acui_email_template' )->publish > 0 ): ?>
 			<h3><?php _e( 'Load custom email from email templates', 'import-users-from-csv-with-meta' ); ?></h3>
 			<?php wp_dropdown_pages( array( 'id' => 'email_template_selected', 'post_type' => 'acui_email_template', 'selected' => $template_id ) ); ?>
-			<input id="load_email_template" class="button-primary" type="button" value="<?php _e( "Load subject and content from this email template", 'import-users-from-csv-with-meta' ); ?>"/>
+			<input id="load_email_template" class="button-primary" type="button" value="<?php _e( "Load subject, content and attachment from this email template", 'import-users-from-csv-with-meta' ); ?>"/>
 		<?php endif; ?>			
 
 		<h3><?php _e( 'Customize the email that can be sent when importing users', 'import-users-from-csv-with-meta' ); ?></h3>
@@ -106,10 +106,13 @@ class ACUI_Email_Options{
 				};
 
 				$.post( ajaxurl, data, function( response ) {
-					console.log( response );
 					var response = JSON.parse( response );
 					$( '#title' ).val( response.title );
 					tinyMCE.get( 'body_mail' ).setContent( response.content );
+					$( '#email_template_attachment_id' ).val( response.attachment_id );
+					if( response.attachment_url != '' ){
+						$( '#email_template_attachment_file' ).val( response.attachment_url );
+					}
 					$( '#template_id' ).val( response.id );
 					$( '#save_mail_template_options' ).click();
 				});

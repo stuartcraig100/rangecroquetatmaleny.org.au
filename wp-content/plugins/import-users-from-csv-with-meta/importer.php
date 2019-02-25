@@ -43,6 +43,8 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 			$role_default = isset( $form_data["role"] ) ? $form_data["role"] : '';
 			$update_roles_existing_users = isset( $form_data["update_roles_existing_users"] ) ? $form_data["update_roles_existing_users"] : '';
 			$empty_cell_action = isset( $form_data["empty_cell_action"] ) ? $form_data["empty_cell_action"] : '';
+			$delete_users = isset( $form_data["delete_users"] ) ? $form_data["delete_users"] : '';
+			$delete_users_assign_posts = isset( $form_data["delete_users_assign_posts"] ) ? $form_data["delete_users_assign_posts"] : '';
 
 			if( $is_frontend ){
 				$activate_users_wp_members = get_option( "acui_frontend_activate_users_wp_members" );
@@ -97,6 +99,7 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 			echo "<p>" . __('First row represents the form of sheet','import-users-from-csv-with-meta') . "</p>";
 			$row = 0;
 			$positions = array();
+			$error_importing = false;
 
 			ini_set('auto_detect_line_endings',TRUE);
 
@@ -171,6 +174,7 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 
 					if( count( $data ) != $columns ): // if number of columns is not the same that columns in header
 						echo '<script>alert("' . __( 'Row number', 'import-users-from-csv-with-meta' ) . " $row " . __( 'does not have the same columns than the header, we are going to skip', 'import-users-from-csv-with-meta') . '");</script>';
+						$error_importing = true;
 						continue;
 					endif;
 
@@ -256,10 +260,12 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 					}
 					elseif( !empty( $email ) && ( ( sanitize_email( $email ) == '' ) ) ){ // if email is invalid
 						$problematic_row = true;
+						$error_importing = true;
 						$data[0] = __('Invalid EMail','import-users-from-csv-with-meta')." ($email)";
 					}
 					elseif( empty( $email) ) { // if email is blank
 						$problematic_row = true;
+						$error_importing = true;
 						$data[0] = __( 'EMail not specified', 'import-users-from-csv-with-meta' );
 					}
 					elseif( username_exists( $username ) ){ // if user exists, we take his ID by login, we will update his mail if it has changed
@@ -293,6 +299,7 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 	                    
 	                    $data[0] = __( 'User already exists as:', 'import-users-from-csv-with-meta' ) . $user_object->user_login . '<br/>' . __( '(in this CSV file is called:', 'import-users-from-csv-with-meta' ) . $username . ")";
 	                    $problematic_row = true;
+	                    $error_importing = true;
 
 	                    if( $password !== "" )
 	                        wp_set_password( $password, $user_id );
@@ -321,6 +328,7 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 					if( is_wp_error( $user_id ) ){ // in case the user is generating errors after this checks
 						$error_string = $user_id->get_error_message();
 						echo '<script>alert("' . __( 'Problems with user:', 'import-users-from-csv-with-meta' ) . $username . __( ', we are going to skip. \r\nError: ', 'import-users-from-csv-with-meta') . $error_string . '");</script>';
+						$error_importing = true;
 						continue;
 					}
 
@@ -368,6 +376,7 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 
 								if ( !empty( $invalid_roles ) ){
 									$problematic_row = true;
+									$error_importing = true;
 									if( count( $invalid_roles ) == 1 )
 										$data[0] = __('Invalid role','import-users-from-csv-with-meta').' (' . reset( $invalid_roles ) . ')';
 									else
@@ -624,19 +633,38 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 				wp_delete_attachment( $attach_id );
 
 			// delete all users that have not been imported
-			if( $is_cron && get_option( "acui_cron_delete_users" ) ):
+			$delete_users_flag = false;
+
+			if( $delete_users == 'yes' ){
+				$delete_users_flag = true;
+			}
+
+			if( $is_cron && get_option( "acui_cron_delete_users" ) ){
+				$delete_users_flag = true;
+				$delete_users_assign_posts = get_option( "acui_cron_delete_users_assign_posts");
+			}
+
+			if( $is_frontend && get_option( "acui_frontend_delete_users" ) ){
+				$delete_users_flag = true;
+				$delete_users_assign_posts = get_option( "acui_frontend_delete_users_assign_posts");
+			}
+
+			if( $error_importing ) // if there is some problem of some kind importing we won't proceed with delete to avoid problems
+				$delete_users_flag = false;
+
+			if( $delete_users_flag ):
 				require_once( ABSPATH . 'wp-admin/includes/user.php');	
 
 				$all_users = get_users( array( 
 					'fields' => array( 'ID' ),
 					'role__not_in' => array( 'administrator' )
 				) );
-				$cron_delete_users_assign_posts = get_option( "acui_cron_delete_users_assign_posts");
+				
 
 				foreach ( $all_users as $user ) {
 					if( !in_array( $user->ID, $users_registered ) ){
-						if( !empty( $cron_delete_users_assign_posts ) && get_userdata( $cron_delete_users_assign_posts ) !== false ){
-							wp_delete_user( $user->ID, $cron_delete_users_assign_posts );
+						if( !empty( $delete_users_assign_posts ) && get_userdata( $delete_users_assign_posts ) !== false ){
+							wp_delete_user( $user->ID, $delete_users_assign_posts );
 						}
 						else{
 							wp_delete_user( $user->ID );
