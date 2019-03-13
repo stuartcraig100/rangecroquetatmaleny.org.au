@@ -3,6 +3,11 @@
 if ( ! defined( 'ABSPATH' ) ) exit; 
 
 class ACUI_Email_Options{
+	function __construct(){
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ), 10, 1 );
+		add_action( 'wp_ajax_acui_mail_options_remove_attachment', array( $this, 'ajax_remove_attachment' ) );
+	}
+
 	public static function admin_gui(){
 		$from_email = get_option( "acui_mail_from" );
 		$from_name = get_option( "acui_mail_from_name" );
@@ -11,7 +16,7 @@ class ACUI_Email_Options{
 		$template_id = get_option( "acui_mail_template_id" );
 		$attachment_id = get_option( "acui_mail_attachment_id" );
 		$enable_email_templates = get_option( "acui_enable_email_templates" );
-		$automattic_wordpress_email = get_option( "acui_automattic_wordpress_email" );
+		$automattic_wordpress_email = get_option( "acui_automatic_wordpress_email" );
 	?>
 		<form method="POST" enctype="multipart/form-data" action="" accept-charset="utf-8">
 		<h3><?php _e('Mail options','import-users-from-csv-with-meta'); ?></h3>
@@ -69,7 +74,8 @@ class ACUI_Email_Options{
 				<label for="email_template_attachment_file"><?php _e( 'Attachment', 'import-users-from-csv-with-meta' )?></label><br>
 				<input type="url" class="large-text" name="email_template_attachment_file" id="email_template_attachment_file" value="<?php echo wp_get_attachment_url( $attachment_id ); ?>" readonly/><br>
 				<input type="hidden" name="email_template_attachment_id" id="email_template_attachment_id" value="<?php echo $attachment_id ?>"/>
-				<button type="button" class="button" id="acui_email_template_upload_button"><?php _e( 'Upload file', 'import-users-from-csv-with-meta' )?></button>
+				<button type="button" class="button" id="acui_email_option_upload_button"><?php _e( 'Upload file', 'import-users-from-csv-with-meta' )?></button>
+				<button type="button" class="button" id="acui_email_option_remove_upload_button"><?php _e( 'Remove file', 'import-users-from-csv-with-meta' )?></button>
 			</div>
 		</fieldset>
 
@@ -79,46 +85,30 @@ class ACUI_Email_Options{
 		<?php ACUI_Email_Template::email_templates_edit_form_after_editor(); ?>
 
 		</form>
-
-		<script type="text/javascript">
-		jQuery( document ).ready( function( $ ){
-			$( '#enable_email_templates' ).change( function(){
-				var enable = $( this ).is( ':checked' );
-				var data = {
-					'action': 'acui_refresh_enable_email_templates',
-					'enable': enable,
-					'security': '<?php echo wp_create_nonce( "codection-security" ); ?>',
-				};
-
-				$.post( ajaxurl, data, function( response ) {
-					location.reload();
-				});
-			} );
-
-			$( '#load_email_template' ).click( function(){
-				if( $( '#email_template_selected' ).val() == '' )
-					return;
-
-				var data = {
-					'action': 'acui_email_template_selected',
-					'email_template_selected': $( '#email_template_selected' ).val(),
-					'security': '<?php echo wp_create_nonce( "codection-security" ); ?>',
-				};
-
-				$.post( ajaxurl, data, function( response ) {
-					var response = JSON.parse( response );
-					$( '#title' ).val( response.title );
-					tinyMCE.get( 'body_mail' ).setContent( response.content );
-					$( '#email_template_attachment_id' ).val( response.attachment_id );
-					if( response.attachment_url != '' ){
-						$( '#email_template_attachment_file' ).val( response.attachment_url );
-					}
-					$( '#template_id' ).val( response.id );
-					$( '#save_mail_template_options' ).click();
-				});
-			} );
-		} );	
-		</script>
 		<?php
 	}
+
+	function load_scripts( $hook ) {
+		global $typenow, $acui_url_plugin;
+		
+		if( $typenow == 'acui_email_template' || $hook == 'tools_page_acui' ) {
+			wp_enqueue_media();
+			wp_register_script( 'email-template-attachment-admin', $acui_url_plugin . '/assets/email-template-attachment-admin.js', array( 'jquery' ) );
+			wp_localize_script( 'email-template-attachment-admin', 'email_template_attachment_admin',
+				array(
+					'title' => __( 'Choose or upload file', 'import-users-from-csv-with-meta' ),
+					'button' => __( 'Use this file', 'import-users-from-csv-with-meta' ),
+					'nonce' => wp_create_nonce( "codection-security" )
+				)
+			);
+			wp_enqueue_script( 'email-template-attachment-admin' );
+		}
+	}
+
+	function ajax_remove_attachment(){
+		check_ajax_referer( 'codection-security', 'security' );
+		update_option( "acui_mail_attachment_id", "" );
+	}
 }
+
+new ACUI_Email_Options();

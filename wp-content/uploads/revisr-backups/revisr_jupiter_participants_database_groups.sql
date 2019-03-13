@@ -15,6 +15,7 @@ DROP TABLE IF EXISTS `jupiter_participants_database_groups`;
 CREATE TABLE `jupiter_participants_database_groups` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `order` int(3) NOT NULL DEFAULT 0,
+  `mode` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
   `display` tinyint(1) DEFAULT 1,
   `admin` tinyint(1) NOT NULL DEFAULT 0,
   `title` tinytext COLLATE utf8_unicode_ci NOT NULL,
@@ -27,7 +28,7 @@ CREATE TABLE `jupiter_participants_database_groups` (
 
 LOCK TABLES `jupiter_participants_database_groups` WRITE;
 /*!40000 ALTER TABLE `jupiter_participants_database_groups` DISABLE KEYS */;
-INSERT INTO `jupiter_participants_database_groups` VALUES (1,1,1,0,'Participant Info','main',NULL),(2,2,1,0,'Personal Info','personal',NULL),(3,3,0,0,'Administrative Info','admin',NULL),(4,4,0,0,'Record Info','internal',NULL);
+INSERT INTO `jupiter_participants_database_groups` VALUES (1,1,'public',1,0,'Participant Info','main',NULL),(2,2,'public',1,0,'Personal Info','personal',NULL),(3,3,'admin',0,0,'Administrative Info','admin',NULL),(4,4,'admin',0,0,'Record Info','internal',NULL);
 /*!40000 ALTER TABLE `jupiter_participants_database_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

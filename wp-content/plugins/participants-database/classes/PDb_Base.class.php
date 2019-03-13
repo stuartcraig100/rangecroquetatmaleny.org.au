@@ -1384,9 +1384,10 @@ class PDb_Base {
     // none found
     if ( empty( $matches ) )
       return false;
+    
     // check each one for a plugin shortcode
     foreach ( $matches as $shortcode ) {
-      if ( false !== strpos( $shortcode[0], $tag ) ) {
+      if ( false !== strpos( $shortcode[0], $tag ) && false === strpos( $shortcode[0], '[[' ) ) {
         return true;
       }
     }
@@ -1498,6 +1499,20 @@ class PDb_Base {
         'ascdesc' => FILTER_SANITIZE_STRING,
         Participants_Db::$list_page => FILTER_VALIDATE_INT,
     );
+  }
+  
+  /**
+   * provides a general cache expiration time
+   * 
+   * this is to prevent persistent caches from holding on to the cached values too long
+   * 
+   * this is tuned to generously cover a single page load
+   * 
+   * @return int cache valid time in seconds
+   */
+  public static function cache_expire()
+  {
+    return Participants_Db::apply_filters( 'general_cache_expiration', 10 );
   }
 
   /**

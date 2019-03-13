@@ -2,7 +2,7 @@
 	'use strict';
 	var attachmentFrame;
 
-	$( '#acui_email_template_upload_button' ).click(function(e) {
+	$( '#acui_email_option_upload_button,#acui_email_template_upload_button' ).click(function(e) {
 		var btn = e.target;
 
 		if ( !btn  ) return;
@@ -10,8 +10,8 @@
 		e.preventDefault();
 
 		attachmentFrame = wp.media.frames.attachmentFrame = wp.media({
-			title: meta_image.title,
-			button: { text:  meta_image.button },
+			title: email_template_attachment_admin.title,
+			button: { text:  email_template_attachment_admin.button },
 		});
 
 		attachmentFrame.on('select', function() {
@@ -23,4 +23,56 @@
 
 		attachmentFrame.open();
 	});
+
+	$( '#enable_email_templates' ).change( function(){
+		var enable = $( this ).is( ':checked' );
+		var data = {
+			'action': 'acui_refresh_enable_email_templates',
+			'enable': enable,
+			'security': email_template_attachment_admin.nonce,
+		};
+
+		$.post( ajaxurl, data, function( response ) {
+			location.reload();
+		});
+	} );
+
+	$( '#load_email_template' ).click( function(){
+		if( $( '#email_template_selected' ).val() == '' )
+			return;
+
+		var data = {
+			'action': 'acui_email_template_selected',
+			'email_template_selected': $( '#email_template_selected' ).val(),
+			'security': email_template_attachment_admin.nonce,
+		};
+
+		$.post( ajaxurl, data, function( response ) {
+			var response = JSON.parse( response );
+			$( '#title' ).val( response.title );
+			tinyMCE.get( 'body_mail' ).setContent( response.content );
+			$( '#email_template_attachment_id' ).val( response.attachment_id );
+			if( response.attachment_url != '' ){
+				$( '#email_template_attachment_file' ).val( response.attachment_url );
+			}
+			$( '#template_id' ).val( response.id );
+			$( '#save_mail_template_options' ).click();
+		});
+	} );
+
+	$( '#acui_email_option_remove_upload_button' ).click( function(){
+		var data = {
+			'action': 'acui_mail_options_remove_attachment',
+			'security': email_template_attachment_admin.nonce,
+		};
+
+		$.post( ajaxurl, data, function( response ) {
+			location.reload();
+		});
+	} );
+
+	$( '#acui_email_template_remove_upload_button' ).click( function(){
+		$( '#email_template_attachment_file' ).val( '' );
+		$( '#email_template_attachment_id' ).val( '' );	
+	} );
 });

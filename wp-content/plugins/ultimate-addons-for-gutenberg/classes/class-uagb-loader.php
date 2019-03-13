@@ -73,7 +73,7 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 			define( 'UAGB_BASE', plugin_basename( UAGB_FILE ) );
 			define( 'UAGB_DIR', plugin_dir_path( UAGB_FILE ) );
 			define( 'UAGB_URL', plugins_url( '/', UAGB_FILE ) );
-			define( 'UAGB_VER', '1.9.1' );
+			define( 'UAGB_VER', '1.11.1' );
 			define( 'UAGB_MODULES_DIR', UAGB_DIR . 'modules/' );
 			define( 'UAGB_MODULES_URL', UAGB_URL . 'modules/' );
 			define( 'UAGB_SLUG', 'uag' );
@@ -95,6 +95,7 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 			require( UAGB_DIR . 'classes/class-uagb-core-plugin.php' );
 			require_once UAGB_DIR . 'dist/blocks/post/index.php';
 			require_once UAGB_DIR . 'dist/blocks/post-timeline/index.php';
+			require_once UAGB_DIR . 'dist/blocks/cf7-styler/index.php';
 		}
 
 		/**
@@ -118,48 +119,15 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 		 * @return void
 		 */
 		public function load_textdomain() {
-			// Default languages directory for "ultimate-addons-for-gutenberg".
-			$lang_dir = UAGB_DIR . 'languages/';
 
 			/**
 			 * Filters the languages directory path to use for AffiliateWP.
 			 *
 			 * @param string $lang_dir The languages directory path.
 			 */
-			$lang_dir = apply_filters( 'uagb_languages_directory', $lang_dir );
+			$lang_dir = apply_filters( 'uagb_languages_directory', UAGB_DIR . 'languages/' );
 
-			// Traditional WordPress plugin locale filter.
-			global $wp_version;
-
-			$get_locale = get_locale();
-
-			if ( $wp_version >= 4.7 ) {
-				$get_locale = get_user_locale();
-			}
-
-			/**
-			 * Language Locale for Ultimate Gutenberg
-			 *
-			 * @var $get_locale The locale to use. Uses get_user_locale()` in WordPress 4.7 or greater,
-			 *                  otherwise uses `get_locale()`.
-			 */
-			$locale = apply_filters( 'plugin_locale', $get_locale, 'ultimate-addons-for-gutenberg' );
-			$mofile = sprintf( '%1$s-%2$s.mo', 'ultimate-addons-for-gutenberg', $locale );
-
-			// Setup paths to current locale file.
-			$mofile_local  = $lang_dir . $mofile;
-			$mofile_global = WP_LANG_DIR . '/ultimate-addons-for-gutenberg/' . $mofile;
-
-			if ( file_exists( $mofile_global ) ) {
-				// Look in global /wp-content/languages/ultimate-addons-for-gutenberg/ folder.
-				load_textdomain( 'ultimate-addons-for-gutenberg', $mofile_global );
-			} elseif ( file_exists( $mofile_local ) ) {
-				// Look in local /wp-content/plugins/ultimate-addons-for-gutenberg/languages/ folder.
-				load_textdomain( 'ultimate-addons-for-gutenberg', $mofile_local );
-			} else {
-				// Load the default language files.
-				load_plugin_textdomain( 'ultimate-addons-for-gutenberg', false, $lang_dir );
-			}
+			load_plugin_textdomain( 'ultimate-addons-for-gutenberg', false, $lang_dir );
 		}
 
 		/**
@@ -183,7 +151,6 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 
 				$action_url   = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $plugin . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $plugin );
 				$button_label = __( 'Activate Gutenberg', 'ultimate-addons-for-gutenberg' );
-
 			} else {
 				if ( ! current_user_can( 'install_plugins' ) ) {
 					return;

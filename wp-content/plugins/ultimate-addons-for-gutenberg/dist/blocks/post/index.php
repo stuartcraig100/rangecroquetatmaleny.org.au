@@ -243,8 +243,13 @@ function uagb_register_blocks() {
 				'categories'              => array(
 					'type' => 'string',
 				),
-				'className'               => array(
-					'type' => 'string',
+				'postType'                => array(
+					'type'    => 'string',
+					'default' => 'post',
+				),
+				'taxonomyType'            => array(
+					'type'    => 'string',
+					'default' => 'category',
 				),
 				'postsToShow'             => array(
 					'type'    => 'number',
@@ -608,8 +613,13 @@ function uagb_register_blocks() {
 				'categories'              => array(
 					'type' => 'string',
 				),
-				'className'               => array(
-					'type' => 'string',
+				'postType'                => array(
+					'type'    => 'string',
+					'default' => 'post',
+				),
+				'taxonomyType'            => array(
+					'type'    => 'string',
+					'default' => 'category',
 				),
 				'postsToShow'             => array(
 					'type'    => 'number',
@@ -1006,8 +1016,13 @@ function uagb_register_blocks() {
 				'categories'              => array(
 					'type' => 'string',
 				),
-				'className'               => array(
-					'type' => 'string',
+				'postType'                => array(
+					'type'    => 'string',
+					'default' => 'post',
+				),
+				'taxonomyType'            => array(
+					'type'    => 'string',
+					'default' => 'category',
 				),
 				'postsToShow'             => array(
 					'type'    => 'number',
@@ -1363,49 +1378,55 @@ add_action( 'init', 'uagb_register_blocks' );
  * @since 0.0.1
  */
 function uagb_blocks_register_rest_fields() {
-	// Add featured image source.
-	register_rest_field(
-		'post',
-		'uagb_featured_image_src',
-		array(
-			'get_callback'    => 'uagb_blocks_get_image_src',
-			'update_callback' => null,
-			'schema'          => null,
-		)
-	);
 
-	// Add author info.
-	register_rest_field(
-		'post',
-		'uagb_author_info',
-		array(
-			'get_callback'    => 'uagb_blocks_get_author_info',
-			'update_callback' => null,
-			'schema'          => null,
-		)
-	);
+	$post_type = UAGB_Helper::get_post_types();
 
-	// Add comment info.
-	register_rest_field(
-		'post',
-		'uagb_comment_info',
-		array(
-			'get_callback'    => 'uagb_blocks_get_comment_info',
-			'update_callback' => null,
-			'schema'          => null,
-		)
-	);
+	foreach ( $post_type as $key => $value ) {
 
-	// Add excerpt info.
-	register_rest_field(
-		'post',
-		'uagb_excerpt',
-		array(
-			'get_callback'    => 'uagb_blocks_get_excerpt',
-			'update_callback' => null,
-			'schema'          => null,
-		)
-	);
+		// Add featured image source.
+		register_rest_field(
+			$value['value'],
+			'uagb_featured_image_src',
+			array(
+				'get_callback'    => 'uagb_blocks_get_image_src',
+				'update_callback' => null,
+				'schema'          => null,
+			)
+		);
+
+		// Add author info.
+		register_rest_field(
+			$value['value'],
+			'uagb_author_info',
+			array(
+				'get_callback'    => 'uagb_blocks_get_author_info',
+				'update_callback' => null,
+				'schema'          => null,
+			)
+		);
+
+		// Add comment info.
+		register_rest_field(
+			$value['value'],
+			'uagb_comment_info',
+			array(
+				'get_callback'    => 'uagb_blocks_get_comment_info',
+				'update_callback' => null,
+				'schema'          => null,
+			)
+		);
+
+		// Add excerpt info.
+		register_rest_field(
+			$value['value'],
+			'uagb_excerpt',
+			array(
+				'get_callback'    => 'uagb_blocks_get_excerpt',
+				'update_callback' => null,
+				'schema'          => null,
+			)
+		);
+	}
 }
 
 add_action( 'rest_api_init', 'uagb_blocks_register_rest_fields' );
@@ -1545,20 +1566,20 @@ function uagb_render_title( $attributes ) {
  */
 function uagb_render_meta( $attributes ) {
 	global $post;
-	// @codingStandardsIgnoreStart
-	do_action( "uagb_single_post_before_meta_{$attributes['post_type']}", get_the_ID(), $attributes );
-	?>
-	<div class="uagb-post-grid-byline"><?php if ( $attributes['displayPostAuthor'] ) {
-		?><span class="uagb-post__author"><span class="dashicons-admin-users dashicons"></span><?php the_author_posts_link(); ?></span><?php }
-		if ( $attributes['displayPostDate'] ) {
-																?><time datetime="<?php echo esc_attr( get_the_date( 'c', $post->ID ) ); ?>" class="uagb-post__date"><span class="dashicons-calendar dashicons"></span><?php echo esc_html( get_the_date( '', $post->ID ) ); ?></time><?php }
-		if ( $attributes['displayPostComment'] ) {
-																?><span class="uagb-post__comment"><span class="dashicons-admin-comments dashicons"></span><?php comments_number();
+    // @codingStandardsIgnoreStart
+    do_action( "uagb_single_post_before_meta_{$attributes['post_type']}", get_the_ID(), $attributes );
+    ?>
+    <div class="uagb-post-grid-byline"><?php if ( $attributes['displayPostAuthor'] ) {
+        ?><span class="uagb-post__author"><span class="dashicons-admin-users dashicons"></span><?php the_author_posts_link(); ?></span><?php }
+        if ( $attributes['displayPostDate'] ) {
+                                                                ?><time datetime="<?php echo esc_attr( get_the_date( 'c', $post->ID ) ); ?>" class="uagb-post__date"><span class="dashicons-calendar dashicons"></span><?php echo esc_html( get_the_date( '', $post->ID ) ); ?></time><?php }
+        if ( $attributes['displayPostComment'] ) {
+                                                                ?><span class="uagb-post__comment"><span class="dashicons-admin-comments dashicons"></span><?php comments_number();
 ?></span><?php }
-		?></div>
-	<?php
-	do_action( "uagb_single_post_after_meta_{$attributes['post_type']}", get_the_ID(), $attributes );
-	// @codingStandardsIgnoreEnd
+        ?></div>
+    <?php
+    do_action( "uagb_single_post_after_meta_{$attributes['post_type']}", get_the_ID(), $attributes );
+    // @codingStandardsIgnoreEnd
 }
 
 /**

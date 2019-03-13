@@ -17,12 +17,12 @@ CREATE TABLE `jupiter_bsk_pdf_manager_relationships` (
   `pdf_id` int(11) NOT NULL,
   `cat_id` int(11) NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `jupiter_bsk_pdf_manager_relationships` WRITE;
 /*!40000 ALTER TABLE `jupiter_bsk_pdf_manager_relationships` DISABLE KEYS */;
-INSERT INTO `jupiter_bsk_pdf_manager_relationships` VALUES (1,1,1),(2,2,1),(3,3,1),(10,4,2),(7,6,3),(8,8,3),(9,9,2),(12,10,3);
+INSERT INTO `jupiter_bsk_pdf_manager_relationships` VALUES (1,1,1),(2,2,1),(3,3,1),(10,4,2),(7,6,3),(8,8,3),(9,9,2),(12,10,3),(13,11,3),(15,12,3),(16,13,3);
 /*!40000 ALTER TABLE `jupiter_bsk_pdf_manager_relationships` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -1,4 +1,4 @@
-  <?php
+<?php
 /**
  * this file is called by the admin menu item, also a link in the admin record list
  * 
@@ -68,27 +68,30 @@ if ( $participant_values ) :
     <form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>" enctype="multipart/form-data" autocomplete="off" >
       <?php
       PDb_FormElement::print_hidden_fields( $hidden );
-
+      
       // get the columns and output form
-      $readonly_columns = Participants_Db::get_readonly_fields();
       foreach ( Participants_db::get_column_atts( 'backend' ) as $backend_column ) :
 
-        $column = new PDb_Field_Item( $backend_column->name );
-        $column->set_value( $participant_values[$column->name()] );
+        $column = new PDb_Field_Item( array(
+            'name' => $backend_column->name,
+            'module' => 'backend-edit',
+            'value' => $participant_values[$backend_column->name] ),
+                $participant_id
+                );
 
         $id_line = '';
 
         $attributes = $column->attributes();
 
         // set a new section
-        if ( $column->group != $section ) {
+        if ( $column->group != $section ) :
           if ( !empty( $section ) ) {
             ?>
             </table>
         </div>
         <?php
       } else {
-        $id_line = '<tr><th>' . _x( 'ID', 'abbreviation for "identification"', 'participants-database' ) . '</th><td>' . ( false === $participant_id ? _x( '(new record)', 'indicates a new record is being entered', 'participants-database' ) : $participant_id ) . '</td></tr>';
+//        $id_line = '<tr><th>' . _x( 'ID', 'abbreviation for "identification"', 'participants-database' ) . '</th><td>' . ( false === $participant_id ? _x( '(new record)', 'indicates a new record is being entered', 'participants-database' ) : $participant_id ) . '</td></tr>';
       }
       $section = $column->group()
       ?>
@@ -98,11 +101,11 @@ if ( $participant_values ) :
         <table class="form-table">
           <tbody>
             <?php
-          }
-          echo $id_line;
+          endif; // new section
+//          echo $id_line;
           ?>
 
-            <tr class="<?php echo ( $column->is_hidden_field() ? 'text-line' : $column->form_element() ) . ' ' . $column->name() . '-field' ?>">
+          <tr class="<?php echo ( $column->is_hidden_field() ? 'text-line' : $column->form_element() ) . ' ' . $column->name() . '-field' ?>">
             <?php
             $column_title = str_replace( array('"', "'"), array('&quot;', '&#39;'), Participants_Db::apply_filters( 'translate_string', stripslashes( $column->title ) ) );
             if ( $options['mark_required_fields'] && $column->validation != 'no' ) {
@@ -115,6 +118,7 @@ if ( $participant_values ) :
             if ( $column->is_hidden_field() ) {
               $add_title[] = __( 'hidden', 'participants-database' );
             }
+            
             if ( $column->is_readonly() ) {
 
               if (
@@ -122,6 +126,7 @@ if ( $participant_values ) :
                       $column->name() === 'private_id' && Participants_Db::apply_filters( 'private_id_is_read_only', true ) === false ) {
                 // don't mark these fields as read-only if editing is enabled
                 $column->make_readonly( false );
+                
               } else {
 
                 $attributes['class'] = 'readonly-field';
@@ -132,9 +137,10 @@ if ( $participant_values ) :
                  * @return bool if true the field is rendered as readonly
                  */
                 if (
-                        Participants_Db::apply_filters( 'field_readonly_override', !Participants_Db::current_user_has_plugin_role( 'editor', 'readonly access' ), $column ) ||
-                        $column->name() === 'private_id' && Participants_Db::apply_filters( 'private_id_is_read_only', true )  
-                        ) {
+                        !Participants_Db::current_user_has_plugin_role( 'admin', 'readonly access' ) && Participants_Db::apply_filters( 'field_readonly_override', true, $column ) ||
+                        $column->name() === 'private_id' && Participants_Db::apply_filters( 'private_id_is_read_only', true ) ||
+                        $column->name() === 'id' && Participants_Db::apply_filters( 'record_id_is_read_only', true )
+                ) {
                   $attributes['readonly'] = 'readonly';
                 }
                 $add_title[] = __( 'read only', 'participants-database' );
@@ -151,7 +157,7 @@ if ( $participant_values ) :
 
               // handle the persistent feature
               if ( empty( $participant_values[$column->name()] ) ) {
-                $column->set_value( $column->is_persistent() ? $column->default : '' );
+                $column->set_value( $column->is_persistent() ? $column->default : ''  );
               }
 
               // get the existing value if any
@@ -191,18 +197,21 @@ if ( $participant_values ) :
                   if ( $column->has_content() ) {
                     $value = PDb_FormElement::dummy;
                   }
-                  $column->set_value($value);
+                  $column->set_value( $value );
                   break;
 
                 case 'hidden':
-
-                  $column->form_element = 'text-line';
+                  
+                  $column->set_form_element( 'text-line' );
+                  if (!Participants_Db::current_user_has_plugin_role( 'admin', 'readonly access' ) ) {
+                    $column->make_readonly();
+                  }
                   break;
 
                 case 'timestamp':
 
                   if ( !PDb_Date_Parse::is_mysql_timestamp( $column->value() ) )
-                    $column->set_value('');
+                    $column->set_value( '' );
                   break;
               }
 
@@ -217,7 +226,7 @@ if ( $participant_values ) :
                 );
               } else {
 
-                $params = array(
+                PDb_FormElement::print_element( array(
                     'type' => $column->form_element(),
                     'value' => $column->get_value(),
                     'name' => $column->name(),
@@ -226,9 +235,7 @@ if ( $participant_values ) :
                     'attributes' => $attributes,
                     'module' => 'admin-edit',
                     'link' => $column->link(),
-                );
-                
-                PDb_FormElement::print_element( $params );
+                ) );
               }
 
               if ( !empty( $column->help_text ) ) :
@@ -281,8 +288,5 @@ if ( $participant_values ) :
   </form>
   </div>
   <?php
-
-
-
 
  endif;

@@ -51,15 +51,21 @@ class ACUI_Homepage{
 
 		<div class="main_bar">
 			<form method="POST" enctype="multipart/form-data" action="" accept-charset="utf-8" onsubmit="return check();">
+			<h2><?php _e( 'General', 'import-users-from-csv-with-meta'); ?></h2>
 			<table class="form-table">
 				<tbody>
+
 				<tr class="form-field form-required">
-					<th scope="row"><label><?php _e( 'Update existing users?', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<th scope="row"><label><?php _e( 'CSV file <span class="description">(required)</span></label>', 'import-users-from-csv-with-meta' ); ?></th>
 					<td>
-						<select name="update_existing_users">
-							<option value="yes"><?php _e( 'Yes', 'import-users-from-csv-with-meta' ); ?></option>
-							<option value="no"><?php _e( 'No', 'import-users-from-csv-with-meta' ); ?></option>
-						</select>
+						<div id="upload_file">
+							<input type="file" name="uploadfiles[]" id="uploadfiles" size="35" class="uploadfiles" />
+							<?php _e( '<em>or you can choose directly a file from your host,', 'import-users-from-csv-with-meta' ) ?> <a href="#" class="toggle_upload_path"><?php _e( 'click here', 'import-users-from-csv-with-meta' ) ?></a>.</em>
+						</div>
+						<div id="introduce_path" style="display:none;">
+							<input placeholder="<?php _e( 'You have to introduce the path to file, i.e.:' ,'import-users-from-csv-with-meta' ); ?><?php $upload_dir = wp_upload_dir(); echo $upload_dir["path"]; ?>/test.csv" type="text" name="path_to_file" id="path_to_file" value="<?php echo dirname( __FILE__ ); ?>/test.csv" style="width:70%;" />
+							<em><?php _e( 'or you can upload it directly from your PC', 'import-users-from-csv-with-meta' ); ?>, <a href="#" class="toggle_upload_path"><?php _e( 'click here', 'import-users-from-csv-with-meta' ); ?></a>.</em>
+						</div>
 					</td>
 				</tr>
 
@@ -82,31 +88,6 @@ class ACUI_Homepage{
 				</tr>
 
 				<tr class="form-field form-required">
-					<th scope="row"><label><?php _e( 'Update roles for existing users?', 'import-users-from-csv-with-meta' ); ?></label></th>
-					<td>
-						<select name="update_roles_existing_users">
-							<option value="no"><?php _e( 'No', 'import-users-from-csv-with-meta' ); ?></option>
-							<option value="yes"><?php _e( 'Yes, update and override existing roles', 'import-users-from-csv-with-meta' ); ?></option>
-							<option value="yes_no_override"><?php _e( 'Yes, add new roles and not override existing ones', 'import-users-from-csv-with-meta' ); ?></option>
-						</select>
-					</td>
-				</tr>
-
-				<tr class="form-field form-required">
-					<th scope="row"><label><?php _e( 'CSV file <span class="description">(required)</span></label>', 'import-users-from-csv-with-meta' ); ?></th>
-					<td>
-						<div id="upload_file">
-							<input type="file" name="uploadfiles[]" id="uploadfiles" size="35" class="uploadfiles" />
-							<?php _e( '<em>or you can choose directly a file from your host,', 'import-users-from-csv-with-meta' ) ?> <a href="#" class="toggle_upload_path"><?php _e( 'click here', 'import-users-from-csv-with-meta' ) ?></a>.</em>
-						</div>
-						<div id="introduce_path" style="display:none;">
-							<input placeholder="<?php _e( 'You have to introduce the path to file, i.e.:' ,'import-users-from-csv-with-meta' ); ?><?php $upload_dir = wp_upload_dir(); echo $upload_dir["path"]; ?>/test.csv" type="text" name="path_to_file" id="path_to_file" value="<?php echo dirname( __FILE__ ); ?>/test.csv" style="width:70%;" />
-							<em><?php _e( 'or you can upload it directly from your PC', 'import-users-from-csv-with-meta' ); ?>, <a href="#" class="toggle_upload_path"><?php _e( 'click here', 'import-users-from-csv-with-meta' ); ?></a>.</em>
-						</div>
-					</td>
-				</tr>
-
-				<tr class="form-field form-required">
 					<th scope="row"><label><?php _e( 'What should the plugin do with empty cells?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
 						<select name="empty_cell_action">
@@ -116,10 +97,59 @@ class ACUI_Homepage{
 					</td>
 				</tr>
 
+				<tr class="form-field">
+					<th scope="row"><label for="user_login"><?php _e( 'Send mail', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<p>
+							<?php _e( 'Do you wish to send a mail with credentials and other data?', 'import-users-from-csv-with-meta' ); ?> 
+							<input type="checkbox" name="sends_email" value="yes" <?php if( get_option( 'acui_manually_send_mail' ) ): ?> checked="checked" <?php endif; ?>>
+						</p>
+						<p>
+							<?php _e( 'Do you wish to send this mail also to users that are being updated? (not only to the one which are being created)', 'import-users-from-csv-with-meta' ); ?>
+							<input type="checkbox" name="send_email_updated" value="yes" <?php if( get_option( 'acui_manually_send_mail_updated' ) ): ?> checked="checked" <?php endif; ?>>
+						</p>
+					</td>
+				</tr>
+
+				</tbody>
+			</table>
+
+			<h2><?php _e( 'Update users', 'import-users-from-csv-with-meta'); ?></h2>
+
+			<table class="form-table">
+				<tbody>
+				<tr class="form-field form-required">
+					<th scope="row"><label><?php _e( 'Update existing users?', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<select name="update_existing_users">
+							<option value="yes"><?php _e( 'Yes', 'import-users-from-csv-with-meta' ); ?></option>
+							<option value="no"><?php _e( 'No', 'import-users-from-csv-with-meta' ); ?></option>
+						</select>
+					</td>
+				</tr>
+
+				<tr class="form-field form-required">
+					<th scope="row"><label><?php _e( 'Update roles for existing users?', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<select name="update_roles_existing_users">
+							<option value="no"><?php _e( 'No', 'import-users-from-csv-with-meta' ); ?></option>
+							<option value="yes"><?php _e( 'Yes, update and override existing roles', 'import-users-from-csv-with-meta' ); ?></option>
+							<option value="yes_no_override"><?php _e( 'Yes, add new roles and not override existing ones', 'import-users-from-csv-with-meta' ); ?></option>
+						</select>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<h2><?php _e( 'Users not present in CSV file', 'import-users-from-csv-with-meta'); ?></h2>
+
+			<table class="form-table">
+				<tbody>
+				
 				<tr class="form-field form-required">
 					<th scope="row"><label for="delete_users"><?php _e( 'Delete users that are not present in the CSV?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
-						<div style="float:left;">
+						<div style="float:left; margin-top: 10px;">
 							<input type="checkbox" name="delete_users" value="yes"/>
 						</div>
 						<div style="margin-left:25px;">
@@ -138,127 +168,32 @@ class ACUI_Homepage{
 					</td>
 				</tr>
 
-				<?php if( is_plugin_active( 'buddypress/bp-loader.php' ) ):
-
-					if( !class_exists( "BP_XProfile_Group" ) ){
-						require_once( WP_PLUGIN_DIR . "/buddypress/bp-xprofile/classes/class-bp-xprofile-group.php" );
-					}
-
-					$buddypress_fields = array();
-					$buddypress_types=array();
-					$profile_groups = BP_XProfile_Group::get( array( 'fetch_fields' => true	) );
-
-					if ( !empty( $profile_groups ) ) {
-						 foreach ( $profile_groups as $profile_group ) {
-							if ( !empty( $profile_group->fields ) ) {				
-								foreach ( $profile_group->fields as $field ) {
-									$buddypress_fields[] = $field->name;
-									$buddypress_types[] = $field->type;
-								}
-							}
-						}
-					}
-				?>
-
 				<tr class="form-field form-required">
-					<th scope="row"><label><?php _e( 'BuddyPress users', 'import-users-from-csv-with-meta' ); ?></label></th>
-					<td><?php _e( 'You can insert any profile from BuddyPress using his name as header. Plugin will check, before import, which fields are defined in BuddyPress and will assign it in the update. You can use this fields:', 'import-users-from-csv-with-meta' ); ?>
-					<ul style="list-style:disc outside none;margin-left:2em;">
-						<?php foreach ($buddypress_fields as $buddypress_field ): ?><li><?php echo $buddypress_field; ?></li><?php endforeach; ?>
-					</ul>
-					<?php _e( 'Remember that all date fields have to be imported using a format like this: 2016-01-01 00:00:00', 'import-users-from-csv-with-meta' ); ?>
-
-					<p class="description"><strong>(<?php _e( 'Only for', 'import-users-from-csv-with-meta' ); ?> <a href="https://wordpress.org/plugins/buddypress/">BuddyPress</a> <?php _e( 'users', 'import-users-from-csv-with-meta' ); ?></strong>.)</p>
-					</td>					
-				</tr>
-
-				<?php endif; ?>
-
-				<?php if( is_plugin_active( 'wp-members/wp-members.php' ) ): ?>
-
-				<tr class="form-field form-required">
-					<th scope="row"><label>Activate user when they are being imported?</label></th>
+					<th scope="row"><label for="change_role_not_present"><?php _e( 'Change role of users that are not present in the CSV?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
-						<select name="activate_users_wp_members">
-							<option value="no_activate"><?php _e( 'Do not activate users', 'import-users-from-csv-with-meta' ); ?></option>
-							<option value="activate"><?php _e( 'Activate users when they are being imported', 'import-users-from-csv-with-meta' ); ?></option>
-						</select>
-
-						<p class="description"><strong>(<?php _e( 'Only for', 'import-users-from-csv-with-meta' ); ?> <a href="https://wordpress.org/plugins/wp-members/"><?php _e( 'WP Members', 'import-users-from-csv-with-meta' ); ?></a> <?php _e( 'users', 'import-users-from-csv-with-meta' ); ?>)</strong>.</p>
-					</td>
-					
-				</tr>
-
-				<?php endif; ?>
-
-				<?php if( is_plugin_active( 'new-user-approve/new-user-approve.php' ) ): ?>
-
-				<tr class="form-field form-required">
-					<th scope="row"><label><?php _e( 'Approve users at the same time is being created', 'import-users-from-csv-with-meta' ); ?></label></th>
-					<td>
-						<select name="approve_users_new_user_appove">
-							<option value="no_approve"><?php _e( 'Do not approve users', 'import-users-from-csv-with-meta' ); ?></option>
-							<option value="approve"><?php _e( 'Approve users when they are being imported', 'import-users-from-csv-with-meta' ); ?></option>
-						</select>
-
-						<p class="description"><strong>(<?php _e( 'Only for', 'import-users-from-csv-with-meta' ); ?> <a href="https://es.wordpress.org/plugins/new-user-approve/"><?php _e( 'New User Approve', 'import-users-from-csv-with-meta' ); ?></a> <?php _e( 'users', 'import-users-from-csv-with-meta' ); ?></strong>.</p>
-					</td>
-					
-				</tr>
-
-				<?php endif; ?>
-
-				<?php if( is_plugin_active( 'allow-multiple-accounts/allow-multiple-accounts.php' ) ): ?>
-
-				<tr class="form-field form-required">
-					<th scope="row"><label><?php _e( 'Repeated email in different users?', 'import-users-from-csv-with-meta' ); ?></label></th>
-					<td>
-						<select name="allow_multiple_accounts">
-							<option value="not_allowed"><?php _e( 'Not allowed', 'import-users-from-csv-with-meta' ); ?></option>
-							<option value="allowed"><?php _e( 'Allowed', 'import-users-from-csv-with-meta' ); ?></option>
-						</select>
-						<p class="description"><strong>(<?php _e( 'Only for', 'import-users-from-csv-with-meta' ); ?> <a href="https://wordpress.org/plugins/allow-multiple-accounts/"><?php _e( 'Allow Multiple Accounts', 'import-users-from-csv-with-meta' ); ?></a> <?php _e( 'users', 'import-users-from-csv-with-meta'); ?>)</strong>. <?php _e('Allow multiple user accounts to be created having the same email address.','import-users-from-csv-with-meta' ); ?></p>
+						<div style="float:left; margin-top: 10px;">
+							<input type="checkbox" name="change_role_not_present" value="yes"/>
+						</div>
+						<div style="margin-left:25px;">
+							<select id="change_role_not_present_role" name="change_role_not_present_role">
+								<?php
+									$list_roles = acui_get_editable_roles(); 
+						
+									foreach ($list_roles as $key => $value) {
+										echo "<option value='$key'>$value</option>";
+									}
+								?>
+							</select>
+							<p class="description"><?php _e( 'After import users which is not present in the CSV and can be changed to a different role.', 'import-users-from-csv-with-meta' ); ?></p>
+						</div>
 					</td>
 				</tr>
 
-				<?php endif; ?>
-
-				<?php if( is_plugin_active( 'wp-access-areas/wp-access-areas.php' ) ): ?>
-
-				<tr class="form-field form-required">
-					<th scope="row"><label><?php _e('WordPress Access Areas is activated','import-users-from-csv-with-meta'); ?></label></th>
-					<td>
-						<p class="description"><?php _e('As user of','import-users-from-csv-with-meta' ); ?> <a href="https://wordpress.org/plugins/wp-access-areas/"><?php _e( 'WordPress Access Areas', 'import-users-from-csv-with-meta' )?></a> <?php _e( 'you can use the Access Areas created', 'import-users-from-csv-with-meta' ); ?> <a href="<?php echo admin_url( 'users.php?page=user_labels' ); ?>"><?php _e( 'here', 'import-users-from-csv-with-meta' ); ?></a> <?php _e( 'and use this areas in your own CSV file. Please use the column name <strong>wp-access-areas</strong> and in each row use <strong>the name that you have used', 'import-users-from-csv-with-meta' ); ?> <a href="<?php echo admin_url( 'users.php?page=user_labels' ); ?>"><?php _e( 'here', 'import-users-from-csv-with-meta' ); ?></a></strong><?php _e( ', like this ones:', 'import-users-from-csv-with-meta' ); ?></p>
-						<ol>
-							<?php 
-								$data = WPAA_AccessArea::get_available_userlabels( '0,5' , NULL ); 								
-								foreach ( $data as $access_area_object ): ?>
-									<li><?php echo $access_area_object->cap_title; ?></li>
-							<?php endforeach; ?>
-
-						</ol>
-						<p class="description"><?php _e( "If you leave this cell empty for some user or the access area indicated doesn't exist, user won't be assigned to any access area. You can choose more than one area for each user using pads between them in the same row, i.e.: ", 'import-users-from-csv-with-meta' ) ?>access_area1#accces_area2</p>
-					</td>
-				</tr>
-
-				<?php endif; ?>
-
-				<tr class="form-field">
-					<th scope="row"><label for="user_login"><?php _e( 'Send mail', 'import-users-from-csv-with-meta' ); ?></label></th>
-					<td>
-						<p>
-							<?php _e( 'Do you wish to send a mail with credentials and other data?', 'import-users-from-csv-with-meta' ); ?> 
-							<input type="checkbox" name="sends_email" value="yes" <?php if( get_option( 'acui_manually_send_mail' ) ): ?> checked="checked" <?php endif; ?>>
-						</p>
-						<p>
-							<?php _e( 'Do you wish to send this mail also to users that are being updated? (not only to the one which are being created)', 'import-users-from-csv-with-meta' ); ?>
-							<input type="checkbox" name="send_email_updated" value="yes" <?php if( get_option( 'acui_manually_send_mail_updated' ) ): ?> checked="checked" <?php endif; ?>>
-						</p>
-					</td>
-				</tr>
 				</tbody>
 			</table>
 
+			<?php do_action( 'acui_tab_import_before_import_button' ); ?>
+				
 			<?php wp_nonce_field( 'acui-import', 'acui-nonce' ); ?>
 
 			<input class="button-primary" type="submit" name="uploadfile" id="uploadfile_btn" value="<?php _e( 'Start importing', 'import-users-from-csv-with-meta' ); ?>"/>

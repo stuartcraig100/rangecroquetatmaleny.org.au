@@ -1,11 +1,11 @@
 === Participants Database ===
 Contributors: xnau
 Donate link: https://xnau.com/wordpress-plugins/participants-database
-Tags: supporter, member, volunteer, database, sign up form, survey, management, non-profit, political, community, organization, mailing list, team, records
+Tags: supporter, member, volunteer, database, sign-up form, directory, index, survey, management, non-profit, political, community, organization, mailing list, team, records
 Requires at least: 4.0
-Tested up to: 5.0.3
+Tested up to: 5.1
 Requires PHP: 5.6
-Stable tag: 1.8.4.8
+Stable tag: 1.9.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -289,6 +289,21 @@ You can define a "captcha" form element which will show a simple math question f
 
 == Changelog ==
 
+= 1.9.2 =
+* fixed admin list pagination in alternate session mode
+* fixed missing link recovery error message
+* several minor bug fixes
+
+= 1.9.1 =
+* fixed manage database fields order issue 
+* fixed issue with chosen dropdown options not showing
+
+= 1.9.0 =
+* redesigned Manage Database Fields page
+* new visibility modes for field groups
+* new Lost Private Link Success Message setting
+* new validation message setting for validated fields
+
 = 1.8.4.9 =
 * fixed fatal error on first install in multisite
 
@@ -335,6 +350,10 @@ You can define a "captcha" form element which will show a simple math question f
 
 = 1.8.3.1 =
 * bugfix: field attributes missing in backend record edit
+
+= 1.8.5 =
+* redesigned Manage Database Fields page
+* important changes to how fields are defined
 
 = 1.8.3 =
 * bugfix for single record display no record
@@ -1138,8 +1157,8 @@ Taking defensive precautions against other plugins in the admin:
 
 == Upgrade Notice ==
 
-= 1.8.4.9 =
-Version 1.8.4.9 is a bigfix update.
+= 1.9.2 =
+Version 1.9.2 is a bugfix release
 
 == Plugin Support ==
 

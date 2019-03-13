@@ -3,8 +3,8 @@ Contributors: awordpresslife
 Tags: slider, slider gallery, image slider, photo Slider, gallery slideshow
 Donate link: https://awplife.com/
 Requires at least: 3.8
-Tested up to: 5.0.3
-Stable tag: 1.0.0
+Tested up to: 5.1
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -147,6 +147,12 @@ The following are other recommended plugins by the author:
 7. Slide Show Preview
 
 == Changelog ==
+
+= 1.0.1 =
+
+* Enhancements: tested for wordpress 5.1
+* Bug Fix: Yes,
+* Additional changes: None.
 
 = 1.0.0 =
 

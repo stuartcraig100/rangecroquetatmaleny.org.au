@@ -4,7 +4,7 @@ Donate link: http://paypal.me/codection
 Tags: csv, import, importer, meta data, meta, user, users, user meta,  editor, profile, custom, fields, delimiter, update, insert
 Requires at least: 3.4
 Tested up to: 5.1
-Stable tag: 1.13.1
+Stable tag: 1.14.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,17 @@ Plugin will automatically detect:
 5. Extra profile information (user meta)
 
 == Changelog ==
+
+= 1.14.0.1 =
+*	Echo removed from class to prevent message on activation
+
+= 1.14 =
+*	Options management improved
+*	GUI improved
+*	Now you can change the role of users that are not in the CSV file thanks to California Advocates Management Services
+
+= 1.13.2 =
+*	Attachments in email templates and mail options now can be deleted thanks to Joel Frankwick
 
 = 1.13.1 =
 *	Email templates loads also the attachment in Mail options when they are selected thanks to Joel Frankwick

@@ -9,7 +9,6 @@ class ACUI_Email_Template{
 		add_action( 'wp_ajax_acui_refresh_enable_email_templates', array( $this, 'refresh_enable_email_templates' ) );
 		add_action( 'wp_ajax_acui_email_template_selected', array( $this, 'email_template_selected' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ), 10, 1 );
 		add_action( 'save_post', array( $this, 'save_post' ) );
 	}
 
@@ -118,22 +117,6 @@ class ACUI_Email_Template{
         				'core' );
 	}
 
-	function load_admin_scripts( $hook ) {
-		global $typenow, $acui_url_plugin;
-		
-		if( $typenow == 'acui_email_template' || $hook == 'tools_page_acui' ) {
-			wp_enqueue_media();
-			wp_register_script( 'meta-box-image', $acui_url_plugin . '/assets/email-template-attachment-admin.js', array( 'jquery' ) );
-			wp_localize_script( 'meta-box-image', 'meta_image',
-				array(
-					'title' => __( 'Choose or upload file', 'import-users-from-csv-with-meta' ),
-					'button' => __( 'Use this file', 'import-users-from-csv-with-meta' ),
-				)
-			);
-			wp_enqueue_script( 'meta-box-image' );
-		}
-	}
-
 	public function email_template_attachments( $post ){
 		$email_template_attachment_id = get_post_meta( $post->ID, 'email_template_attachment_id', true );
 		?>
@@ -143,6 +126,7 @@ class ACUI_Email_Template{
 					<input type="url" class="large-text" name="email_template_attachment_file" id="email_template_attachment_file" value="<?php echo wp_get_attachment_url( $email_template_attachment_id ); ?>" readonly/><br>
 					<input type="hidden" name="email_template_attachment_id" id="email_template_attachment_id" value="<?php echo $email_template_attachment_id ?>"/>
 					<button type="button" class="button" id="acui_email_template_upload_button"><?php _e( 'Upload file', 'import-users-from-csv-with-meta' )?></button>
+					<button type="button" class="button" id="acui_email_template_remove_upload_button"><?php _e( 'Remove file', 'import-users-from-csv-with-meta' )?></button>
 				</div>
 			</fieldset>
 		<?php

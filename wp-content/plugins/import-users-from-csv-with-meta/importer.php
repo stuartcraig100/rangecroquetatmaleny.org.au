@@ -45,6 +45,8 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 			$empty_cell_action = isset( $form_data["empty_cell_action"] ) ? $form_data["empty_cell_action"] : '';
 			$delete_users = isset( $form_data["delete_users"] ) ? $form_data["delete_users"] : '';
 			$delete_users_assign_posts = isset( $form_data["delete_users_assign_posts"] ) ? $form_data["delete_users_assign_posts"] : '';
+			$change_role_not_present = isset( $form_data["change_role_not_present"] ) ? $form_data["change_role_not_present"] : '';
+			$change_role_not_present_role = isset( $form_data["change_role_not_present_role"] ) ? $form_data["change_role_not_present_role"] : '';
 
 			if( $is_frontend ){
 				$activate_users_wp_members = get_option( "acui_frontend_activate_users_wp_members" );
@@ -89,7 +91,7 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 				update_option( "acui_manually_send_mail_updated", false );
 
 			// disable WordPress default emails if this must be disabled
-			if( !get_option('acui_automattic_wordpress_email') ){
+			if( !get_option('acui_automatic_wordpress_email') ){
 				add_filter( 'send_email_change_email', 'acui_return_false', 999 );
 				add_filter( 'send_password_change_email', 'acui_return_false', 999 );
 			}
@@ -596,7 +598,7 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 
 						$attachments = array();
 						$attachment_id = get_option( 'acui_mail_attachment_id' );
-						if( $attachment_id != 0 )
+						if( !empty( $attachment_id ) )
 							$attachments[] = get_attached_file( $attachment_id );
 
 						add_filter( 'wp_mail_content_type', 'cod_set_html_content_type' );
@@ -624,7 +626,7 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 			endwhile;
 
 			// let the filter of default WordPress emails as it were before deactivating them
-			if( !get_option('acui_automattic_wordpress_email') ){
+			if( !get_option('acui_automatic_wordpress_email') ){
 				remove_filter( 'send_email_change_email', 'acui_return_false', 999 );
 				remove_filter( 'send_password_change_email', 'acui_return_false', 999 );
 			}
@@ -634,6 +636,7 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 
 			// delete all users that have not been imported
 			$delete_users_flag = false;
+			$change_role_not_present_flag = false;
 
 			if( $delete_users == 'yes' ){
 				$delete_users_flag = true;
@@ -649,8 +652,24 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 				$delete_users_assign_posts = get_option( "acui_frontend_delete_users_assign_posts");
 			}
 
-			if( $error_importing ) // if there is some problem of some kind importing we won't proceed with delete to avoid problems
+			if( $change_role_not_present == 'yes' ){
+				$change_role_not_present_flag = true;
+			}
+
+			if( $is_cron && get_option( "acui_cron_change_role_not_present" ) ){
+				$change_role_not_present_flag = true;
+				$change_role_not_present_role = get_option( "acui_cron_change_role_not_present_role");
+			}
+
+			if( $is_frontend && get_option( "acui_frontend_change_role_not_present" ) ){
+				$change_role_not_present_flag = true;
+				$change_role_not_present_role = get_option( "acui_frontend_change_role_not_present_role");
+			}
+
+			if( $error_importing ){ // if there is some problem of some kind importing we won't proceed with delete or changing role to users not present to avoid problems
 				$delete_users_flag = false;
+				$change_role_not_present_flag = false;
+			}
 
 			if( $delete_users_flag ):
 				require_once( ABSPATH . 'wp-admin/includes/user.php');	
@@ -658,8 +677,7 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 				$all_users = get_users( array( 
 					'fields' => array( 'ID' ),
 					'role__not_in' => array( 'administrator' )
-				) );
-				
+				) );				
 
 				foreach ( $all_users as $user ) {
 					if( !in_array( $user->ID, $users_registered ) ){
@@ -673,6 +691,21 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 				}
 			endif;
 
+			if( $change_role_not_present ):
+				require_once( ABSPATH . 'wp-admin/includes/user.php');	
+
+				$all_users = get_users( array( 
+					'fields' => array( 'ID' ),
+					'role__not_in' => array( 'administrator' )
+				) );
+				
+				foreach ( $all_users as $user ) {
+					if( !in_array( $user->ID, $users_registered ) ){
+						$user_object = new WP_User( $user->ID );
+						$user_object->set_role( $change_role_not_present_role );
+					}
+				}
+			endif;			
 			?>
 			</table>
 

@@ -12,6 +12,7 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 	 */
 	class UAGB_Block_Helper {
 
+
 		/**
 		 * Get Section Block CSS
 		 *
@@ -276,14 +277,16 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 					'height' => $attr['topHeight'] . "px"
 				),
 				' .uagb-columns__shape-top .uagb-columns__shape-fill' => array(
-					'fill' => $attr['topColor']
+					'fill' => $attr['topColor'],
+					'opacity' => ( isset( $attr['topDividerOpacity'] ) && '' != $attr['topDividerOpacity'] ) ? ( ( $attr['topDividerOpacity'] ) / 100 ) : ""
 				),
 				' .uagb-columns__shape-bottom svg' => array(
 					'width' => "calc( " . $attr['bottomWidth'] . "% + 1.3px )",
 					'height' => $attr['bottomHeight'] . "px"
 				),
 				' .uagb-columns__shape-bottom .uagb-columns__shape-fill' => array(
-					'fill' => $attr['bottomColor']
+					'fill' => $attr['bottomColor'],
+					'opacity' => ( isset( $attr['bottomDividerOpacity'] ) && '' != $attr['bottomDividerOpacity'] ) ? ( ( $attr['bottomDividerOpacity'] ) / 100 ) : ""
 				),
 			);
 
@@ -618,21 +621,26 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 
 			foreach ( $attr['buttons'] as $key => $button ) {
 
-				$button['size']         = ( isset( $button['size'] ) ) ? $button['size'] : '';
-				$button['borderWidth']  = ( isset( $button['borderWidth'] ) ) ? $button['borderWidth'] : '';
-				$button['borderStyle']  = ( isset( $button['borderStyle'] ) ) ? $button['borderStyle'] : '';
-				$button['borderColor']  = ( isset( $button['borderColor'] ) ) ? $button['borderColor'] : '';
-				$button['borderRadius'] = ( isset( $button['borderRadius'] ) ) ? $button['borderRadius'] : '';
-				$button['background']   = ( isset( $button['background'] ) ) ? $button['background'] : '';
-				$button['hBackground']  = ( isset( $button['hBackground'] ) ) ? $button['hBackground'] : '';
-				$button['borderHColor'] = ( isset( $button['borderHColor'] ) ) ? $button['borderHColor'] : '';
-				$button['vPadding']     = ( isset( $button['vPadding'] ) ) ? $button['vPadding'] : '';
-				$button['hPadding']     = ( isset( $button['hPadding'] ) ) ? $button['hPadding'] : '';
-				$button['color']        = ( isset( $button['color'] ) ) ? $button['color'] : '';
-				$button['hColor']       = ( isset( $button['hColor'] ) ) ? $button['hColor'] : '';
-				$button['sizeType']     = ( isset( $button['sizeType'] ) ) ? $button['sizeType'] : 'px';
-				$button['sizeMobile']   = ( isset( $button['sizeMobile'] ) ) ? $button['sizeMobile'] : '';
-				$button['sizeTablet']   = ( isset( $button['sizeTablet'] ) ) ? $button['sizeTablet'] : '';
+				$button['size']             = ( isset( $button['size'] ) ) ? $button['size'] : '';
+				$button['borderWidth']      = ( isset( $button['borderWidth'] ) ) ? $button['borderWidth'] : '';
+				$button['borderStyle']      = ( isset( $button['borderStyle'] ) ) ? $button['borderStyle'] : '';
+				$button['borderColor']      = ( isset( $button['borderColor'] ) ) ? $button['borderColor'] : '';
+				$button['borderRadius']     = ( isset( $button['borderRadius'] ) ) ? $button['borderRadius'] : '';
+				$button['background']       = ( isset( $button['background'] ) ) ? $button['background'] : '';
+				$button['hBackground']      = ( isset( $button['hBackground'] ) ) ? $button['hBackground'] : '';
+				$button['borderHColor']     = ( isset( $button['borderHColor'] ) ) ? $button['borderHColor'] : '';
+				$button['vPadding']         = ( isset( $button['vPadding'] ) ) ? $button['vPadding'] : '';
+				$button['hPadding']         = ( isset( $button['hPadding'] ) ) ? $button['hPadding'] : '';
+				$button['color']            = ( isset( $button['color'] ) ) ? $button['color'] : '';
+				$button['hColor']           = ( isset( $button['hColor'] ) ) ? $button['hColor'] : '';
+				$button['sizeType']         = ( isset( $button['sizeType'] ) ) ? $button['sizeType'] : 'px';
+				$button['sizeMobile']       = ( isset( $button['sizeMobile'] ) ) ? $button['sizeMobile'] : '';
+				$button['sizeTablet']       = ( isset( $button['sizeTablet'] ) ) ? $button['sizeTablet'] : '';
+				$button['lineHeight']       = ( isset( $button['lineHeight'] ) ) ? $button['lineHeight'] : '';
+				$button['lineHeightType']   = ( isset( $button['lineHeightType'] ) ) ? $button['lineHeightType'] : '';
+				$button['lineHeightMobile'] = ( isset( $button['lineHeightMobile'] ) ) ? $button['lineHeightMobile'] : '';
+				$button['lineHeightTablet'] = ( isset( $button['lineHeightTablet'] ) ) ? $button['lineHeightTablet'] : '';
+
 
 				if ( $attr['btn_count'] <= $key ) {
 					break;
@@ -3137,6 +3145,568 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 		}
 
 		/**
+		 * Get Contact Form 7 CSS
+		 *
+		 * @param array  $attr The block attributes.
+		 * @param string $id The selector ID.
+		 * @since 1.10.0
+		 */
+		public static function get_cf7_styler_css( $attr, $id ) {
+			$defaults = UAGB_Helper::$block_list['uagb/cf7-styler']['attributes'];
+
+			$attr = array_merge( $defaults, (array) $attr );
+
+			$selectors = array(
+				' .wpcf7 .wpcf7-form'                 => array(
+					'text-align' => $attr['align'],
+				),
+				' .wpcf7 form.wpcf7-form:not(input)'  => array(
+					'color' => $attr['fieldLabelColor'],
+				),
+				' .wpcf7 input:not([type=submit])'    => array(
+					'background-color' => $attr['fieldBgColor'],
+					'color'            => $attr['fieldInputColor'],
+					'border-style'     => $attr['fieldBorderStyle'],
+					'border-color'     => $attr['fieldBorderColor'],
+					'border-width'     => $attr['fieldBorderWidth'] . 'px',
+					'border-radius'    => $attr['fieldBorderRadius'] . $attr['fieldBorderRadiusType'],
+					'padding-left'     => $attr['fieldHrPadding'] . 'px',
+					'padding-right'    => $attr['fieldHrPadding'] . 'px',
+					'padding-top'      => $attr['fieldVrPadding'] . 'px',
+					'padding-bottom'   => $attr['fieldVrPadding'] . 'px',
+					'margin-top'       => $attr['fieldLabelSpacing'] . 'px',
+					'margin-bottom'    => $attr['fieldSpacing'] . 'px',
+					'font-size'        => $attr['inputFontSize'] . $attr['inputFontSizeType'],
+					'font-family'      => $attr['inputFontFamily'],
+					'font-weight'      => $attr['inputFontWeight'],
+					'line-height'      => $attr['inputLineHeight'] . $attr['inputLineHeightType'],
+					'text-align'       => $attr['align'],
+				),
+				' .wpcf7 select'                      => array(
+					'background-color' => $attr['fieldBgColor'],
+					'color'            => $attr['fieldLabelColor'],
+					'border-style'     => $attr['fieldBorderStyle'],
+					'border-color'     => $attr['fieldBorderColor'],
+					'border-width'     => $attr['fieldBorderWidth'] . 'px',
+					'border-radius'    => $attr['fieldBorderRadius'] . $attr['fieldBorderRadiusType'],
+					'margin-top'       => $attr['fieldLabelSpacing'] . 'px',
+					'margin-bottom'    => $attr['fieldSpacing'] . 'px',
+					'font-size'        => $attr['labelFontSize'] . $attr['labelFontSizeType'],
+					'font-family'      => $attr['labelFontFamily'],
+					'font-weight'      => $attr['labelFontWeight'],
+					'line-height'      => $attr['labelLineHeight'] . $attr['labelLineHeightType'],
+					'text-align'       => $attr['align'],
+				),
+				' .wpcf7 select.wpcf7-form-control.wpcf7-select:not([multiple="multiple"])' => array(
+					'padding-left'   => $attr['fieldHrPadding'] . 'px',
+					'padding-right'  => $attr['fieldHrPadding'] . 'px',
+					'padding-top'    => $attr['fieldVrPadding'] . 'px',
+					'padding-bottom' => $attr['fieldVrPadding'] . 'px',
+				),
+				' .wpcf7 select.wpcf7-select[multiple="multiple"] option' => array(
+					'padding-left'   => $attr['fieldHrPadding'] . 'px',
+					'padding-right'  => $attr['fieldHrPadding'] . 'px',
+					'padding-top'    => $attr['fieldVrPadding'] . 'px',
+					'padding-bottom' => $attr['fieldVrPadding'] . 'px',
+				),
+				' .wpcf7 textarea'                    => array(
+					'background-color' => $attr['fieldBgColor'],
+					'color'            => $attr['fieldInputColor'],
+					'border-color'     => $attr['fieldBorderColor'],
+					'border-width'     => $attr['fieldBorderWidth'] . 'px',
+					'border-radius'    => $attr['fieldBorderRadius'] . $attr['fieldBorderRadiusType'],
+					'border-style'     => $attr['fieldBorderStyle'],
+					'padding-left'     => $attr['fieldHrPadding'] . 'px',
+					'padding-right'    => $attr['fieldHrPadding'] . 'px',
+					'padding-top'      => $attr['fieldVrPadding'] . 'px',
+					'padding-bottom'   => $attr['fieldVrPadding'] . 'px',
+					'margin-top'       => $attr['fieldLabelSpacing'] . 'px',
+					'margin-bottom'    => $attr['fieldSpacing'] . 'px',
+					'font-size'        => $attr['inputFontSize'] . $attr['inputFontSizeType'],
+					'font-family'      => $attr['inputFontFamily'],
+					'font-weight'      => $attr['inputFontWeight'],
+					'line-height'      => $attr['inputLineHeight'] . $attr['inputLineHeightType'],
+					'text-align'       => $attr['align'],
+				),
+				' .wpcf7 textarea::placeholder'       => array(
+					'color'      => $attr['fieldInputColor'],
+					'text-align' => $attr['align'],
+				),
+				' .wpcf7 input::placeholder'          => array(
+					'color'      => $attr['fieldInputColor'],
+					'text-align' => $attr['align'],
+				),
+				' .wpcf7 form label'                  => array(
+					'font-size'   => $attr['labelFontSize'] . $attr['labelFontSizeType'],
+					'font-family' => $attr['labelFontFamily'],
+					'font-weight' => $attr['labelFontWeight'],
+					'line-height' => $attr['labelLineHeight'] . $attr['labelLineHeightType'],
+				),
+				' .wpcf7 form .wpcf7-list-item-label' => array(
+					'font-size'   => $attr['labelFontSize'] . $attr['labelFontSizeType'],
+					'font-family' => $attr['labelFontFamily'],
+					'font-weight' => $attr['labelFontWeight'],
+					'line-height' => $attr['labelLineHeight'] . $attr['labelLineHeightType'],
+				),
+
+				// Focus.
+				' .wpcf7 form input:not([type=submit]):focus' => array(
+					'border-color' => $attr['fieldBorderFocusColor'],
+				),
+				' .wpcf7 form select:focus'           => array(
+					'border-color' => $attr['fieldBorderFocusColor'],
+				),
+				' .wpcf7 textarea:focus'              => array(
+					'border-color' => $attr['fieldBorderFocusColor'],
+				),
+
+				// Submit button.
+				' .wpcf7 input.wpcf7-form-control.wpcf7-submit' => array(
+					'color'            => $attr['buttonTextColor'],
+					'background-color' => $attr['buttonBgColor'],
+					'font-size'        => $attr['buttonFontSize'] . $attr['buttonFontSizeType'],
+					'font-family'      => $attr['buttonFontFamily'],
+					'font-weight'      => $attr['buttonFontWeight'],
+					'line-height'      => $attr['buttonLineHeight'] . $attr['buttonLineHeightType'],
+					'border-color'     => $attr['buttonBorderColor'],
+					'border-style'     => $attr['buttonBorderStyle'],
+					'border-width'     => $attr['buttonBorderWidth'] . 'px',
+					'border-radius'    => $attr['buttonBorderRadius'] . $attr['buttonBorderRadiusType'],
+					'padding-left'     => $attr['buttonHrPadding'] . 'px',
+					'padding-right'    => $attr['buttonHrPadding'] . 'px',
+					'padding-top'      => $attr['buttonVrPadding'] . 'px',
+					'padding-bottom'   => $attr['buttonVrPadding'] . 'px',
+				),
+				' .wpcf7 input.wpcf7-form-control.wpcf7-submit:hover' => array(
+					'color'            => $attr['buttonTextHoverColor'],
+					'background-color' => $attr['buttonBgHoverColor'],
+					'border-color'     => $attr['buttonBorderHoverColor'],
+				),
+
+				// Check box Radio.
+				' .wpcf7 .wpcf7-checkbox input[type="checkbox"]:checked + span:before' => array(
+					'background-color' => $attr['fieldBgColor'],
+					'color'            => $attr['fieldInputColor'],
+					'font-size'        => 'calc( ' . $attr['fieldVrPadding'] . 'px / 1.2 )',
+					'border-color'     => $attr['fieldBorderFocusColor'],
+				),
+				' .wpcf7 .wpcf7-checkbox input[type="checkbox"] + span:before' => array(
+					'background-color' => $attr['fieldBgColor'],
+					'color'            => $attr['fieldInputColor'],
+					'height'           => $attr['fieldVrPadding'] . 'px',
+					'width'            => $attr['fieldVrPadding'] . 'px',
+					'border-style'     => $attr['fieldBorderStyle'],
+					'border-color'     => $attr['fieldBorderColor'],
+					'border-width'     => $attr['fieldBorderWidth'] . 'px',
+					'border-radius'    => $attr['fieldBorderRadius'] . $attr['fieldBorderRadiusType'],
+					'font-size'        => 'calc( ' . $attr['fieldVrPadding'] . 'px / 1.2 )',
+				),
+				' .wpcf7 .wpcf7-acceptance input[type="checkbox"]:checked + span:before' => array(
+					'background-color' => $attr['fieldBgColor'],
+					'color'            => $attr['fieldInputColor'],
+					'font-size'        => 'calc( ' . $attr['fieldVrPadding'] . 'px / 1.2 )',
+					'border-color'     => $attr['fieldBorderFocusColor'],
+				),
+				' .wpcf7 .wpcf7-acceptance input[type="checkbox"] + span:before' => array(
+					'background-color' => $attr['fieldBgColor'],
+					'color'            => $attr['fieldInputColor'],
+					'height'           => $attr['fieldVrPadding'] . 'px',
+					'width'            => $attr['fieldVrPadding'] . 'px',
+					'font-size'        => 'calc( ' . $attr['fieldVrPadding'] . 'px / 1.2 )',
+					'border-color'     => $attr['fieldBorderColor'],
+					'border-style'     => $attr['fieldBorderStyle'],
+					'border-width'     => $attr['fieldBorderWidth'] . 'px',
+					'border-radius'    => $attr['fieldBorderRadius'] . $attr['fieldBorderRadiusType'],
+				),
+				' .wpcf7 .wpcf7-radio input[type="radio"] + span:before' => array(
+					'background-color' => $attr['fieldBgColor'],
+					'color'            => $attr['fieldInputColor'],
+					'height'           => $attr['fieldVrPadding'] . 'px',
+					'width'            => $attr['fieldVrPadding'] . 'px',
+					'border-style'     => $attr['fieldBorderStyle'],
+					'border-color'     => $attr['fieldBorderColor'],
+					'border-width'     => $attr['fieldBorderWidth'] . 'px',
+				),
+				' .wpcf7 .wpcf7-radio input[type="radio"]:checked + span:before' => array(
+					'border-color' => $attr['fieldBorderFocusColor'],
+				),
+
+				// Underline border.
+				' .uagb-cf7-styler__field-style-underline .wpcf7 input:not([type=submit])' => array(
+					'border-style'        => 'none',
+					'border-bottom-color' => $attr['fieldBorderColor'],
+					'border-bottom-style' => 'solid',
+					'border-bottom-width' => $attr['fieldBorderWidth'] . 'px',
+					'border-radius'       => $attr['fieldBorderRadius'] . $attr['fieldBorderRadiusType'],
+				),
+				' .uagb-cf7-styler__field-style-underline textarea' => array(
+					'border-style'        => 'none',
+					'border-bottom-color' => $attr['fieldBorderColor'],
+					'border-bottom-style' => 'solid',
+					'border-bottom-width' => $attr['fieldBorderWidth'] . 'px',
+					'border-radius'       => $attr['fieldBorderRadius'] . $attr['fieldBorderRadiusType'],
+				),
+				' .uagb-cf7-styler__field-style-underline select' => array(
+					'border-style'        => 'none',
+					'border-bottom-color' => $attr['fieldBorderColor'],
+					'border-bottom-style' => 'solid',
+					'border-bottom-width' => $attr['fieldBorderWidth'] . 'px',
+					'border-radius'       => $attr['fieldBorderRadius'] . $attr['fieldBorderRadiusType'],
+				),
+				' .uagb-cf7-styler__field-style-underline textarea' => array(
+					'border-style'        => 'none',
+					'border-bottom-color' => $attr['fieldBorderColor'],
+					'border-bottom-style' => 'solid',
+					'border-bottom-width' => $attr['fieldBorderWidth'] . 'px',
+					'border-radius'       => $attr['fieldBorderRadius'] . $attr['fieldBorderRadiusType'],
+				),
+				' .uagb-cf7-styler__field-style-underline .wpcf7-checkbox input[type="checkbox"] + span:before' => array(
+					'border-style' => 'solid',
+				),
+				' .uagb-cf7-styler__field-style-underline .wpcf7 input[type="radio"] + span:before' => array(
+					'border-style' => 'solid',
+				),
+				' .uagb-cf7-styler__field-style-underline .wpcf7-acceptance input[type="checkbox"] + span:before' => array(
+					'border-style' => 'solid',
+				),
+				' .uagb-cf7-styler__field-style-box .wpcf7-checkbox input[type="checkbox"]:checked + span:before' => array(
+					'border-style'  => $attr['fieldBorderStyle'],
+					'border-width'  => $attr['fieldBorderWidth'] . 'px',
+					'border-radius' => $attr['fieldBorderRadius'] . $attr['fieldBorderRadiusType'],
+					'font-size'     => 'calc( ' . $attr['fieldVrPadding'] . 'px / 1.2 )',
+				),
+				' .uagb-cf7-styler__field-style-box .wpcf7-acceptance input[type="checkbox"]:checked + span:before' => array(
+					'border-style'  => $attr['fieldBorderStyle'],
+					'border-width'  => $attr['fieldBorderWidth'] . 'px',
+					'border-radius' => $attr['fieldBorderRadius'] . $attr['fieldBorderRadiusType'],
+					'font-size'     => 'calc( ' . $attr['fieldVrPadding'] . 'px / 1.2 )',
+				),
+				' .wpcf7-radio input[type="radio"]:checked + span:before' => array(
+					'background-color' => $attr['fieldInputColor'],
+				),
+
+				// Override check box.
+				' .uagb-cf7-styler__check-style-enabled .wpcf7 .wpcf7-checkbox input[type="checkbox"] + span:before' => array(
+					'background-color' => $attr['radioCheckBgColor'],
+					'color'            => $attr['radioCheckSelectColor'],
+					'height'           => $attr['radioCheckSize'] . 'px',
+					'width'            => $attr['radioCheckSize'] . 'px',
+					'font-size'        => 'calc( ' . $attr['radioCheckSize'] . 'px / 1.2 )',
+					'border-color'     => $attr['radioCheckBorderColor'],
+					'border-width'     => $attr['radioCheckBorderWidth'] . 'px',
+					'border-radius'    => $attr['radioCheckBorderRadius'] . $attr['radioCheckBorderRadiusType'],
+				),
+				' .uagb-cf7-styler__check-style-enabled .wpcf7 .wpcf7-checkbox input[type="checkbox"]:checked + span:before' => array(
+					'border-color' => $attr['fieldBorderFocusColor'],
+				),
+				' .uagb-cf7-styler__check-style-enabled .wpcf7 .wpcf7-acceptance input[type="checkbox"] + span:before' => array(
+					'background-color' => $attr['radioCheckBgColor'],
+					'color'            => $attr['radioCheckSelectColor'],
+					'height'           => $attr['radioCheckSize'] . 'px',
+					'width'            => $attr['radioCheckSize'] . 'px',
+					'font-size'        => 'calc( ' . $attr['radioCheckSize'] . 'px / 1.2 )',
+					'border-color'     => $attr['radioCheckBorderColor'],
+					'border-width'     => $attr['radioCheckBorderWidth'] . 'px',
+					'border-radius'    => $attr['radioCheckBorderRadius'] . $attr['radioCheckBorderRadiusType'],
+				),
+				' .uagb-cf7-styler__check-style-enabled .wpcf7 .wpcf7-acceptance input[type="checkbox"]:checked + span:before' => array(
+					'border-color' => $attr['fieldBorderFocusColor'],
+				),
+
+				' .uagb-cf7-styler__check-style-enabled .wpcf7 input[type="radio"] + span:before' => array(
+					'background-color' => $attr['radioCheckBgColor'],
+					'color'            => $attr['radioCheckSelectColor'],
+					'height'           => $attr['radioCheckSize'] . 'px',
+					'width'            => $attr['radioCheckSize'] . 'px',
+					'font-size'        => 'calc( ' . $attr['radioCheckSize'] . 'px / 1.2 )',
+					'border-color'     => $attr['radioCheckBorderColor'],
+					'border-width'     => $attr['radioCheckBorderWidth'] . 'px',
+				),
+				' .uagb-cf7-styler__check-style-enabled .wpcf7-radio input[type="radio"]:checked + span:before' => array(
+					'background-color' => $attr['radioCheckSelectColor'],
+				),
+				' .uagb-cf7-styler__check-style-enabled .wpcf7 form .wpcf7-list-item-label' => array(
+					'font-size'   => $attr['radioCheckFontSize'] . $attr['radioCheckFontSizeType'],
+					'font-family' => $attr['radioCheckFontFamily'],
+					'font-weight' => $attr['radioCheckFontWeight'],
+					'line-height' => $attr['radioCheckLineHeight'] . $attr['radioCheckLineHeightType'],
+					'color'       => $attr['radioCheckLableColor'],
+				),
+				' span.wpcf7-not-valid-tip'           => array(
+					'color'       => $attr['validationMsgColor'],
+					'font-size'   => $attr['validationMsgFontSize'] . $attr['validationMsgFontSizeType'],
+					'font-family' => $attr['validationMsgFontFamily'],
+					'font-weight' => $attr['validationMsgFontWeight'],
+					'line-height' => $attr['validationMsgLineHeight'] . $attr['validationMsgLineHeightType'],
+				),
+				' .uagb-cf7-styler__highlight-border input.wpcf7-form-control.wpcf7-not-valid' => array(
+					'border-color' => $attr['highlightBorderColor'],
+				),
+				' .uagb-cf7-styler__highlight-border .wpcf7-form-control.wpcf7-not-valid .wpcf7-list-item-label:before' => array(
+					'border-color' => $attr['highlightBorderColor'] . '!important',
+				),
+				' .uagb-cf7-styler__highlight-style-bottom_right .wpcf7-not-valid-tip' => array(
+					'background-color' => $attr['validationMsgBgColor'],
+				),
+				' .wpcf7-response-output'             => array(
+					'border-width'   => $attr['msgBorderSize'] . 'px',
+					'border-radius'  => $attr['msgBorderRadius'] . $attr['msgBorderRadiusType'],
+					'font-size'      => $attr['msgFontSize'] . $attr['msgFontSizeType'],
+					'font-family'    => $attr['msgFontFamily'],
+					'font-weight'    => $attr['msgFontWeight'],
+					'line-height'    => $attr['msgLineHeight'] . $attr['msgLineHeightType'],
+					'padding-top'    => $attr['msgVrPadding'] . 'px',
+					'padding-bottom' => $attr['msgVrPadding'] . 'px',
+					'padding-left'   => $attr['msgHrPadding'] . 'px',
+					'padding-right'  => $attr['msgHrPadding'] . 'px',
+				),
+				' .wpcf7-response-output.wpcf7-validation-errors' => array(
+					'background-color' => $attr['errorMsgBgColor'],
+					'border-color'     => $attr['errorMsgBorderColor'],
+					'color'            => $attr['errorMsgColor'],
+				),
+				' .wpcf7-response-output.wpcf7-validation- success' => array(
+					'background-color' => $attr['successMsgBgColor'],
+					'border-color'     => $attr['successMsgBorderColor'],
+					'color'            => $attr['successMsgColor'],
+				),
+
+			);
+
+			$t_selectors = array(
+				' .wpcf7 form.wpcf7-form:not(input)'  => array(
+					'color' => $attr['fieldLabelColor'],
+				),
+				' .wpcf7 input:not([type=submit])'    => array(
+					'font-size'   => $attr['inputFontSizeTablet'] . $attr['inputFontSizeType'],
+					'line-height' => $attr['inputLineHeightTablet'] . $attr['inputLineHeightType'],
+				),
+				' .wpcf7 select'                      => array(
+					'font-size'   => $attr['labelFontSizeTablet'] . $attr['labelFontSizeType'],
+					'line-height' => $attr['labelLineHeightTablet'] . $attr['labelLineHeightType'],
+				),
+				' .wpcf7 textarea'                    => array(
+					'font-size'   => $attr['inputFontSizeTablet'] . $attr['inputFontSizeType'],
+					'line-height' => $attr['inputLineHeightTablet'] . $attr['inputLineHeightType'],
+				),
+				' .wpcf7 form label'                  => array(
+					'font-size'   => $attr['labelFontSizeTablet'] . $attr['labelFontSizeType'],
+					'line-height' => $attr['labelLineHeightTablet'] . $attr['labelLineHeightType'],
+				),
+
+				' .wpcf7 form .wpcf7-list-item-label' => array(
+					'font-size'   => $attr['labelFontSizeTablet'] . $attr['labelFontSizeType'],
+					'line-height' => $attr['labelLineHeightTablet'] . $attr['labelLineHeightType'],
+				),
+				' .wpcf7 input.wpcf7-form-control.wpcf7-submit' => array(
+					'font-size'   => $attr['buttonFontSizeTablet'] . $attr['buttonFontSizeType'],
+					'line-height' => $attr['buttonLineHeightTablet'] . $attr['buttonLineHeightType'],
+				),
+				' .uagb-cf7-styler__check-style-enabled .wpcf7 form .wpcf7-list-item-label' => array(
+					'font-size'   => $attr['radioCheckFontSizeTablet'] . $attr['radioCheckFontSizeType'],
+					'line-height' => $attr['radioCheckLineHeightTablet'] . $attr['radioCheckLineHeightType'],
+				),
+				' span.wpcf7-not-valid-tip'           => array(
+					'font-size'   => $attr['validationMsgFontSizeTablet'] . $attr['validationMsgFontSizeType'],
+					'line-height' => $attr['validationMsgLineHeightTablet'] . $attr['validationMsgLineHeightType'],
+				),
+				' .wpcf7-response-output'             => array(
+					'font-size'   => $attr['msgFontSizeTablet'] . $attr['msgFontSizeType'],
+					'line-height' => $attr['msgLineHeightTablet'] . $attr['msgLineHeightType'],
+				),
+			);
+
+			$m_selectors = array(
+				' .wpcf7 input:not([type=submit])'    => array(
+					'font-size'   => $attr['inputFontSizeMobile'] . $attr['inputFontSizeType'],
+					'line-height' => $attr['inputLineHeightMobile'] . $attr['inputLineHeightType'],
+				),
+				' .wpcf7 select'                      => array(
+					'font-size'   => $attr['labelFontSizeMobile'] . $attr['labelFontSizeType'],
+					'line-height' => $attr['labelLineHeightMobile'] . $attr['labelLineHeightType'],
+				),
+				' .wpcf7 textarea'                    => array(
+					'font-size'   => $attr['inputFontSizeMobile'] . $attr['inputFontSizeType'],
+					'line-height' => $attr['inputLineHeightMobile'] . $attr['inputLineHeightType'],
+				),
+				' .wpcf7 form label'                  => array(
+					'font-size'   => $attr['labelFontSizeMobile'] . $attr['labelFontSizeType'],
+					'line-height' => $attr['labelLineHeightMobile'] . $attr['labelLineHeightType'],
+				),
+
+				' .wpcf7 form .wpcf7-list-item-label' => array(
+					'font-size'   => $attr['labelFontSizeMobile'] . $attr['labelFontSizeType'],
+					'line-height' => $attr['labelLineHeightMobile'] . $attr['labelLineHeightType'],
+				),
+				' .wpcf7 input.wpcf7-form-control.wpcf7-submit' => array(
+					'font-size'   => $attr['buttonFontSizeMobile'] . $attr['buttonFontSizeType'],
+					'line-height' => $attr['buttonLineHeightMobile'] . $attr['buttonLineHeightType'],
+				),
+				' .uagb-cf7-styler__check-style-enabled .wpcf7 form .wpcf7-list-item-label' => array(
+					'font-size'   => $attr['radioCheckFontSizeMobile'] . $attr['radioCheckFontSizeType'],
+					'line-height' => $attr['radioCheckLineHeightMobile'] . $attr['radioCheckLineHeightType'],
+				),
+				' span.wpcf7-not-valid-tip'           => array(
+					'font-size'   => $attr['validationMsgFontSizeMobile'] . $attr['validationMsgFontSizeType'],
+					'line-height' => $attr['validationMsgLineHeightMobile'] . $attr['validationMsgLineHeightType'],
+				),
+				' .wpcf7-response-output'             => array(
+					'font-size'   => $attr['msgFontSizeMobile'] . $attr['msgFontSizeType'],
+					'line-height' => $attr['msgLineHeightMobile'] . $attr['msgLineHeightType'],
+				),
+			);
+
+			$desktop = UAGB_Helper::generate_css( $selectors, '#uagb-cf7-styler-' . $id );
+			$tablet  = UAGB_Helper::generate_responsive_css( $t_selectors, '#uagb-cf7-styler-' . $id, 'tablet' );
+			$mobile  = UAGB_Helper::generate_responsive_css( $m_selectors, '#uagb-cf7-styler-' . $id, 'mobile' );
+
+			return $desktop . $tablet . $mobile;
+		}
+
+		/**
+		 * Get Marketing Button Block CSS
+		 *
+		 * @since 1.11.0
+		 * @param array  $attr The block attributes.
+		 * @param string $id The selector ID.
+		 * @return array The Widget List.
+		 */
+		public static function get_marketing_btn_css( $attr, $id ) { 			// @codingStandardsIgnoreStart
+
+			$defaults = UAGB_Helper::$block_list['uagb/marketing-button']['attributes'];
+
+			$attr = array_merge( $defaults, (array) $attr );
+
+			$m_selectors = array();
+			$t_selectors = array();
+
+			$icon_color = ( "" == $attr["iconColor"] ) ? $attr["titleColor"] : $attr["iconColor"];
+			$icon_hover_color = ( "" == $attr["iconHoverColor"] ) ? $attr["titleHoverColor"] : $attr["iconHoverColor"];
+
+			$selectors = array(
+				" .uagb-marketing-btn__title-wrap" => array(
+					"margin-bottom" => $attr["titleSpace"] . "px"
+				),
+				" .uagb-marketing-btn__title" => array(
+					"font-size" => $attr["titleFontSize"] . $attr["titleFontSizeType"],
+					"line-height" => $attr["titleLineHeight"] . $attr["titleLineHeightType"],
+					"font-family" => $attr["titleFontFamily"],
+					"font-weight" => $attr["titleFontWeight"],
+					"color" => $attr["titleColor"],
+				),
+				" .uagb-marketing-btn__icon-wrap" => array(
+					"width" => $attr["iconFontSize"] . $attr["iconFontSizeType"],
+					"height" => $attr["iconFontSize"] . $attr["iconFontSizeType"],
+				),
+				" .uagb-marketing-btn__icon-wrap svg" => array(
+					"fill" => $icon_color
+				),
+				" .uagb-marketing-btn__prefix" => array(
+					"font-size" => $attr["prefixFontSize"] . $attr["prefixFontSizeType"],
+					"line-height" => $attr["prefixLineHeight"] . $attr["prefixLineHeightType"],
+					"font-family" => $attr["prefixFontFamily"],
+					"font-weight" => $attr["prefixFontWeight"],
+					"color" => $attr["prefixColor"],
+				),
+				" .uagb-marketing-btn__link:hover .uagb-marketing-btn__title" => array(
+					"color" => $attr["titleHoverColor"],
+				),
+				" .uagb-marketing-btn__link:hover .uagb-marketing-btn__prefix" => array(
+					"color" => $attr["prefixHoverColor"],
+				),
+				" .uagb-marketing-btn__link:hover .uagb-marketing-btn__icon-wrap svg" => array(
+					"fill" => $icon_hover_color
+				),
+				" .uagb-marketing-btn__link" => array(
+					"padding-left" => $attr["hPadding"] . "px",
+					"padding-right" => $attr["hPadding"] . "px",
+					"padding-top" => $attr["vPadding"] . "px",
+					"padding-bottom" => $attr["vPadding"] . "px",
+					"border-style" => $attr["borderStyle"],
+					"border-width" => $attr["borderWidth"] . "px",
+					"border-color" => $attr["borderColor"],
+					"border-radius" => $attr["borderRadius"] . "px",
+				),
+				" .uagb-marketing-btn__link:hover" => array(
+					"border-color" => $attr["borderHoverColor"]
+				),
+			);
+
+			if ( "transparent" == $attr["backgroundType"] ) {
+
+				$selectors[" .uagb-marketing-btn__link"]["background"] = "transparent";
+
+			} else if ( "color" == $attr["backgroundType"] ) {
+
+				$selectors[" .uagb-marketing-btn__link"]["background"] = UAGB_Helper::hex2rgba( $attr["backgroundColor"], $attr['backgroundOpacity'] );
+
+				// Hover Background
+				$selectors[" .uagb-marketing-btn__link:hover"] = array(
+					"background" => UAGB_Helper::hex2rgba( $attr["backgroundHoverColor"], $attr['backgroundHoverOpacity'] ),
+				);
+
+			} else if ( "gradient" == $attr["backgroundType"] ) {
+
+				$selectors[' .uagb-marketing-btn__link']['background-color'] = 'transparent';
+
+				if ( 'linear' === $attr['gradientType'] ) {
+
+					$selectors[' .uagb-marketing-btn__link']['background-image'] = 'linear-gradient(' . $attr['gradientAngle'] . 'deg, ' . UAGB_Helper::hex2rgba( $attr['gradientColor1'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation1'] . '%, ' . UAGB_Helper::hex2rgba( $attr['gradientColor2'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation2'] . '%)';
+				} else {
+
+					$selectors[' .uagb-marketing-btn__link']['background-image'] = 'radial-gradient( at center center, ' . UAGB_Helper::hex2rgba( $attr['gradientColor1'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation1'] . '%, ' . UAGB_Helper::hex2rgba( $attr['gradientColor2'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation2'] . '%)';
+				}
+			}
+
+			$margin_type = ( "after" == $attr["iconPosition"] ) ? "margin-left" : "margin-right";
+
+			$selectors[" .uagb-marketing-btn__icon-wrap"][$margin_type] = $attr["iconSpace"] . "px";
+
+			$m_selectors = array(
+				' .uagb-marketing-btn__title'        => array(
+					'font-size' => $attr['titleFontSizeMobile'] . $attr['titleFontSizeType'],
+					'line-height' => $attr['titleLineHeightMobile'] . $attr['titleLineHeightType'],
+				),
+				' .uagb-marketing-btn__prefix' => array(
+					'font-size' => $attr['prefixFontSizeMobile'] . $attr['prefixFontSizeType'],
+					'line-height' => $attr['prefixLineHeightMobile'] . $attr['prefixLineHeightType'],
+				),
+				' .uagb-marketing-btn__icon-wrap' => array(
+					"width" => $attr["iconFontSizeMobile"] . $attr["iconFontSizeType"],
+					"height" => $attr["iconFontSizeMobile"] . $attr["iconFontSizeType"],
+				),
+
+			);
+
+			$t_selectors = array(
+				' .uagb-marketing-btn__title'        => array(
+					'font-size' => $attr['titleFontSizeTablet'] . $attr['titleFontSizeType'],
+					'line-height' => $attr['titleLineHeightTablet'] . $attr['titleLineHeightType'],
+				),
+				' .uagb-marketing-btn__prefix' => array(
+					'font-size' => $attr['prefixFontSizeTablet'] . $attr['prefixFontSizeType'],
+					'line-height' => $attr['prefixLineHeightTablet'] . $attr['prefixLineHeightType'],
+				),
+				' .uagb-marketing-btn__icon-wrap' => array(
+					"width" => $attr["iconFontSizeTablet"] . $attr["iconFontSizeType"],
+					"height" => $attr["iconFontSizeTablet"] . $attr["iconFontSizeType"],
+				),
+
+			);
+
+			// @codingStandardsIgnoreEnd
+
+			$desktop = UAGB_Helper::generate_css( $selectors, '#uagb-marketing-btn-' . $id );
+
+			$tablet = UAGB_Helper::generate_responsive_css( $t_selectors, '#uagb-marketing-btn-' . $id, 'tablet' );
+
+			$mobile = UAGB_Helper::generate_responsive_css( $m_selectors, '#uagb-marketing-btn-' . $id, 'mobile' );
+
+			return $desktop . $tablet . $mobile;
+		}
+
+
+		/**
 		 * Get Testimonial Js
 		 *
 		 * @since 1.6.0
@@ -3272,6 +3842,77 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 
 			UAGB_Helper::blocks_google_font( $head_load_google_font, $head_font_family, $head_font_weight, $head_font_subset );
 			UAGB_Helper::blocks_google_font( $subhead_load_google_font, $subhead_font_family, $subhead_font_weight, $subhead_font_subset );
+		}
+
+
+		/**
+		 * Adds Google fonts for CF7 Styler block.
+		 *
+		 * @since 1.10.0
+		 * @param array $attr the blocks attr.
+		 */
+		public static function blocks_cf7_styler_gfont( $attr ) {
+
+			$label_load_google_font = isset( $attr['labelLoadGoogleFonts'] ) ? $attr['labelLoadGoogleFonts'] : '';
+			$label_font_family      = isset( $attr['labelFontFamily'] ) ? $attr['labelFontFamily'] : '';
+			$label_font_weight      = isset( $attr['labelFontWeight'] ) ? $attr['labelFontWeight'] : '';
+			$label_font_subset      = isset( $attr['labelFontSubset'] ) ? $attr['labelFontSubset'] : '';
+
+			$input_load_google_font = isset( $attr['inputLoadGoogleFonts'] ) ? $attr['inputLoadGoogleFonts'] : '';
+			$input_font_family      = isset( $attr['inputFontFamily'] ) ? $attr['inputFontFamily'] : '';
+			$input_font_weight      = isset( $attr['inputFontWeight'] ) ? $attr['inputFontWeight'] : '';
+			$input_font_subset      = isset( $attr['inputFontSubset'] ) ? $attr['inputFontSubset'] : '';
+
+			$radio_check_load_google_font = isset( $attr['radioCheckLoadGoogleFonts'] ) ? $attr['radioCheckLoadGoogleFonts'] : '';
+			$radio_check_font_family      = isset( $attr['radioCheckFontFamily'] ) ? $attr['radioCheckFontFamily'] : '';
+			$radio_check_font_weight      = isset( $attr['radioCheckFontWeight'] ) ? $attr['radioCheckFontWeight'] : '';
+			$radio_check_font_subset      = isset( $attr['radioCheckFontSubset'] ) ? $attr['radioCheckFontSubset'] : '';
+
+			$button_load_google_font = isset( $attr['buttonLoadGoogleFonts'] ) ? $attr['buttonLoadGoogleFonts'] : '';
+			$button_font_family      = isset( $attr['buttonFontFamily'] ) ? $attr['buttonFontFamily'] : '';
+			$button_font_weight      = isset( $attr['buttonFontWeight'] ) ? $attr['buttonFontWeight'] : '';
+			$button_font_subset      = isset( $attr['buttonFontSubset'] ) ? $attr['buttonFontSubset'] : '';
+
+			$msg_font_load_google_font = isset( $attr['msgLoadGoogleFonts'] ) ? $attr['msgLoadGoogleFonts'] : '';
+			$msg_font_family           = isset( $attr['msgFontFamily'] ) ? $attr['msgFontFamily'] : '';
+			$msg_font_weight           = isset( $attr['msgFontWeight'] ) ? $attr['msgFontWeight'] : '';
+			$msg_font_subset           = isset( $attr['msgFontSubset'] ) ? $attr['msgFontSubset'] : '';
+
+			$validation_msg_load_google_font = isset( $attr['validationMsgLoadGoogleFonts'] ) ? $attr['validationMsgLoadGoogleFonts'] : '';
+			$validation_msg_font_family      = isset( $attr['validationMsgFontFamily'] ) ? $attr['validationMsgFontFamily'] : '';
+			$validation_msg_font_weight      = isset( $attr['validationMsgFontWeight'] ) ? $attr['validationMsgFontWeight'] : '';
+			$validation_msg_font_subset      = isset( $attr['validationMsgFontSubset'] ) ? $attr['validationMsgFontSubset'] : '';
+
+			UAGB_Helper::blocks_google_font( $msg_font_load_google_font, $msg_font_family, $msg_font_weight, $msg_font_subset );
+			UAGB_Helper::blocks_google_font( $validation_msg_load_google_font, $validation_msg_font_family, $validation_msg_font_weight, $validation_msg_font_subset );
+
+			UAGB_Helper::blocks_google_font( $radio_check_load_google_font, $radio_check_font_family, $radio_check_font_weight, $radio_check_font_subset );
+			UAGB_Helper::blocks_google_font( $button_load_google_font, $button_font_family, $button_font_weight, $button_font_subset );
+
+			UAGB_Helper::blocks_google_font( $label_load_google_font, $label_font_family, $label_font_weight, $label_font_subset );
+			UAGB_Helper::blocks_google_font( $input_load_google_font, $input_font_family, $input_font_weight, $input_font_subset );
+		}
+
+		/**
+		 * Adds Google fonts for Marketing Button block.
+		 *
+		 * @since 1.11.0
+		 * @param array $attr the blocks attr.
+		 */
+		public static function blocks_marketing_btn_gfont( $attr ) {
+
+			$title_load_google_font = isset( $attr['titleLoadGoogleFonts'] ) ? $attr['titleLoadGoogleFonts'] : '';
+			$title_font_family      = isset( $attr['titleFontFamily'] ) ? $attr['titleFontFamily'] : '';
+			$title_font_weight      = isset( $attr['titleFontWeight'] ) ? $attr['titleFontWeight'] : '';
+			$title_font_subset      = isset( $attr['titleFontSubset'] ) ? $attr['titleFontSubset'] : '';
+
+			$prefix_load_google_font = isset( $attr['prefixLoadGoogleFonts'] ) ? $attr['prefixLoadGoogleFonts'] : '';
+			$prefix_font_family      = isset( $attr['prefixFontFamily'] ) ? $attr['prefixFontFamily'] : '';
+			$prefix_font_weight      = isset( $attr['prefixFontWeight'] ) ? $attr['prefixFontWeight'] : '';
+			$prefix_font_subset      = isset( $attr['prefixFontSubset'] ) ? $attr['prefixFontSubset'] : '';
+
+			UAGB_Helper::blocks_google_font( $title_load_google_font, $title_font_family, $title_font_weight, $title_font_subset );
+			UAGB_Helper::blocks_google_font( $prefix_load_google_font, $prefix_font_family, $prefix_font_weight, $prefix_font_subset );
 		}
 
 		/**

@@ -195,6 +195,7 @@ abstract class PDb_Shortcode {
   /**
    * instantiates the shortcode object
    *
+   * @global WP_Post $post
    * @param array  $shortcode_atts              the raw parameters passed in from the shortcode
    * @param array  $subclass_shortcode_defaults additional shortcode attributes to use as defined
    *                                            in the instantiating subclass
@@ -274,9 +275,7 @@ abstract class PDb_Shortcode {
     $this->wrap_class = $this->prefix . $this->module . ' ' . $this->prefix . 'instance-' . $this->instance_index;
 
     $this->_set_display_columns();
-
-    $public_groups_only = $this->module === 'retrieve' ? false : true;
-    $this->_set_display_groups( $public_groups_only );
+    $this->_set_display_groups();
 
     $this->wrap_class = trim( $this->wrap_class ) . ' ' . trim( $this->shortcode_atts['class'] );
     // set the template to use
@@ -284,9 +283,36 @@ abstract class PDb_Shortcode {
 
     /**
      * @action pdb-shortcode_set
-     * @param object the currently instanted shortcode class
+     * @param object the current shortcode class object
      */
     do_action( Participants_Db::$prefix . 'shortcode_set', $this );
+  }
+  
+  /**
+   * provides the boolean value for a shortcode attribute
+   * 
+   * this allows for various different ways of stating the value of the attribute 
+   * in the shortcode
+   * 
+   * @param string $attribute
+   * @return bool
+   */
+  public function attribute_true( $attribute ) {
+    $state = false;
+    if ( ! isset( $this->shortcode_atts[$attribute] ) ) {
+      return $state;
+    }
+    if ( is_bool( $this->shortcode_atts[$attribute] ) ) {
+      return $this->shortcode_atts[$attribute];
+    }
+    switch ($this->shortcode_atts[$attribute]) {
+      case 'true':
+      case '1':
+      case 'yes':
+        $state = true;
+        break;
+    }
+    return $state;
   }
 
   /**
@@ -370,6 +396,7 @@ abstract class PDb_Shortcode {
   {
 
     $custom_template_file = 'pdb-' . $this->module . '-' . $this->template_name . '.php';
+    
     /**
      * @version 1.6 'pdb-template_select' filter added
      */
@@ -690,6 +717,7 @@ abstract class PDb_Shortcode {
              * @return PDb_Field_item
              */
             do_action( 'pdb-before_field_added_to_iterator', $field );
+    
             $this->record->$group_name->fields->{$field->name()} = $field;
           }
         }
@@ -813,11 +841,10 @@ abstract class PDb_Shortcode {
    * if the shortcode "groups" attribute is used, it overrides the gobal group 
    * visibility settings
    *
-   * @global object $wpdb
-   * @param  bool $public_only if true, include only public groups, if false, include all groups
+   * @global wpdb $wpdb
    * @return null
    */
-  protected function _set_display_groups( $public_only = true )
+  protected function _set_display_groups()
   {
     global $wpdb;
     $groups = array();
@@ -844,11 +871,11 @@ abstract class PDb_Shortcode {
          * get a list of all defined groups
          */
         $sql = 'SELECT g.name 
-                  FROM ' . Participants_Db::$groups_table . ' g ORDER BY FIELD( g.name, "' . implode( '","', $group_list ) . '")';
+                  FROM ' . Participants_Db::$groups_table . ' g WHERE g.mode IN ("' . implode( '","', array_keys( PDb_Manage_Fields::group_display_modes() ) ) . '") ORDER BY FIELD( g.name, "' . implode( '","', $group_list ) . '")';
 
         $result = $wpdb->get_results( $sql, ARRAY_N );
         foreach ( $result as $group ) {
-          if ( in_array( current( $group ), $group_list ) || $public_only === false ) {
+          if ( in_array( current( $group ), $group_list ) ) {
             $groups[] = current( $group );
           }
         }
@@ -856,23 +883,51 @@ abstract class PDb_Shortcode {
     }
     if ( count( $groups ) === 0 ) {
 
-      $orderby = empty( $this->shortcode_atts['fields'] ) ? 'g.order ASC' : 'FIELD( g.name, "' . implode( '","', $groups ) . '")';
-
-      if ( $this->module === 'signup' ) {
-        $sql = 'SELECT DISTINCT g.name 
-                  FROM ' . Participants_Db::$groups_table . ' g 
+      $orderby = 'g.order ASC';
+      
+      switch ( $this->module ) {
+        case 'signup':
+          // get only signup-enabled fields from public groups
+          $sql = 'SELECT DISTINCT g.name 
+                  FROM ' . Participants_Db::$groups_table . ' g  
                   JOIN ' . Participants_Db::$fields_table . ' f ON f.group = g.name 
-                  WHERE f.signup = "1" ' . ( $public_only ? 'AND g.display = "1"' : '' ) . ' AND f.form_element <> "hidden" ORDER BY ' . $orderby;
-      } else {
-        $sql = 'SELECT g.name 
+                  WHERE f.signup = "1" AND g.mode = "public" ORDER BY ' . $orderby;
+          break;
+        
+        case 'record':
+          // get field from public and private groups
+          $sql = 'SELECT DISTINCT g.name 
+                FROM ' . Participants_Db::$groups_table . ' g 
+                WHERE g.mode IN ("public","private") ORDER BY ' . $orderby;
+          break;
+        
+        case 'retrieve':
+          // fields from all groups are available here
+          $sql = 'SELECT DISTINCT g.name 
+                FROM ' . Participants_Db::$groups_table . ' g 
+                ORDER BY ' . $orderby;
+          break;
+    
+        default:
+          
+          $sql = 'SELECT g.name 
                 FROM ' . Participants_Db::$groups_table . ' g
-                  WHERE 1=1 ' . ( $public_only ? 'AND g.display = "1"' : '' ) . ' ORDER BY ' . $orderby;
+                WHERE 1=1 AND g.mode = "public" ORDER BY ' . $orderby;
       }
+      
+      $cachekey = md5($sql);
+      
+      $groups = wp_cache_get($cachekey);
+      
+      if ( ! $groups ) {
 
-      $result = $wpdb->get_results( $sql, ARRAY_N );
+        $result = $wpdb->get_results( $sql, ARRAY_N );
 
-      foreach ( $result as $group ) {
-        $groups[] = current( $group );
+        foreach ( $result as $group ) {
+          $groups[] = current( $group );
+        }
+        
+        wp_cache_set( $cachekey, $groups, '', Participants_Db::cache_expire() );
       }
     }
     $this->display_groups = $groups;

@@ -127,6 +127,37 @@ final class AAM_Core_Policy_Manager {
         
         return $allowed;
     }
+
+    /**
+     * Determine if resource is the boundary
+     * 
+     * The Boundary is type of resource that is denied and is enforced so no other
+     * statements can override it. For example edit_posts capability can be boundary
+     * for any statement that user Role resource
+     *
+     * @param string $resource
+     * @param array  $args
+     * 
+     * @return boolean
+     * 
+     * @access public
+     */
+    public function isBoundary($resource, $args = array()) {
+        $denied = false;
+        $tree   = $this->preparePolicyTree();
+        $id     = strtolower($resource);
+        
+        if (isset($tree['Statement'][$id])) {
+            $stm = $tree['Statement'][$id];
+            
+            if ($this->isApplicable($stm, $args)) {
+                $effect  = strtolower($stm['Effect']);
+                $denied = ($effect === 'deny' && !empty($stm['Enforce']));
+            }
+        }
+        
+        return $denied;
+    }
     
     /**
      * Get Policy Param
@@ -138,10 +169,9 @@ final class AAM_Core_Policy_Manager {
      * 
      * @access public
      */
-    public function getParam($name, $args = array()) {
+    public function getParam($id, $args = array()) {
         $value = null;
-        $id    = strtolower($name);
-        
+
         if (isset($this->tree['Param'][$id])) {
             $param = $this->tree['Param'][$id];
             
@@ -279,10 +309,10 @@ final class AAM_Core_Policy_Manager {
         // Step #1. If there are any statements, let's index them by resource:action
         // and insert into the list of statements
         foreach($addition['Statement'] as $stm) {
-            $ress = (isset($stm['Resource']) ? (array) $stm['Resource'] : array());
+            $list = (isset($stm['Resource']) ? (array) $stm['Resource'] : array());
             $acts = (isset($stm['Action']) ? (array) $stm['Action'] : array(''));
             
-            foreach($ress as $res) {
+            foreach($list as $res) {
                 foreach($acts as $act) {
                     $id = strtolower($res . (!empty($act) ? ":{$act}" : ''));
                     

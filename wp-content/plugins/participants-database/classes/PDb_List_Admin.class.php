@@ -222,9 +222,12 @@ class PDb_List_Admin {
 
     // set the pagination object
     $current_page = filter_input( INPUT_GET, self::$list_page, FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1)) );
+    
+    // include the session ID if using the alternate method
+    $sess = Participants_Db::plugin_setting_is_true( 'use_session_alternate_method' ) ? '&' . PDb_Session::id_var . '=' . session_id() : '';
 
     self::$pagination = new PDb_Pagination( array(
-        'link' => self::prepare_page_link( $_SERVER['REQUEST_URI'] ) . '&' . self::$list_page . '=%1$s',
+        'link' => self::prepare_page_link( $_SERVER['REQUEST_URI'] ) . $sess . '&' . self::$list_page . '=%1$s',
         'page' => $current_page,
         'size' => self::$page_list_limit,
         'total_records' => self::$num_records,
@@ -660,12 +663,11 @@ query: '.( isset($last_query) ? $last_query : $wpdb->last_query ));
         }
     }
 
-    // get the attributes of the field being searched
-    $field_atts = Participants_Db::get_field_atts( $filter_set['search_field'] );
+    $search_field_form_element = Participants_Db::$fields[ $filter_set['search_field'] ]->form_element();
 
     $value = PDb_FormElement::get_title_value( $filter_set['value'], $filter_set['search_field'] );
 
-    if ( $field_atts->form_element == 'timestamp' ) {
+    if ( $search_field_form_element == 'timestamp' ) {
 
       $value = $filter_set['value'];
       $value2 = false;
@@ -673,9 +675,9 @@ query: '.( isset($last_query) ? $last_query : $wpdb->last_query ));
         list($value, $value2) = explode( 'to', $filter_set['value'] );
       }
 
-      $value = PDb_Date_Parse::timestamp( $value, array(), __METHOD__ . ' ' . $field_atts->form_element );
+      $value = PDb_Date_Parse::timestamp( $value, array(), __METHOD__ . ' ' . $search_field_form_element );
       if ( $value2 )
-        $value2 = PDb_Date_Parse::timestamp( $value2, array(), __METHOD__ . ' ' . $field_atts->form_element );
+        $value2 = PDb_Date_Parse::timestamp( $value2, array(), __METHOD__ . ' ' . $search_field_form_element );
 
       if ( $value !== false ) {
 
@@ -711,7 +713,7 @@ query: '.( isset($last_query) ? $last_query : $wpdb->last_query ));
           self::$list_query .= ' (p.' . esc_sql( $filter_set['search_field'] ) . ' IS NULL' . ( $is_numeric ? '' : ' OR p.' . esc_sql( $filter_set['search_field'] ) . ' = ""' ) . ')';
           break;
       }
-    } elseif ( $field_atts->form_element == 'date' ) {
+    } elseif ( $search_field_form_element == 'date' ) {
 
       $value = $filter_set['value'];
       $value2 = false;
@@ -719,9 +721,9 @@ query: '.( isset($last_query) ? $last_query : $wpdb->last_query ));
         list($value, $value2) = explode( 'to', $filter_set['value'] );
       }
 
-      $value = PDb_Date_Parse::timestamp( $value, array('zero_time' => $operator === '='), __METHOD__ . ' ' . $field_atts->form_element ); //Participants_Db::parse_date( $value, $field_atts, true );
+      $value = PDb_Date_Parse::timestamp( $value, array('zero_time' => $operator === '='), __METHOD__ . ' ' . $search_field_form_element ); //Participants_Db::parse_date( $value, $field_atts, true );
       if ( $value2 )
-        $value2 = PDb_Date_Parse::timestamp( $value, array('zero_time' => $operator === '='), __METHOD__ . ' ' . $field_atts->form_element ); //Participants_Db::parse_date( $value2, $field_atts, $field_atts->form_element == 'date' );
+        $value2 = PDb_Date_Parse::timestamp( $value, array('zero_time' => $operator === '='), __METHOD__ . ' ' . $search_field_form_element ); //Participants_Db::parse_date( $value2, $field_atts, $search_field_form_element == 'date' );
 
       if ( $value !== false ) {
 
@@ -1302,7 +1304,7 @@ query: '.( isset($last_query) ? $last_query : $wpdb->last_query ));
   public static function get_filter()
   {
     $filter = Participants_Db::$session->getArray( self::$filter_transient );
-
+    
     return $filter ? $filter : self::$default_filter;
   }
 

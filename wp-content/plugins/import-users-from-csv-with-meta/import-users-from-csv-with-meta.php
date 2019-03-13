@@ -3,7 +3,7 @@
 Plugin Name:	Import users from CSV with meta
 Plugin URI:		https://www.codection.com
 Description:	This plugins allows to import users using CSV files to WP database automatically
-Version:		1.13.1
+Version:		1.14.0.1
 Author:			codection
 Author URI: 	https://codection.com
 License:     	GPL2
@@ -86,46 +86,58 @@ function acui_init(){
 	acui_activate();
 }
 
+function acui_get_default_options_list(){
+	return array(
+		'acui_columns' => array(),
+		// emails
+		'acui_mail_subject' => __('Welcome to', 'import-users-from-csv-with-meta') . ' ' . get_bloginfo("name"),
+		'acui_mail_body' => __('Welcome,', 'import-users-from-csv-with-meta') . '<br/>' . __('Your data to login in this site is:', 'import-users-from-csv-with-meta') . '<br/><ul><li>' . __('URL to login', 'import-users-from-csv-with-meta') . ': **loginurl**</li><li>' . __( 'Username', 'import-users-from-csv-with-meta') . '= **username**</li><li>Password = **password**</li></ul>',
+		'acui_mail_template_id' => 0,
+		'acui_mail_attachment_id' => 0,
+		'acui_enable_email_templates' => false,
+		// cron
+		'acui_cron_activated' => false,
+		'acui_cron_send_mail' => false,
+		'acui_cron_send_mail_updated' => false,
+		'acui_cron_delete_users' => false,
+		'acui_cron_delete_users_assign_posts' => 0,
+		'acui_cron_change_role_not_present' => false,
+		'acui_cron_change_role_not_present_role' => 0,
+		'acui_cron_path_to_file' => '',
+		'acui_cron_path_to_move' => '',
+		'acui_cron_path_to_move_auto_rename' => false,
+		'acui_cron_period' => '',
+		'acui_cron_role' => '',
+		'acui_cron_update_roles_existing_users' => '',
+		'acui_cron_log' => '',
+		'acui_cron_allow_multiple_accounts' => 'not_allowed',
+		// frontend
+		'acui_frontend_send_mail'=> false,
+		'acui_frontend_send_mail_updated' => false,
+		'acui_frontend_delete_users' => false,
+		'acui_frontend_delete_users_assign_posts' => 0,
+		'acui_frontend_change_role_not_present' => false,
+		'acui_frontend_change_role_not_present_role' => 0,
+		'acui_frontend_role' => '',
+		// others
+		'acui_manually_send_mail' => false,
+		'acui_manually_send_mail_updated' => false,
+		'acui_automatic_wordpress_email' => false,
+		'acui_show_profile_fields' => false
+	);
+}
+
 function acui_activate(){
 	global $acui_smtp_options;
-	
-	add_option( "acui_columns" );
-	
-	add_option( "acui_mail_subject", __('Welcome to', 'import-users-from-csv-with-meta') . ' ' . get_bloginfo("name"), '', false );
-	add_option( "acui_mail_body", __('Welcome,', 'import-users-from-csv-with-meta') . '<br/>' . __('Your data to login in this site is:', 'import-users-from-csv-with-meta') . '<br/><ul><li>' . __('URL to login', 'import-users-from-csv-with-meta') . ': **loginurl**</li><li>' . __( 'Username', 'import-users-from-csv-with-meta') . '= **username**</li><li>Password = **password**</li></ul>', '', false );
-	add_option( "acui_mail_template_id", 0 );
-	add_option( "acui_mail_attachment_id", 0 );
-	add_option( "acui_enable_email_templates", false );
-	
-	add_option( "acui_cron_activated", false );
-	add_option( "acui_cron_send_mail", false );
-	add_option( "acui_cron_send_mail_updated", false );
-	add_option( "acui_cron_delete_users", false );
-	add_option( "acui_cron_delete_users_assign_posts" );
-	add_option( "acui_cron_path_to_file" );
-	add_option( "acui_cron_path_to_move" );
-	add_option( "acui_cron_path_to_move_auto_rename" );
-	add_option( "acui_cron_period" );
-	add_option( "acui_cron_role" );
-	add_option( "acui_cron_update_roles_existing_users" );
-	add_option( "acui_cron_log" );
-	add_option( "acui_cron_allow_multiple_accounts", "not_allowed" );
-	
-	add_option( "acui_frontend_send_mail", false );
-	add_option( "acui_frontend_send_mail_updated", false );
-	add_option( "acui_frontend_delete_users", false );
-	add_option( "acui_frontend_delete_users_assign_posts" );	
-	add_option( "acui_frontend_role" );
-
-	add_option( "acui_manually_send_mail", false );
-	add_option( "acui_manually_send_mail_updated", false );
-
-	add_option( "acui_automattic_wordpress_email" );
-	add_option( "acui_show_profile_fields" );
+	$acui_default_options_list = acui_get_default_options_list();
+		
+	foreach ( $acui_default_options_list as $key => $value) {
+		add_option( $key, $value );		
+	}
 
 	// smtp
-	foreach ( $acui_smtp_options as $name => $val ) {
-		add_option( $name, $val );
+	foreach ( $acui_smtp_options as $key => $value ) {
+		add_option( $key, $value );
 	}
 }
 
@@ -139,43 +151,14 @@ function acui_admin_enqueue_scripts() {
 
 function acui_delete_options(){
 	global $acui_smtp_options;
+	$acui_default_options_list = acui_get_default_options_list();
+		
+	foreach ( $acui_default_options_list as $key => $value) {
+		delete_option( $key );		
+	}
 
-	delete_option( "acui_columns" );
-	
-	delete_option( "acui_mail_subject" );
-	delete_option( "acui_mail_body" );
-	delete_option( "acui_mail_template_id" );
-	delete_option( "acui_mail_attachment_id" );
-	delete_option( "acui_enable_email_templates" );
-
-	delete_option( "acui_cron_activated" );
-	delete_option( "acui_cron_send_mail" );
-	delete_option( "acui_cron_send_mail_updated" );
-	delete_option( "acui_cron_delete_users" );
-	delete_option( "acui_cron_delete_users_assign_posts" );
-	delete_option( "acui_cron_path_to_file" );
-	delete_option( "acui_cron_path_to_move" );
-	delete_option( "acui_cron_path_to_move_auto_rename" );
-	delete_option( "acui_cron_period" );
-	delete_option( "acui_cron_role" );
-	delete_option( "acui_cron_update_roles_existing_users" );
-	delete_option( "acui_cron_log" );
-	delete_option( "acui_cron_allow_multiple_accounts" );
-
-	delete_option( "acui_frontend_send_mail" );
-	delete_option( "acui_frontend_send_mail_updated" );
-	delete_option( "acui_frontend_delete_users" );
-	delete_option( "acui_frontend_delete_users_assign_posts" );	
-	delete_option( "acui_frontend_role" );
-
-	delete_option( "acui_manually_send_mail" );
-	delete_option( "acui_manually_send_mail_updated" );
-
-	delete_option( "acui_automattic_wordpress_email" );
-	delete_option( "acui_show_profile_fields" );
-
-	foreach ( $acui_smtp_options as $name => $val ) {
-		delete_option( $name );
+	foreach ( $acui_smtp_options as $key => $value ) {
+		delete_option( $key );
 	}
 }
 
@@ -414,6 +397,13 @@ function acui_manage_frontend_process( $form_data ){
 
 	update_option( "acui_frontend_delete_users_assign_posts", $form_data["delete-users-assign-posts-frontend"] );
 
+	if( isset( $form_data["change-role-not-present-frontend"] ) && $form_data["change-role-not-present-frontend"] == "yes" )
+		update_option( "acui_frontend_change_role_not_present", true );
+	else
+		update_option( "acui_frontend_change_role_not_present", false );
+
+	update_option( "acui_frontend_change_role_not_present_role", $form_data["change-role-not-present-role-frontend"] );
+
 	if( isset( $form_data["activate-users-wp-members-frontend"] ) )
 		update_option( "acui_frontend_activate_users_wp_members", $form_data["activate-users-wp-members-frontend"] );
 	else
@@ -438,7 +428,7 @@ function acui_manage_extra_profile_fields( $form_data ){
 }
 
 function acui_save_mail_template( $form_data ){
-	update_option( "acui_automattic_wordpress_email", stripslashes( $form_data["automattic_wordpress_email"] ) );
+	update_option( "acui_automatic_wordpress_email", stripslashes( $form_data["automattic_wordpress_email"] ) );
 	update_option( "acui_mail_body", stripslashes( $form_data["body_mail"] ) );
 	update_option( "acui_mail_subject", stripslashes( $form_data["subject_mail"] ) );
 	update_option( "acui_mail_template_id", stripslashes( $form_data["template_id"] ) );
@@ -510,7 +500,19 @@ function acui_manage_cron_process( $form_data ){
 	update_option( "acui_cron_period", $form_data["period"] );
 	update_option( "acui_cron_role", $form_data["role"] );
 	update_option( "acui_cron_update_roles_existing_users", $form_data["update-roles-existing-users"] );
+	
+	if( isset( $form_data["cron-delete-users"] ) && $form_data["cron-delete-users"] == "yes" )
+		update_option( "acui_cron_delete_users", true );
+	else
+		update_option( "acui_cron_delete_users", false );
 	update_option( "acui_cron_delete_users_assign_posts", $form_data["cron-delete-users-assign-posts"] );
+
+	if( isset( $form_data["cron-change-role-not-present"] ) && $form_data["cron-change-role-not-present"] == "yes" )
+		update_option( "acui_cron_change_role_not_present", true );
+	else
+		update_option( "acui_cron_change_role_not_present", false );
+
+	update_option( "acui_cron_change_role_not_present_role", $form_data["cron-change-role-not-present-role"] );
 	?>
 	<div class="updated">
        <p><?php _e( 'Settings updated correctly', 'import-users-from-csv-with-meta' ) ?></p>

@@ -230,7 +230,7 @@ class AAM_Backend_Manager {
             $content = trim(filter_input(INPUT_POST, 'aam-policy'));
             
             if (!empty($content)) { // Edit form was submitted
-                $data['post_content'] = $content;
+                $data['post_content'] = addslashes($content);
             }
             
             if (empty($data['post_content'])) {
@@ -833,7 +833,7 @@ class AAM_Backend_Manager {
     public function printJavascript() {
         if (AAM::isAAM()) {
             wp_enqueue_script('aam-vendor', AAM_MEDIA . '/js/vendor.js');
-            wp_enqueue_script('aam-main', AAM_MEDIA . '/js/aam-5.9.js');
+            wp_enqueue_script('aam-main', AAM_MEDIA . '/js/aam-5.9.1.js');
             
             //add plugin localization
             $this->printLocalization('aam-main');

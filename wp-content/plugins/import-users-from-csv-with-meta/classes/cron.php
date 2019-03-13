@@ -9,6 +9,8 @@ class ACUI_Cron{
 		$send_mail_updated = get_option( "acui_cron_send_mail_updated");
 		$cron_delete_users = get_option( "acui_cron_delete_users");
 		$cron_delete_users_assign_posts = get_option( "acui_cron_delete_users_assign_posts");
+		$cron_change_role_not_present = get_option( "acui_cron_change_role_not_present" );
+		$cron_change_role_not_present_role = get_option( "acui_cron_change_role_not_present_role" );
 		$path_to_file = get_option( "acui_cron_path_to_file");
 		$period = get_option( "acui_cron_period");
 		$role = get_option( "acui_cron_role");
@@ -59,11 +61,18 @@ class ACUI_Cron{
 		if( empty( $allow_multiple_accounts ) )
 			$allow_multiple_accounts = "not_allowed";
 		?>
-		<h3><?php _e( "Execute an import of users periodically", 'import-users-from-csv-with-meta' ); ?></h3>
+		<h2><?php _e( "Execute an import of users periodically", 'import-users-from-csv-with-meta' ); ?></h2>
 
 		<form method="POST" enctype="multipart/form-data" action="" accept-charset="utf-8">
 			<table class="form-table">
 				<tbody>
+
+				<tr class="form-field form-required">
+					<th scope="row"><label for="cron-activated"><?php _e( 'Activate periodical import?', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<input type="checkbox" name="cron-activated" value="yes" <?php if( $cron_activated == true ) echo "checked='checked'"; ?>/>
+					</td>
+				</tr>
 
 				<tr class="form-field">
 					<th scope="row"><label for="path_to_file"><?php _e( "Path of file that are going to be imported", 'import-users-from-csv-with-meta' ); ?></label></th>
@@ -86,13 +95,6 @@ class ACUI_Cron{
 				</tr>
 
 				<tr class="form-field form-required">
-					<th scope="row"><label for="cron-activated"><?php _e( 'Activate periodical import?', 'import-users-from-csv-with-meta' ); ?></label></th>
-					<td>
-						<input type="checkbox" name="cron-activated" value="yes" <?php if( $cron_activated == true ) echo "checked='checked'"; ?>/>
-					</td>
-				</tr>
-
-				<tr class="form-field form-required">
 					<th scope="row"><label for="send-mail-cron"><?php _e( 'Send mail when using periodical import?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
 						<input type="checkbox" name="send-mail-cron" value="yes" <?php if( $send_mail_cron == true ) echo "checked='checked'"; ?>/>
@@ -103,47 +105,6 @@ class ACUI_Cron{
 					<th scope="row"><label for="send-mail-updated"><?php _e( 'Send mail also to users that are being updated?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
 						<input type="checkbox" name="send-mail-updated" value="yes" <?php if( $send_mail_updated == true ) echo "checked='checked'"; ?>/>
-					</td>
-				</tr>
-				
-				<?php if( is_plugin_active( 'allow-multiple-accounts/allow-multiple-accounts.php' ) ): ?>
-
-				<tr class="form-field form-required">
-					<th scope="row"><label><?php _e( 'Repeated email in different users?', 'import-users-from-csv-with-meta' ); ?></label></th>
-					<td>
-						<input type="checkbox" name="allow_multiple_accounts" value="yes" <?php if( $allow_multiple_accounts == "allowed" ) echo "checked='checked'"; ?>/>
-						<p class="description"><strong>(<?php _e( 'Only for', 'import-users-from-csv-with-meta' ); ?> <a href="https://wordpress.org/plugins/allow-multiple-accounts/"><?php _e( 'Allow Multiple Accounts', 'import-users-from-csv-with-meta' ); ?></a> <?php _e( 'users', 'import-users-from-csv-with-meta'); ?>)</strong>. <?php _e('Allow multiple user accounts to be created having the same email address.','import-users-from-csv-with-meta' ); ?></p>
-					</td>
-				</tr>
-
-				<?php endif; ?>
-				
-				<tr class="form-field form-required">
-					<th scope="row"><label for="cron-delete-users"><?php _e( 'Delete users that are not present in the CSV?', 'import-users-from-csv-with-meta' ); ?></label></th>
-					<td>
-						<div style="float:left;">
-							<input type="checkbox" name="cron-delete-users" value="yes" <?php if( $cron_delete_users == true ) echo "checked='checked'"; ?>/>
-						</div>
-						<div style="margin-left:25px;">
-							<select id="cron-delete-users-assign-posts" name="cron-delete-users-assign-posts">
-								<?php
-									if( $cron_delete_users_assign_posts == '' )
-										echo "<option selected='selected' value=''>" . __( 'Delete posts of deled users without assing to any user', 'import-users-from-csv-with-meta' ) . "</option>";
-									else
-										echo "<option value=''>" . __( 'Delete posts of deled users without assing to any user', 'import-users-from-csv-with-meta' ) . "</option>";
-
-									$blogusers = get_users();
-									
-									foreach ( $blogusers as $bloguser ) {
-										if( $bloguser->ID == $cron_delete_users_assign_posts )
-											echo "<option selected='selected' value='{$bloguser->ID}'>{$bloguser->display_name}</option>";
-										else
-											echo "<option value='{$bloguser->ID}'>{$bloguser->display_name}</option>";
-									}
-								?>
-							</select>
-							<p class="description"><?php _e( 'After delete users, we can choose if we want to assign their posts to another user. Please do not delete them or posts will be deleted.', 'import-users-from-csv-with-meta' ); ?></p>
-						</div>
 					</td>
 				</tr>
 
@@ -202,8 +163,73 @@ class ACUI_Cron{
 							<p class="description"><?php _e( 'Your file will be renamed after moved, so you will not lost any version of it. The way to rename will be append the time stamp using this date format: YmdHis.', 'import-users-from-csv-with-meta'); ?></p>
 						</div>
 					</td>
-				</tr>	
+				</tr>
 
+				</tbody>
+			</table>
+
+			<h2><?php _e( 'Users not present in CSV file', 'import-users-from-csv-with-meta'); ?></h2>
+
+			<table class="form-table">
+				<tbody>
+				
+				<tr class="form-field form-required">
+					<th scope="row"><label for="cron-delete-users"><?php _e( 'Delete users that are not present in the CSV?', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<div style="float:left; margin-top: 10px;">
+							<input type="checkbox" name="cron-delete-users" value="yes" <?php if( $cron_delete_users == true ) echo "checked='checked'"; ?>/>
+						</div>
+						<div style="margin-left:25px;">
+							<select id="cron-delete-users-assign-posts" name="cron-delete-users-assign-posts">
+								<?php
+									if( $cron_delete_users_assign_posts == '' )
+										echo "<option selected='selected' value=''>" . __( 'Delete posts of deled users without assing to any user', 'import-users-from-csv-with-meta' ) . "</option>";
+									else
+										echo "<option value=''>" . __( 'Delete posts of deled users without assing to any user', 'import-users-from-csv-with-meta' ) . "</option>";
+
+									$blogusers = get_users();
+									
+									foreach ( $blogusers as $bloguser ) {
+										if( $bloguser->ID == $cron_delete_users_assign_posts )
+											echo "<option selected='selected' value='{$bloguser->ID}'>{$bloguser->display_name}</option>";
+										else
+											echo "<option value='{$bloguser->ID}'>{$bloguser->display_name}</option>";
+									}
+								?>
+							</select>
+							<p class="description"><?php _e( 'After delete users, we can choose if we want to assign their posts to another user. Please do not delete them or posts will be deleted.', 'import-users-from-csv-with-meta' ); ?></p>
+						</div>
+					</td>
+				</tr>
+
+				<tr class="form-field form-required">
+					<th scope="row"><label for="cron-change-role-not-present"><?php _e( 'Change role of users that are not present in the CSV?', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<div style="float:left; margin-top: 10px;">
+							<input type="checkbox" name="cron-change-role-not-present" value="yes" <?php checked( $cron_change_role_not_present ); ?> />
+						</div>
+						<div style="margin-left:25px;">
+							<select id="cron-change-role-not-present-role" name="cron-change-role-not-present-role">
+								<?php
+									$list_roles = acui_get_editable_roles();						
+									foreach ($list_roles as $key => $value):
+								?>
+									<option value='<?php echo $key; ?>' <?php selected( $cron_change_role_not_present_role, $key ); ?> ><?php echo $value; ?></option>
+								<?php endforeach; ?>
+							</select>
+							<p class="description"><?php _e( 'After import users which is not present in the CSV and can be changed to a different role.', 'import-users-from-csv-with-meta' ); ?></p>
+						</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<?php do_action( 'acui_tab_cron_before_log' ); ?>
+
+			<h2><?php _e( 'Log', 'import-users-from-csv-with-meta'); ?></h2>
+
+			<table class="form-table">
+				<tbody>
 				<tr class="form-field form-required">
 					<th scope="row"><label for="log"><?php _e( 'Last actions of schedule task', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>
