@@ -187,7 +187,7 @@ class ACUI_Cron{
 									else
 										echo "<option value=''>" . __( 'Delete posts of deled users without assing to any user', 'import-users-from-csv-with-meta' ) . "</option>";
 
-									$blogusers = get_users();
+									$blogusers = get_users( array( 'fields' => array( 'ID', 'display_name' ) ) );
 									
 									foreach ( $blogusers as $bloguser ) {
 										if( $bloguser->ID == $cron_delete_users_assign_posts )

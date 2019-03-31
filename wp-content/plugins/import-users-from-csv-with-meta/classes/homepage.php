@@ -156,7 +156,7 @@ class ACUI_Homepage{
 							<select id="delete_users_assign_posts" name="delete_users_assign_posts">
 								<option value=''><?php _e( 'Delete posts of deled users without assing to any user', 'import-users-from-csv-with-meta' ); ?></option>
 								<?php
-									$blogusers = get_users();
+									$blogusers = get_users( array( 'fields' => array( 'ID', 'display_name' ) ) );
 									
 									foreach ( $blogusers as $bloguser ) {
 										echo "<option value='{$bloguser->ID}'>{$bloguser->display_name}</option>";
@@ -257,11 +257,6 @@ class ACUI_Homepage{
 		if( jQuery( "#path_to_file" ).val() == "" && jQuery( "#introduce_path" ).is(":visible") ) {
 		   alert("<?php _e( 'Please enter a path to the file', 'import-users-from-csv-with-meta' ); ?>");
 		   return false;
-		}
-
-		if( jQuery("[name=role\\[\\]]input:checkbox:checked").length == 0 ){
-			alert("<?php _e( 'Please select a role', 'import-users-from-csv-with-meta'); ?>");
-		   	return false;	
 		}
 	}
 

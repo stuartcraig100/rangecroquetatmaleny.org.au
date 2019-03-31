@@ -2,7 +2,7 @@
 /*
 Plugin Name:  Conditional Menus
 Plugin URI:   https://themify.me/conditional-menus
-Version:      1.1.2
+Version:      1.1.3
 Author:       Themify
 Author URI:   https://themify.me/
 Description:  This plugin enables you to set conditional menus per posts, pages, categories, archive pages, etc.
@@ -69,7 +69,7 @@ class Themify_Conditional_Menus {
 	public function action_links( $links ) {
 		if ( is_plugin_active( 'themify-updater/themify-updater.php' ) ) {
 			$tlinks = array(
-			 '<a href="' . admin_url( 'index.php?page=themify-licence' ) . '">'.__('Themify Licence', 'themify-cm') .'</a>',
+			 '<a href="' . admin_url( 'index.php?page=themify-license' ) . '">'.__('Themify License', 'themify-cm') .'</a>',
 			 );
 		} else {
 			$tlinks = array(
@@ -663,7 +663,7 @@ class Themify_Conditional_Menus {
 		$output .= '</div>'; // tab-categories
 
 		// Post types tab
-		$output .= '<div id="visibility-tab-post-types" class="themify-visibility-options themify-visibility-type-options clearfix" data-type="post">';
+		$output .= '<div id="visibility-tab-post-types" class="themify-visibility-options clearfix" data-type="post">';
 			$output .= '<div id="themify-visibility-post-types-inner-tabs" class="themify-visibility-inner-tabs">';
 			$output .= '<ul class="inline-tabs clearfix">';
 				foreach( $post_types as $key => $post_type ) {

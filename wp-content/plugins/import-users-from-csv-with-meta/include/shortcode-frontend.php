@@ -8,8 +8,9 @@ function acui_frontend() {
 
 	if ( $_FILES && !empty( $_POST ) ) {
 		$nonce = $_POST['acui_nonce'];
-		if ( !isset( $nonce ) || !wp_verify_nonce( $nonce, 'codection-security' ) )
-			die( 'Nonce check failed' );
+		if ( !isset( $nonce ) || !wp_verify_nonce( $nonce, 'codection-security' ) ){
+			wp_die( __( 'Nonce check failed', 'import-users-from-csv-with-meta' ) );
+		}
 
 	    foreach ( $_FILES as $file => $array ) {
 	        $csv_file_id = acui_frontend_upload_file( $file );

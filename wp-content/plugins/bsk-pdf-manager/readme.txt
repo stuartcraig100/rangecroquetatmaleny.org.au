@@ -1,10 +1,10 @@
 === BSK PDF Manager ===
 Contributors: bannersky
 Plugin URI: http://www.bannersky.com/bsk-pdf-manager/
-Tags: PDF, manager, category, widget
+Tags: PDF manager, meeting minutes tool, printable forms tool, data sheets tool, files by category, widget
 Requires at least: 4.0
-Tested up to: 5.0.3
-Stable tag: 2.2.1
+Tested up to: 5.1.1
+Stable tag: 2.3
 
 == Description ==
 
@@ -48,6 +48,22 @@ Please visit <a href="http://www.bannersky.com/bsk-pdf-manager/">http://www.bann
 
 
 == Changelog ==
+
+2.3
+
+* Support .doc file
+
+* Improve uploading file interface
+
+* Improve documents list interface
+
+* Fix widgets cannot sort by date correctly
+
+* Fix duplicate entries appear when do upgrading on some server
+
+* Remove PHP warnings
+
+* Compatible with WordPress 5.1.1
 
 2.2.1
 

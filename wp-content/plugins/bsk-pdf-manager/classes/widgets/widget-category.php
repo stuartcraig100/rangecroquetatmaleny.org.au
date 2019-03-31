@@ -112,14 +112,14 @@ class BSKPDFManagerWidget_Category extends WP_Widget {
         }
 
         $str_body = BSKPDFM_Common_Display::display_pdfs_in_ul_or_ol(
-                                                                                                 $ul_or_ol,
-                                                                                                 false, //$only_li
-                                                                                                 'bsk-pdfm-pdfs-'.$ul_or_ol.'-list',
-                                                                                                 $pdfs_results_array[$category_obj->id], 
-                                                                                                 $open_target_str, $nofollow_tag, 
-                                                                                                 $show_date, $date_format_str, $date_before_title,
-                                                                                                 'h3'
-                                                                                                );
+                                                                     $ul_or_ol,
+                                                                     false, //$only_li
+                                                                     'bsk-pdfm-pdfs-'.$ul_or_ol.'-list',
+                                                                     $pdfs_results_array[$category_obj->id], 
+                                                                     $open_target_str, $nofollow_tag, 
+                                                                     $show_date, $date_format_str, $date_before_title,
+                                                                     'h3'
+                                                                    );
         echo $str_body;
         echo '</div><!--//bsk-pdfm-category-output cat-'.$category_obj->id.'-->';
         
@@ -251,7 +251,7 @@ class BSKPDFManagerWidget_Category extends WP_Widget {
         <p>Order by:&nbsp;
             <select name="<?php echo $this->get_field_name( 'pdfm_order_by' ); ?>">
                 <option value="title" <?php if( $pdfm_order_by == 'title' ) echo 'selected'; ?>>Title</option>
-                <option value="last_date" <?php if( $pdfm_order_by == 'last_date' ) echo 'selected'; ?>>Date</option>
+                <option value="date" <?php if( $pdfm_order_by == 'date' ) echo 'selected'; ?>>Date</option>
                 <option value="order_num" <?php if( $pdfm_order_by == 'order_num' ) echo 'selected'; ?>>Custom Order</option>
             </select>
         </p>

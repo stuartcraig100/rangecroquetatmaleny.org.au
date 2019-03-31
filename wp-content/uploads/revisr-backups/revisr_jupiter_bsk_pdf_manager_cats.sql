@@ -21,12 +21,12 @@ CREATE TABLE `jupiter_bsk_pdf_manager_cats` (
   `empty_message` varchar(512) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `last_date` datetime DEFAULT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `jupiter_bsk_pdf_manager_cats` WRITE;
 /*!40000 ALTER TABLE `jupiter_bsk_pdf_manager_cats` DISABLE KEYS */;
-INSERT INTO `jupiter_bsk_pdf_manager_cats` VALUES (1,0,'Local Tournaments','',NULL,'','2018-12-20 00:00:00'),(2,0,'Croquet Newsletters','',NULL,'','2018-12-22 00:00:00'),(3,0,'Weekly Newsletter','',NULL,'','2019-01-16 00:00:00');
+INSERT INTO `jupiter_bsk_pdf_manager_cats` VALUES (1,0,'Local Tournaments','',NULL,'','2018-12-20 00:00:00'),(2,0,'Croquet Newsletters','',NULL,'','2018-12-22 00:00:00'),(3,0,'Weekly Newsletter','',NULL,'','2019-01-16 00:00:00'),(4,0,'Membership List','','','','2019-03-23 00:00:00'),(5,0,'Club Meeting Minutes','','','','2019-03-23 00:00:00');
 /*!40000 ALTER TABLE `jupiter_bsk_pdf_manager_cats` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

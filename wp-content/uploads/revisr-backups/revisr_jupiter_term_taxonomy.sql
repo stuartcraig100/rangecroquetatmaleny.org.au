@@ -22,12 +22,12 @@ CREATE TABLE `jupiter_term_taxonomy` (
   PRIMARY KEY (`term_taxonomy_id`),
   UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`),
   KEY `taxonomy` (`taxonomy`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `jupiter_term_taxonomy` WRITE;
 /*!40000 ALTER TABLE `jupiter_term_taxonomy` DISABLE KEYS */;
-INSERT INTO `jupiter_term_taxonomy` VALUES (1,1,'category','',0,0),(2,2,'nav_menu','',0,32),(3,3,'category','',0,0),(4,4,'category','',0,0),(5,5,'nav_menu','',0,11),(6,6,'nav_menu','',0,28),(7,7,'post_format','',0,0),(8,8,'event-categories','',0,1),(9,9,'event-categories','',0,13),(10,10,'category','',0,16),(11,11,'category','',0,5);
+INSERT INTO `jupiter_term_taxonomy` VALUES (1,1,'category','',0,0),(2,2,'nav_menu','',0,33),(3,3,'category','',0,0),(4,4,'category','',0,0),(5,5,'nav_menu','',0,11),(6,6,'nav_menu','',0,29),(7,7,'post_format','',0,0),(8,8,'event-categories','',0,23),(9,9,'event-categories','',0,2),(10,10,'category','',0,15),(11,11,'category','',0,5),(12,12,'event-tags','',0,0),(13,13,'event-categories','',0,32);
 /*!40000 ALTER TABLE `jupiter_term_taxonomy` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

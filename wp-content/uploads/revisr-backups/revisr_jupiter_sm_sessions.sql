@@ -19,7 +19,7 @@ CREATE TABLE `jupiter_sm_sessions` (
   `session_expiry` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`session_key`),
   UNIQUE KEY `session_id` (`session_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2108 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2568 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `jupiter_sm_sessions` WRITE;

@@ -12,6 +12,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 	 */
 	final class UAGB_Helper {
 
+
 		/**
 		 * Member Variable
 		 *
@@ -125,44 +126,61 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		public static function generate_css( $selectors, $id ) {
 
 			$styling_css = '';
+			$styling_css = '';
 
 			if ( empty( $selectors ) ) {
 				return;
 			}
 
 			foreach ( $selectors as $key => $value ) {
-				$styling_css .= $id;
 
-				$styling_css .= $key . ' { ';
-				$css          = '';
+				$css = '';
 
 				foreach ( $value as $j => $val ) {
-					$css .= $j . ': ' . $val . ';';
+
+					if ( ! empty( $val ) || 0 === $val ) {
+						$css .= $j . ': ' . $val . ';';
+					}
 				}
 
-				$styling_css .= $css . ' } ';
+				if ( ! empty( $css ) ) {
+					$styling_css .= $id;
+					$styling_css .= $key . '{';
+					$styling_css .= $css . '}';
+				}
 			}
 
 			return $styling_css;
 		}
 
 		/**
-		 * Parse CSS into correct CSS syntax.
+		 * Get CSS value
 		 *
-		 * @param array  $selectors The block selectors.
-		 * @param string $id The selector ID.
-		 * @param string $type Media Query type mobile/tablet.
-		 * @since 0.0.1
+		 * Syntax:
+		 *
+		 *  get_css_value( VALUE, UNIT );
+		 *
+		 * E.g.
+		 *
+		 *  get_css_value( VALUE, 'em' );
+		 *
+		 * @param string $value  CSS value.
+		 * @param string $unit  CSS unit.
+		 * @since x.x.x
 		 */
-		public static function generate_responsive_css( $selectors, $id, $type ) {
+		public static function get_css_value( $value = '', $unit = '' ) {
 
-			$breakpoint = ( 'mobile' == $type ) ? UAGB_MOBILE_BREAKPOINT : UAGB_TABLET_BREAKPOINT;
+			if ( '' == $value ) {
+				return $value;
+			}
 
-			$css  = '@media only screen and (max-width: ' . $breakpoint . 'px) { ';
-			$css .= self::generate_css( $selectors, $id );
-			$css .= ' } ';
+			$css_val = '';
 
-			return $css;
+			if ( ! empty( $value ) ) {
+				$css_val = esc_attr( $value ) . $unit;
+			}
+
+			return $css_val;
 		}
 
 		/**
@@ -178,7 +196,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
             $block = ( array ) $block;
 
             $name = $block['blockName'];
-            $css  = '';
+            $css  = array();
 
             if( ! isset( $name ) ) {
                 return;
@@ -193,99 +211,109 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 
             switch ( $name ) {
                 case 'uagb/section':
-                    $css .= UAGB_Block_Helper::get_section_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_section_css( $blockattr, $block_id );
                     break;
 
                 case 'uagb/advanced-heading':
-                    $css .= UAGB_Block_Helper::get_adv_heading_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_adv_heading_css( $blockattr, $block_id );
                     UAGB_Block_Helper::blocks_advanced_heading_gfont( $blockattr );
                     break;
 
                 case 'uagb/info-box':
-					$css .= UAGB_Block_Helper::get_info_box_css( $blockattr, $block_id );
+					$css += UAGB_Block_Helper::get_info_box_css( $blockattr, $block_id );
                     UAGB_Block_Helper::blocks_info_box_gfont( $blockattr );
                     break;
 
                 case 'uagb/buttons':
-                    $css .= UAGB_Block_Helper::get_buttons_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_buttons_css( $blockattr, $block_id );
                     UAGB_Block_Helper::blocks_buttons_gfont( $blockattr );
                     break;
 
                 case 'uagb/blockquote':
-                    $css .= UAGB_Block_Helper::get_blockquote_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_blockquote_css( $blockattr, $block_id );
                      UAGB_Block_Helper::blocks_blockquote_gfont( $blockattr );
                     break;
 
 				case 'uagb/testimonial':
-					$css .= UAGB_Block_Helper::get_testimonial_css( $blockattr, $block_id );
+					$css += UAGB_Block_Helper::get_testimonial_css( $blockattr, $block_id );
 					UAGB_Block_Helper::blocks_testimonial_gfont( $blockattr );
 					break;
 
                 case 'uagb/team':
-                    $css .= UAGB_Block_Helper::get_team_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_team_css( $blockattr, $block_id );
                     UAGB_Block_Helper::blocks_team_gfont( $blockattr );
                     break;
 
                 case 'uagb/social-share':
-                    $css .= UAGB_Block_Helper::get_social_share_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_social_share_css( $blockattr, $block_id );
                     break;
 
                 case 'uagb/content-timeline':
-                    $css .= UAGB_Block_Helper::get_content_timeline_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_content_timeline_css( $blockattr, $block_id );
                     UAGB_Block_Helper::blocks_content_timeline_gfont( $blockattr );
                     break;
 
 				case 'uagb/restaurant-menu':
-					$css .= UAGB_Block_Helper::get_restaurant_menu_css( $blockattr, $block_id );
+					$css += UAGB_Block_Helper::get_restaurant_menu_css( $blockattr, $block_id );
 					UAGB_Block_Helper::blocks_restaurant_menu_gfont( $blockattr );
 					break;
 
                 case 'uagb/call-to-action':
-                    $css .= UAGB_Block_Helper::get_call_to_action_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_call_to_action_css( $blockattr, $block_id );
                     UAGB_Block_Helper::blocks_call_to_action_gfont( $blockattr );
                     break;
 
+				case 'uagb/table-of-contents':
+					$css += UAGB_Block_Helper::get_table_of_contents_css( $blockattr, $block_id );
+					UAGB_Block_Helper::blocks_table_of_contents_gfont( $blockattr );
+					break;
+
                 case 'uagb/post-timeline':
-                    $css .= UAGB_Block_Helper::get_post_timeline_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_post_timeline_css( $blockattr, $block_id );
                     UAGB_Block_Helper::blocks_post_timeline_gfont( $blockattr );
                     break;
 
                 case 'uagb/icon-list':
-                    $css .= UAGB_Block_Helper::get_icon_list_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_icon_list_css( $blockattr, $block_id );
                      UAGB_Block_Helper::blocks_icon_list_gfont( $blockattr );
                     break;
 
                 case 'uagb/post-grid':
-                    $css .= UAGB_Block_Helper::get_post_grid_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_post_grid_css( $blockattr, $block_id );
                     UAGB_Block_Helper::blocks_post_gfont( $blockattr );
                     break;
 
                 case 'uagb/post-carousel':
-                    $css .= UAGB_Block_Helper::get_post_carousel_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_post_carousel_css( $blockattr, $block_id );
                     UAGB_Block_Helper::blocks_post_gfont( $blockattr );
                     break;
 
                 case 'uagb/post-masonry':
-                    $css .= UAGB_Block_Helper::get_post_masonry_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_post_masonry_css( $blockattr, $block_id );
                     UAGB_Block_Helper::blocks_post_gfont( $blockattr );
                     break;
 
                 case 'uagb/columns':
-                    $css .= UAGB_Block_Helper::get_columns_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_columns_css( $blockattr, $block_id );
                     break;
 
                 case 'uagb/column':
-                    $css .= UAGB_Block_Helper::get_column_css( $blockattr, $block_id );
+                    $css += UAGB_Block_Helper::get_column_css( $blockattr, $block_id );
                     break;
 
                 case 'uagb/cf7-styler':
-					$css .= UAGB_Block_Helper::get_cf7_styler_css( $blockattr, $block_id );
+					$css += UAGB_Block_Helper::get_cf7_styler_css( $blockattr, $block_id );
 					UAGB_Block_Helper::blocks_cf7_styler_gfont( $blockattr );
 					break;
 
 				case 'uagb/marketing-button':
-					$css .= UAGB_Block_Helper::get_marketing_btn_css( $blockattr, $block_id );
+					$css += UAGB_Block_Helper::get_marketing_btn_css( $blockattr, $block_id );
 					UAGB_Block_Helper::blocks_marketing_btn_gfont( $blockattr );
+					break;
+
+                case 'uagb/gf-styler':
+					$css += UAGB_Block_Helper::get_gf_styler_css( $blockattr, $block_id );
+					 UAGB_Block_Helper::blocks_gf_styler_gfont( $blockattr );
 					break;
 
                 default:
@@ -306,13 +334,23 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
                             $this->get_stylesheet( $reusable_blocks );
                         }
                     } else {
-                        // Get CSS for the Block.
-                        $css .= $this->get_block_css( $inner_block );
+                    	// Get CSS for the Block.
+                        $inner_block_css = $this->get_block_css( $inner_block );
+
+                        $css_desktop = ( isset( $css['desktop'] ) ? $css['desktop'] : '' );
+                        $css_tablet = ( isset( $css['tablet'] ) ? $css['tablet'] : '' );
+                        $css_mobile = ( isset( $css['mobile'] ) ? $css['mobile'] : '' );
+
+                        if( isset( $inner_block_css['desktop'] ) ){
+	                        $css['desktop'] = $css_desktop . $inner_block_css['desktop'];
+	                        $css['tablet'] = $css_tablet . $inner_block_css['tablet'];
+	                        $css['mobile'] = $css_mobile . $inner_block_css['mobile'];
+                        }
                     }
                 }
             }
 
-            echo $css;
+            return $css;
 
             // @codingStandardsIgnoreEnd
 		}
@@ -390,6 +428,10 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
                     $js .= UAGB_Block_Helper::get_social_share_js( $block_id );
                     break;
 
+				case 'uagb/table-of-contents':
+					$js .= UAGB_Block_Helper::get_table_of_contents_js( $blockattr, $block_id );
+					break;
+
                 default:
                     // Nothing to do here.
                     break;
@@ -440,13 +482,8 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			} elseif ( is_archive() || is_home() || is_search() ) {
 				global $wp_query;
 
-				if ( $wp_query->have_posts() ) {
-					while ( $wp_query->have_posts() ) {
-						$wp_query->the_post();
-						global $post;
-						$this_post = $post;
-						$this->_generate_stylesheet( $this_post );
-					}
+				foreach ( $wp_query as $post ) {
+					$this->_generate_stylesheet( $post );
 				}
 			}
 		}
@@ -460,17 +497,21 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		public function _generate_stylesheet( $this_post ) {
 
 			if ( has_blocks( get_the_ID() ) ) {
-				$blocks            = $this->parse( $this_post->post_content );
-				self::$page_blocks = $blocks;
+				if ( isset( $this_post->post_content ) ) {
 
-				if ( ! is_array( $blocks ) || empty( $blocks ) ) {
-					return;
+					$blocks            = $this->parse( $this_post->post_content );
+					self::$page_blocks = $blocks;
+
+					if ( ! is_array( $blocks ) || empty( $blocks ) ) {
+						return;
+					}
+
+					ob_start();
+					?>
+					<style type="text/css" media="all" id="uagb-style-frontend"><?php $this->get_stylesheet( $blocks ); ?></style>
+					<?php
+					ob_end_flush();
 				}
-
-				ob_start();
-				?>
-				<style type="text/css" media="all" id="uagb-style-frontend"><?php $this->get_stylesheet( $blocks ); ?></style>
-				<?php
 			}
 		}
 
@@ -495,6 +536,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 				})(jQuery)
 			</script>
 			<?php
+			ob_end_flush();
 		}
 
 		/**
@@ -518,7 +560,15 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 */
 		public function get_stylesheet( $blocks ) {
 
+			$desktop = '';
+			$tablet  = '';
+			$mobile  = '';
+
+			$tab_styling_css = '';
+			$mob_styling_css = '';
+
 			foreach ( $blocks as $i => $block ) {
+
 				if ( is_array( $block ) ) {
 					if ( 'core/block' == $block['blockName'] ) {
 						$id = ( isset( $block['attrs']['ref'] ) ) ? $block['attrs']['ref'] : 0;
@@ -529,13 +579,34 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 							$reusable_blocks = $this->parse( $content );
 
 							$this->get_stylesheet( $reusable_blocks );
+
 						}
 					} else {
 						// Get CSS for the Block.
-						$this->get_block_css( $block );
+						$css = $this->get_block_css( $block );
+
+						if ( isset( $css['desktop'] ) ) {
+							$desktop .= $css['desktop'];
+							$tablet  .= $css['tablet'];
+							$mobile  .= $css['mobile'];
+						}
 					}
 				}
 			}
+
+			if ( ! empty( $tablet ) ) {
+				$tab_styling_css .= '@media only screen and (max-width: ' . UAGB_TABLET_BREAKPOINT . 'px) {';
+				$tab_styling_css .= $tablet;
+				$tab_styling_css .= '}';
+			}
+
+			if ( ! empty( $mobile ) ) {
+				$mob_styling_css .= '@media only screen and (max-width: ' . UAGB_MOBILE_BREAKPOINT . 'px) {';
+				$mob_styling_css .= $mobile;
+				$mob_styling_css .= '}';
+			}
+
+			echo $desktop . $tab_styling_css . $mob_styling_css;
 		}
 
 
@@ -776,7 +847,6 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			);
 
 			if ( isset( $attributes['categories'] ) && '' != $attributes['categories'] ) {
-
 				$query_args['tax_query'][] = array(
 					'taxonomy' => ( isset( $attributes['taxonomyType'] ) ) ? $attributes['taxonomyType'] : 'category',
 					'field'    => 'id',
@@ -854,7 +924,6 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			$options = array();
 
 			foreach ( $post_types as $post_type ) {
-
 				if ( 'product' == $post_type->name ) {
 					continue;
 				}
@@ -881,14 +950,12 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			$return_array = array();
 
 			foreach ( $post_types as $key => $value ) {
-
 				$post_type = $value['value'];
 
 				$taxonomies = get_object_taxonomies( $post_type, 'objects' );
 				$data       = array();
 
 				foreach ( $taxonomies as $tax_slug => $tax ) {
-
 					if ( ! $tax->public || ! $tax->show_ui ) {
 						continue;
 					}
@@ -900,9 +967,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 					$related_tax = array();
 
 					if ( ! empty( $terms ) ) {
-
 						foreach ( $terms as $t_index => $t_obj ) {
-
 							$related_tax[] = array(
 								'id'   => $t_obj->term_id,
 								'name' => $t_obj->name,
@@ -930,7 +995,6 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			$posts_created_with_uag = get_option( 'posts-created-with-uagb' );
 
 			if ( false === $posts_created_with_uag ) {
-
 				$query_args = array(
 					'posts_per_page' => -1,
 					'post_status'    => 'publish',
@@ -973,7 +1037,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * @param  array $is_array Gets an array of the value.
 		 * @since   1.11.0
 		 */
-		static public function hex2rgba( $color, $opacity = false, $is_array = false ) {
+		public static function hex2rgba( $color, $opacity = false, $is_array = false ) {
 
 			$default = $color;
 

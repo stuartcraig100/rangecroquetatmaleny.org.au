@@ -17,22 +17,22 @@ class PDb_Field_Editor {
   /**
    * @var array of attribute statuses
    */
-  private $definition_attributes;
+  protected $definition_attributes;
 
   /**
    * @var PDb_Form_Field_Def the current field definition
    */
-  private $field_def;
+  protected $field_def;
 
   /**
    * @var the row color class
    */
-  private $colorclass;
+  protected $colorclass;
   
   /**
    * @var bool we use this to class the first checkbox field
    */
-  private $first_checkbox = true;
+  protected $first_checkbox = true;
 
   /**
    * creates the object
@@ -571,7 +571,15 @@ class PDb_Field_Editor {
   private function column_has_data( $fieldname )
   {
     global $wpdb;
-    $result = $wpdb->get_col( 'SELECT `' . $fieldname . '` FROM ' . Participants_Db::$participants_table );
+    /**
+     * @filter pdb-field_data_table
+     * 
+     * @param string default table name
+     * @param string field name
+     * @return string table to use for this field
+     */
+    $table = Participants_Db::apply_filters('field_data_table', Participants_Db::$participants_table, $fieldname );
+    $result = $wpdb->get_col( 'SELECT `' . $fieldname . '` FROM ' . $table );
     return count( array_filter( $result ) ) > 0;
   }
 
@@ -691,6 +699,16 @@ class PDb_Field_Def_Parameter {
   {
     return $this->config['type'] === 'checkbox';
   }
+  
+  /**
+   * provides the current value of the parameter
+   * 
+   * @return mixed
+   */
+  public function value()
+  {
+    return $this->config['value'];
+  }
 
   /**
    *  provides the attribute label
@@ -723,7 +741,7 @@ class PDb_Field_Def_Parameter {
       default:
         $name = $this->name;
     }
-    return isset( $titles[$name] ) ? $titles[$name] : $name;
+    return isset( $titles[$name] ) ? $titles[$name] : Participants_Db::apply_filters( 'translate_string', $name );
   }
 
 }

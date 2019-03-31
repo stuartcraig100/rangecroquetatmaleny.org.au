@@ -1,10 +1,10 @@
 === Import users from CSV with meta ===
 Contributors: carazo, hornero
-Donate link: http://paypal.me/codection
+Donate link: https://codection.com/go/donate-import-users-from-csv-with-meta/
 Tags: csv, import, importer, meta data, meta, user, users, user meta,  editor, profile, custom, fields, delimiter, update, insert
 Requires at least: 3.4
 Tested up to: 5.1
-Stable tag: 1.14.0.1
+Stable tag: 1.14.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,14 +17,30 @@ Clean and easy-to-use Import users plugin. It includes custom user meta to be in
 *	Import CSV file with users directly to your WordPress
 *	Import thousends of users in only some seconds
 *	You can also import meta-data like data from WooCommerce customers using the correct meta_keys
-*	Send a mail to every new user
+*	You can assign roles while importing
+*	Send a mail to every new user, this mails can be saved as templates and are fully customizable
 *	Use your own 
 *	You can also update data of each user
 *	Assing a role
 *	Create a cron task to import users periodically
 *	Edit the metadata (you will be able to edit the metadata imported using metakeys directly in the profile of each user)
 *	Read our documentation
+*	Extend the plugin using the hooks we provide
 *	Ask anything in support forum, we try to give the best support
+
+Moreover this plugin is compatible with:
+
+*	WooCommerce: to import the customer data
+*	WooCommerce Membership: to import memberships
+*	BuddyPress: to import custom BuddyPress fields, groups and roles
+*	Paid Membership Pro: to import memberships
+*	Indeed Ultimate Membership Pro: to import memberships
+*	Allow Multiple Accounts: plugin will allow the same rules importing than this plugin
+*	New User Approve: you can import users and approbe/wait for approve them
+*	Users Group: to assign users to groups while importing
+*	WP LMS Course: to enroll users in the courses while importing
+*	WP Members: to import memberships
+*	WP Users Group: to assign users to groups while importing
 
 In Codection we have more plugins, please take a look to them.
 
@@ -38,7 +54,7 @@ In Codection we have more plugins, please take a look to them.
 *	[RedSys Gateway for Goodlayers Tourmaster Pro a plugin to receive payments using RedSys in WordPress using Goodlayers Tourmaster Pro](https://codection.com/producto/redsys-gateway-for-goodlayers-tourmaster-pro/) (premium)
 *	[Clean Login a plugin to create your own register, log in, lost password and update profile forms](https://wordpress.org/plugins/clean-login/) (free)
 
-## **Basics**
+### **Basics**
 
 *   Import users from a CSV easily
 *   And also extra profile information with the user meta data (included in the CSV with your custom fields)
@@ -46,7 +62,7 @@ In Codection we have more plugins, please take a look to them.
 *   All your users will be created/updated with the updated information, and of course including the user meta
 *   Autodetect delimiter compatible with `comma , `, `semicolon ; ` and `bar | `
 
-## **Usage**
+### **Usage**
 
 Once the plugin is installed you can use it. Go to Tools menu and there, there will be a section called _Insert users from CSV_. Just choose your CSV file and go!
 
@@ -73,6 +89,21 @@ Plugin will automatically detect:
 5. Extra profile information (user meta)
 
 == Changelog ==
+
+= 1.14.0.6 =
+*	Notice fixed from last change
+
+= 1.14.0.5 =
+*	Role now is not required when importing
+
+= 1.14.0.4 =
+*	Fix to save email options bug (that appeared in last version)
+
+= 1.14.0.3 =
+*	Security fixes to prevent Reflected Cross Site Scripting (XSS) and Cross Site Request Forgery (CSRF), thanks to Application Security for reporting
+
+= 1.14.0.2 =
+*	get_users used memory improved filtering fields returned, thanks to @shortcutsolutions (https://wordpress.org/support/topic/import-page-no-longer-has-submit-button/#post-11309862)
 
 = 1.14.0.1 =
 *	Echo removed from class to prevent message on activation
@@ -719,6 +750,14 @@ You can use those labels if you want to set data adapted to the WordPress defaul
 = Multiple imports =
 
 You can upload as many files as you want, but all must have the same columns. If you upload another file, the columns will change to the form of last file uploaded.
+
+= This plugin saved me a lot of time and work. Where can I donate? =
+
+Thanks, donations help us to continue improving our plugins and allow us to give the best support in the forums [Donate Here via PayPal.](https://codection.com/go/donate-import-users-from-csv-with-meta/)     
+
+= I'm not sure I will be able to import all users with correct data and roles. Will you do it for me? =
+
+Of course! In Codection we help you to import, migrate, synchronized, update or any other operation you will need to do with your users. Contact us at contacto@codection.com for more information.
 
 = Free and premium support =
 

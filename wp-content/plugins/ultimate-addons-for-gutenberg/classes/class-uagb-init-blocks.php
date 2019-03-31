@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class UAGB_Init_Blocks {
 
+
 	/**
 	 * Member Variable
 	 *
@@ -40,7 +41,6 @@ class UAGB_Init_Blocks {
 	 * Constructor
 	 */
 	public function __construct() {
-
 		// Hook: Frontend assets.
 		add_action( 'enqueue_block_assets', array( $this, 'block_assets' ) );
 
@@ -79,25 +79,55 @@ class UAGB_Init_Blocks {
 		wp_enqueue_style(
 			'uagb-block-css', // Handle.
 			UAGB_URL . 'dist/blocks.style.build.css', // Block style CSS.
+			array(),
 			UAGB_VER
 		);
 
-		// Scripts.
-		wp_enqueue_script(
-			'uagb-masonry', // Handle.
-			UAGB_URL . 'assets/js/isotope.min.js',
-			array( 'jquery' ), // Dependencies, defined above.
-			UAGB_VER,
-			false // Enqueue the script in the footer.
-		);
+		$blocks = UAGB_Helper::get_admin_settings_option( '_uagb_blocks', array() );
 
-		wp_enqueue_script(
-			'uagb-imagesloaded', // Handle.
-			UAGB_URL . 'assets/js/imagesloaded.min.js',
-			array( 'jquery' ), // Dependencies, defined above.
-			UAGB_VER,
-			false // Enqueue the script in the footer.
-		);
+		$masonry_flag  = ( isset( $blocks['post-masonry'] ) && 'disabled' == $blocks['post-masonry'] ) ? false : true;
+		$cf7_flag      = ( isset( $blocks['cf7-styler'] ) && 'disabled' == $blocks['cf7-styler'] ) ? false : true;
+		$slick_flag    = (
+			( isset( $blocks['post-carousel'] ) && 'disabled' == $blocks['post-carousel'] ) &&
+			( isset( $blocks['testimonial'] ) && 'disabled' == $blocks['testimonial'] )
+		) ? false : true;
+		$timeline_flag = (
+			( isset( $blocks['post-timeline'] ) && 'disabled' == $blocks['post-timeline'] ) &&
+			( isset( $blocks['content-timeline'] ) && 'disabled' == $blocks['content-timeline'] )
+		) ? false : true;
+
+		$carousel_flag = ( isset( $blocks['post-carousel'] ) && 'disabled' == $blocks['post-carousel'] ) ? false : true;
+
+		if ( $masonry_flag ) {
+
+			// Scripts.
+			wp_enqueue_script(
+				'uagb-masonry', // Handle.
+				UAGB_URL . 'assets/js/isotope.min.js',
+				array( 'jquery' ), // Dependencies, defined above.
+				UAGB_VER,
+				false // Enqueue the script in the footer.
+			);
+
+			wp_enqueue_script(
+				'uagb-imagesloaded', // Handle.
+				UAGB_URL . 'assets/js/imagesloaded.min.js',
+				array( 'jquery' ), // Dependencies, defined above.
+				UAGB_VER,
+				false // Enqueue the script in the footer.
+			);
+		}
+
+		if ( ! ( isset( $blocks['table-of-contents'] ) && 'disabled' == $blocks['table-of-contents'] ) ) {
+
+			wp_enqueue_script(
+				'uagb-table-of-contents', // Handle.
+				UAGB_URL . 'assets/js/table-of-contents.js',
+				array( 'jquery' ), // Dependencies, defined above.
+				UAGB_VER,
+				false // Enqueue the script in the footer.
+			);
+		}
 
 		$value = true;
 
@@ -113,46 +143,69 @@ class UAGB_Init_Blocks {
 			wp_enqueue_style(
 				'uagb-fontawesome-css', // Handle.
 				$font_awesome, // Block style CSS.
+				array(),
 				UAGB_VER
 			);
 		}
 
-		// Scripts.
-		wp_enqueue_script(
-			'uagb-slick-js', // Handle.
-			UAGB_URL . 'assets/js/slick.min.js',
-			array( 'jquery' ), // Dependencies, defined above.
-			UAGB_VER,
-			false // Enqueue the script in the footer.
-		);
+		if ( $slick_flag ) {
 
-		// Styles.
-		wp_enqueue_style(
-			'uagb-slick-css', // Handle.
-			UAGB_URL . 'assets/css/slick.css', // Block style CSS.
-			UAGB_VER
-		);
+			// Scripts.
+			wp_enqueue_script(
+				'uagb-slick-js', // Handle.
+				UAGB_URL . 'assets/js/slick.min.js',
+				array( 'jquery' ), // Dependencies, defined above.
+				UAGB_VER,
+				false // Enqueue the script in the footer.
+			);
 
-		// Timeline js.
-		wp_enqueue_script(
-			'uagb-timeline-js', // Handle.
-			UAGB_URL . 'assets/js/timeline.js',
-			array( 'jquery' ),
-			UAGB_VER,
-			true // Enqueue the script in the footer.
-		);
+			// Styles.
+			wp_enqueue_style(
+				'uagb-slick-css', // Handle.
+				UAGB_URL . 'assets/css/slick.css', // Block style CSS.
+				array(),
+				UAGB_VER
+			);
+		}
+
+		if ( $timeline_flag ) {
+
+			// Timeline js.
+			wp_enqueue_script(
+				'uagb-timeline-js', // Handle.
+				UAGB_URL . 'assets/js/timeline.js',
+				array( 'jquery' ),
+				UAGB_VER,
+				true // Enqueue the script in the footer.
+			);
+		}
+
+		if ( $carousel_flag ) {
+			// Carousel js.
+			wp_enqueue_script(
+				'uagb-carousel-js', // Handle.
+				UAGB_URL . 'assets/js/post-carousel.js',
+				array( 'jquery' ),
+				UAGB_VER,
+				true // Enqueue the script in the footer.
+			);
+		}
 
 		if ( ! wp_script_is( 'jquery', 'enqueued' ) ) {
 			wp_enqueue_script( 'jquery' );
 		}
 
-		if ( ! wp_script_is( 'contact-form-7', 'enqueued' ) ) {
-			wp_enqueue_script( 'contact-form-7' );
+		if ( $cf7_flag ) {
+
+			if ( ! wp_script_is( 'contact-form-7', 'enqueued' ) ) {
+				wp_enqueue_script( 'contact-form-7' );
+			}
+
+			if ( ! wp_script_is( ' wpcf7-admin', 'enqueued' ) ) {
+				wp_enqueue_script( ' wpcf7-admin' );
+			}
 		}
 
-		if ( ! wp_script_is( ' wpcf7-admin', 'enqueued' ) ) {
-			wp_enqueue_script( ' wpcf7-admin' );
-		}
 	} // End function editor_assets().
 
 	/**
@@ -224,6 +277,7 @@ class UAGB_Init_Blocks {
 				'category'          => 'uagb',
 				'ajax_url'          => admin_url( 'admin-ajax.php' ),
 				'cf7_forms'         => $this->get_cf7_forms(),
+				'gf_forms'          => $this->get_gravity_forms(),
 				'tablet_breakpoint' => UAGB_TABLET_BREAKPOINT,
 				'mobile_breakpoint' => UAGB_MOBILE_BREAKPOINT,
 				'image_sizes'       => UAGB_Helper::get_image_sizes(),
@@ -240,7 +294,6 @@ class UAGB_Init_Blocks {
 	 * @since 1.10.0
 	 */
 	public function get_cf7_forms() {
-
 		$field_options = array();
 
 		if ( class_exists( 'WPCF7_ContactForm' ) ) {
@@ -268,6 +321,40 @@ class UAGB_Init_Blocks {
 				'-1' => __( 'You have not added any Contact Form 7 yet.', 'ultimate-addons-for-gutenberg' ),
 			);
 		}
+		return $field_options;
+	}
+
+	/**
+	 * Returns all gravity forms with ids
+	 *
+	 * @since 1.12.0
+	 * @return array Key Value paired array.
+	 */
+	public function get_gravity_forms() {
+		$field_options = array();
+
+		if ( class_exists( 'GFForms' ) ) {
+			$forms            = RGFormsModel::get_forms( null, 'title' );
+			$field_options[0] = array(
+				'value' => -1,
+				'label' => __( 'Select Form', 'ultimate-addons-for-gutenberg' ),
+			);
+			if ( is_array( $forms ) ) {
+				foreach ( $forms as $form ) {
+					$field_options[] = array(
+						'value' => $form->id,
+						'label' => $form->title,
+					);
+				}
+			}
+		}
+
+		if ( empty( $field_options ) ) {
+			$field_options = array(
+				'-1' => __( 'You have not added any Gravity Forms yet.', 'ultimate-addons-for-gutenberg' ),
+			);
+		}
+
 		return $field_options;
 	}
 }

@@ -331,6 +331,9 @@ class BSKPDFM_Common_Backend {
         $all_available_extension_with_mime_type['swf'] = array(  
                                                                       'application/x-shockwave-flash'
                                                                   );
+        $all_available_extension_with_mime_type['doc'] = array(  
+                                                                      'application/msword'
+                                                                  );
         $all_available_extension_with_mime_type['docx'] = array(  
                                                                       'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                                                                   );

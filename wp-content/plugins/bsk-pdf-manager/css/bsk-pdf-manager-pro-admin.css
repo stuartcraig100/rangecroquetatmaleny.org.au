@@ -169,22 +169,22 @@
 	float:left;
 }
 
-
-
 /* for Categoty edit / add new */
-.bsk_pdf_manager_category_edit span{
+.bsk_pdf_manager_category_edit label{
 	display: inline-block;
-	width: 13%;
+	width: 150px;
 }
 
-.bsk_pdf_manager_category_edit input[type=text]{
-	width: 30%;
+.bsk_pdf_manager_category_edit .bsk-pdfm-date-time-date{
+    width: 100px;
 }
 
-.bsk_pdf_manager_category_edit textarea{
-	width: 30%;
-	height: 150px;
+.bsk_pdf_manager_category_edit .bsk-pdfm-category-title,
+.bsk_pdf_manager_category_edit #cat_parent_category_ID,
+.bsk_pdf_manager_category_edit .bsk-pdfm-category-password{
+    width: 65%;
 }
+
 
 /* for cateogries hierarchy */
 .bsk-pdfm-category-hierarchy-checkbox-container li ul{
@@ -223,3 +223,30 @@
 	padding-left: 20px !important;
 	padding-right: 20px !important;
 }
+
+/*
+ FTP upload
+ */
+
+/*
+ PDF last modified
+ */
+
+.bsk-pdfm-ftp-files-list-table .bsk-pdfm-date-time-date,
+.bsk-pdfm-bulk-change-date-list-table .bsk-pdfm-date-time-date{
+    width: 100px;
+}
+
+.bsk-pdfm-date-time-hour,
+.bsk-pdfm-date-time-minute,
+.bsk-pdfm-date-time-second{
+    width: 45px;
+}
+
+.bsk-pdfm-date-time-disabled{
+    background: rgba(255,255,255,.5) !important;
+    border-color: rgba(222,222,222,.75) !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.04) !important;
+    color: rgba(51,51,51,.5) !important;
+}
+

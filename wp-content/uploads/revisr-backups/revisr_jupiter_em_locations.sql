@@ -36,12 +36,12 @@ CREATE TABLE `jupiter_em_locations` (
   KEY `location_country` (`location_country`),
   KEY `post_id` (`post_id`),
   KEY `blog_id` (`blog_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `jupiter_em_locations` WRITE;
 /*!40000 ALTER TABLE `jupiter_em_locations` DISABLE KEYS */;
-INSERT INTO `jupiter_em_locations` VALUES (1,217,0,'range-croquet-club','Range Croquet Club',1,'Maleny-Stanley River Road','Maleny',NULL,'4552',NULL,'AU',NULL,NULL,NULL,1,0);
+INSERT INTO `jupiter_em_locations` VALUES (1,217,0,'range-croquet-club','Range Croquet Club',1,'Maleny-Stanley River Road','Maleny','Queensland','4552',NULL,'AU',NULL,NULL,NULL,1,0),(2,454,0,'nambour-croquet-club','Nambour Croquet Club',1,'78 Coronation Ave','Nambour','Queensland','4560',NULL,'AU',NULL,NULL,NULL,1,0),(3,455,0,'noosa-croquet-club','Noosa Croquet Club',1,'9 Seashell Place, ','Noosaville','Queensland','4566',NULL,'AU',NULL,NULL,NULL,1,0),(4,456,0,'headland-buderim-croquet-club','Headland Buderim Croquet Club',1,'Syd Lingard Drive','Buderim','Queensland','4556',NULL,'AU',NULL,NULL,NULL,1,0),(5,457,0,'croquet-club-bribie-island','Croquet Club Bribie Island',1,'Cosmos Park Sunderland Drive','Banksia Beach','Queensland','4507',NULL,'AU',NULL,NULL,NULL,1,0),(6,458,0,'coolum-croquet-club','Coolum Croquet Club',1,'25 Seacove Lane','Coolum Beach','Queensland','4573',NULL,'AU',NULL,NULL,NULL,1,0),(7,477,0,'caloundra-croquet-club','Caloundra Croquet Club',1,'78 Arthur St','Caloundra','Queensland','4551',NULL,'AU',NULL,NULL,NULL,1,0);
 /*!40000 ALTER TABLE `jupiter_em_locations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

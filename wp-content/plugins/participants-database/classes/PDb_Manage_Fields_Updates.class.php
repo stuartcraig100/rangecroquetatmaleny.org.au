@@ -88,6 +88,14 @@ class PDb_Manage_Fields_Updates {
 
           $row['validation'] = str_replace( '\\\\', '\\', $row['validation'] );
         }
+        
+        // remove empty values
+        // prevents these attributes from getting cleared
+        foreach ( array('group', 'form_element') as $att ) {
+          if ( isset( $row[$att] ) && empty( $row[$att] ) ) {
+            unset( $row[$att] );
+          } 
+        }
 
         /*
          * modify the datatype if necessary
@@ -222,7 +230,7 @@ class PDb_Manage_Fields_Updates {
         'attributes' => $string_sanitize,
         'signup' => $bool_sanitize,
         'csv' => $bool_sanitize,
-        'readonly' => $bool_sanitize,
+        'readonly' => FILTER_SANITIZE_NUMBER_INT,
         'sortable' => $bool_sanitize,
         'persistent' => $bool_sanitize,
     );
@@ -460,7 +468,7 @@ class PDb_Manage_Fields_Updates {
         }
         $result = $wpdb->query( 'UPDATE ' . Participants_Db::$fields_table . ' SET `order` = CASE ' . implode( " \r", $update ) . ' END WHERE `id` IN ("' . implode( '","', array_keys( $list ) ) . '")' );
 
-        wp_send_json( array('status' => $result ? 'success' : 'failed') );
+        wp_send_json( array('status' => $result !== false ? 'success' : 'failed') );
 
       case 'reorder_groups':
         parse_str( filter_input( INPUT_POST, 'list', FILTER_SANITIZE_STRING ), $list );
@@ -512,11 +520,22 @@ class PDb_Manage_Fields_Updates {
 
   /**
    * redirects back to the manage database fields page after processing the submission
+   * 
+   * @link https://tommcfarlin.com/wordpress-admin-redirect/
    */
   private function return_to_the_manage_database_fields_page()
   {
-    wp_redirect( add_query_arg( 'page', 'participants-database-manage_fields', admin_url( 'admin.php' ) ) );
-    exit();
+    if ( ! isset( $_POST['_wp_http_referer'] ) ) { // Input var okay.
+      $_POST['_wp_http_referer'] = wp_login_url();
+    }
+    
+    $url = sanitize_text_field(
+      wp_unslash( $_POST['_wp_http_referer'] ) // Input var okay.
+    );
+    	
+    wp_safe_redirect( urldecode( $url ) );
+    
+    exit;
   }
   
 
@@ -612,6 +631,7 @@ class PDb_Manage_Fields_Updates {
         $values_array[$attribute] = $attribute;
       }
     }
+    
     return PDb_Base::cleanup_array( $values_array );
   }
 
@@ -716,6 +736,7 @@ class PDb_Manage_Fields_Updates {
     $field_info = $wpdb->get_results( $wpdb->prepare( $sql, $fieldname ) );
     $new_type = PDb_FormElement::get_datatype( array('name' => $fieldname, 'form_element' => $form_element) );
     $current_type = is_object( current( $field_info ) ) ? current( $field_info )->Type : false;
+    $new_type = Participants_Db::apply_filters('new_field_form_element', $new_type, $current_type );
     return $this->datatype_has_changed( $current_type, $new_type ) ? $new_type : false;
   }
 

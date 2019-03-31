@@ -3,7 +3,7 @@
 Plugin Name:	Import users from CSV with meta
 Plugin URI:		https://www.codection.com
 Description:	This plugins allows to import users using CSV files to WP database automatically
-Version:		1.14.0.1
+Version:		1.14.0.6
 Author:			codection
 Author URI: 	https://codection.com
 License:     	GPL2
@@ -308,11 +308,10 @@ function acui_admin_tabs( $current = 'homepage' ) {
 
 function acui_fileupload_process( $form_data, $is_cron = false, $is_frontend  = false ) {
   if ( !( $is_cron || $is_frontend ) && ( ! isset( $_POST['acui-nonce'] ) || ! wp_verify_nonce( $_POST['acui-nonce'], 'acui-import' ) ) ){
-	wp_die( 'Nonce problem' );
+	wp_die( __( 'Nonce check failed', 'import-users-from-csv-with-meta' ) );
   }
 
   $path_to_file = $form_data["path_to_file"];
-  $role = $form_data["role"];
   $uploadfiles = $_FILES['uploadfiles'];
 
   if( empty( $uploadfiles["name"][0] ) ):
@@ -428,20 +427,30 @@ function acui_manage_extra_profile_fields( $form_data ){
 }
 
 function acui_save_mail_template( $form_data ){
-	update_option( "acui_automatic_wordpress_email", stripslashes( $form_data["automattic_wordpress_email"] ) );
-	update_option( "acui_mail_body", stripslashes( $form_data["body_mail"] ) );
-	update_option( "acui_mail_subject", stripslashes( $form_data["subject_mail"] ) );
-	update_option( "acui_mail_template_id", stripslashes( $form_data["template_id"] ) );
-	update_option( "acui_mail_attachment_id", stripslashes( $form_data["email_template_attachment_id"] ) );
+	if ( !isset( $form_data['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'codection-security' ) ) {
+		wp_die( __( 'Nonce check failed', 'import-users-from-csv-with-meta' ) );
+	}
+
+	$automattic_wordpress_email = sanitize_text_field( $form_data["automattic_wordpress_email"] );
+	$subject_mail = sanitize_text_field( $form_data["subject_mail"] );
+	$body_mail = wp_kses_post( $form_data["body_mail"] );
+	$template_id = intval( $form_data["template_id"] );
+	$email_template_attachment_id = intval( $form_data["email_template_attachment_id"] );
+
+	update_option( "acui_automatic_wordpress_email", $automattic_wordpress_email );
+	update_option( "acui_mail_subject", $subject_mail );
+	update_option( "acui_mail_body", $body_mail );
+	update_option( "acui_mail_template_id", $template_id );
+	update_option( "acui_mail_attachment_id", $email_template_attachment_id );
 
 	if( !empty( $form_data["template_id"] ) ){
 		wp_update_post( array(
-			'ID'           => $form_data["template_id"],
-			'post_title'   => $form_data["subject_mail"],
-			'post_content' => $form_data["body_mail"],
+			'ID'           => $template_id,
+			'post_title'   => $subject_mail,
+			'post_content' => $body_mail,
 		) );
 
-		update_post_meta( $form_data["template_id"], 'email_template_attachment_id', $form_data["email_template_attachment_id"] );
+		update_post_meta( $form_data["template_id"], 'email_template_attachment_id', $email_template_attachment_id );
 	}
 	?>
 	<div class="updated">

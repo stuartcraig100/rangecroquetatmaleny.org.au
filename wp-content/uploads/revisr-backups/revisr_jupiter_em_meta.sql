@@ -21,12 +21,12 @@ CREATE TABLE `jupiter_em_meta` (
   PRIMARY KEY (`meta_id`),
   KEY `object_id` (`object_id`),
   KEY `meta_key` (`meta_key`(250))
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `jupiter_em_meta` WRITE;
 /*!40000 ALTER TABLE `jupiter_em_meta` DISABLE KEYS */;
-INSERT INTO `jupiter_em_meta` VALUES (1,8,'category-bgcolor','#FFFFFF','2018-12-22 11:45:00'),(2,9,'category-bgcolor','#FFFFFF','2018-12-22 11:45:26');
+INSERT INTO `jupiter_em_meta` VALUES (1,8,'category-bgcolor','#FFFFFF','2018-12-22 11:45:00'),(2,9,'category-bgcolor','#eeee22','2018-12-22 11:45:26'),(3,12,'tag-bgcolor','#FFFFFF','2019-03-23 07:10:27'),(4,13,'category-bgcolor','#8224e3','2019-03-23 09:53:31');
 /*!40000 ALTER TABLE `jupiter_em_meta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

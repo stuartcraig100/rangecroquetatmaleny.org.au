@@ -443,6 +443,18 @@ class PDb_Form_Field_Def {
   }
   
   /**
+   * provides the named attribute value
+   * 
+   * @param string $attribute name of the attribute to get
+   * @return string empty string if attribute empty or not set
+   */
+  public function get_attribute( $attribute )
+  {
+    $attributes = $this->attributes();
+    return isset( $attributes[$name] ) ? $attributes[$name] : '';
+  }
+  
+  /**
    * provides the help text
    * 
    * @return string
@@ -626,6 +638,28 @@ class PDb_Form_Field_Def {
   public function is_multi()
   {
     return PDb_FormElement::is_multi( $this->form_element );
+  }
+  
+  /**
+   * tells if the field's value is to be treated as a number
+   * 
+   * @return bool
+   */
+  public function is_numeric()
+  {
+    /**
+     * makes it possible to register a custom form element as numeric
+     * 
+     * @filter pdb-numeric_fields
+     * @param array of numeric form element names
+     * @return array
+     */
+    return in_array( $this->form_element, Participants_Db::apply_filters('numeric_fields', array(
+        'numeric',
+        'decimal',
+        'currency',
+        'date',
+    )));
   }
 
   /**

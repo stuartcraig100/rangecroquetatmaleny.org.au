@@ -129,7 +129,7 @@ jQuery(document).ready( function($) {
         var date = new Date( event.target.files[0].lastModified );
         var date_full = dateFormat( date, 'yyyy-mm-dd HH:MM:ss' );
         var date_new = dateFormat( date, 'yyyy-mm-dd' );
-        $("#bsk_pdfm_lastmodified_text_ID").html( date_new );
+        $("#bsk_pdfm_lastmodified_text_ID").html( date_full );
         $("#bsk_pdfm_lastmodified_val_ID").val( date_full );
     });
     
@@ -322,6 +322,51 @@ jQuery(document).ready( function($) {
 		$("#bsk_pdf_manager_action_id").val("");
 		$("#bsk_pdf_manager_pdfs_change_category_form_id").submit();
 	});
+    
+    /*
+      * bulk change date
+      */
+    $(".bsk-pdfm-bulk-change-date-way-raido").click(function(){
+        var date_way = $("input[name='bsk_pdfm_bulk_change_date_way_raido']:checked").val();
+        var system_current = $(".bsk-pdfm-bulk-change-date-list-table").find( ".bsk-pdfm-bulk-change-date-current-server-date-time" ).val();
+        
+        $(".bsk-pdfm-bulk-change-date-list-table tbody tr").each( function(){
+            var date = '';
+            var time_h = '';
+            var time_m = '';
+            var time_s = '';
+            if( date_way == 'Current_Date' ){
+                date = system_current.substr( 0, 10 );
+                $(this).find(".bsk-pdfm-date-time-date").val( date );
+            }else if( date_way == 'Current_Date_Time' ){
+                date = system_current.substr( 0, 10 );
+                time_h = system_current.substr( 11, 2 );
+                time_m = system_current.substr( 14, 2 );
+                time_s = system_current.substr( 17, 2 );
+                
+                $(this).find(".bsk-pdfm-date-time-date").val( date );
+                $(this).find(".bsk-pdfm-date-time-hour").val( time_h );
+                $(this).find(".bsk-pdfm-date-time-minute").val( time_m );
+                $(this).find(".bsk-pdfm-date-time-second").val( time_s );
+            }else if( date_way == 'Document_Date_Time' ){
+                var document_date_time = $(this).find(".bsk-pdfm-bulk-change-date-document-self").val();
+                date = document_date_time.substr( 0, 10 );
+                time_h = document_date_time.substr( 11, 2 );
+                time_m = document_date_time.substr( 14, 2 );
+                time_s = document_date_time.substr( 17, 2 );
+                
+                $(this).find(".bsk-pdfm-date-time-date").val( date );
+                $(this).find(".bsk-pdfm-date-time-hour").val( time_h );
+                $(this).find(".bsk-pdfm-date-time-minute").val( time_m );
+                $(this).find(".bsk-pdfm-date-time-second").val( time_s );
+            }
+        });
+    });
+    
+    $("#bsk_pdf_manager_pdfs_date_change_cancel_id").click(function(){
+		$("#bsk_pdf_manager_action_id").val("");
+		$("#bsk_pdf_manager_pdfs_bulk_change_date_form_id").submit();
+	});
 	
 	$("#bsk_pdf_manager_pdfs_categories_change_submit_id").click(function(){
         
@@ -356,6 +401,54 @@ jQuery(document).ready( function($) {
     /*
      * Add by FTP
      */
+    $(".bsk-pdfm-ftp-exclude-extension-raido").click(function(){
+        var exclude_extension = $("input[name='bsk_pdfm_ftp_exclude_extension_raido']:checked").val();
+        
+        $(".bsk-pdfm-ftp-files-list-table tbody tr").each( function(){
+            var title = $(this).find( ".bsk-pdf-manager-ftp-title-input" ).val();
+            var title_array = title.split( '.' );
+            var ext = $(this).find( ".bsk-pdf-manager-ftp-extension-val" ).val();
+            if( exclude_extension == 'NO' ){
+                if( title_array[title_array.length - 1] != ext ){
+                    var new_title = title + '.' + ext;
+                    $(this).find( ".bsk-pdf-manager-ftp-title-input" ).val( new_title );
+                }
+            }else if( exclude_extension == 'YES' ){
+                if( title_array[title_array.length - 1] == ext ){
+                    var new_title = title.replace( '.' + ext, '' );
+                    $(this).find( ".bsk-pdf-manager-ftp-title-input" ).val( new_title );
+                }
+            }
+        });
+    });
+    
+    $(".bsk-pdfm-ftp-date-way-raido").click(function(){
+        var date_way = $("input[name='bsk_pdfm_ftp_date_way_raido']:checked").val();
+        var system_current = $(".bsk-pdfm-ftp-files-list-table").find( ".bsk-pdf-manager-ftp-current-server-date-time" ).val();
+        
+        $(".bsk-pdfm-ftp-files-list-table tbody tr").each( function(){
+            var date = '';
+            var time_h = '';
+            var time_m = '';
+            var time_s = '';
+            if( date_way == 'Last_Modify' ){
+                var last_modify = $(this).find( ".bsk-pdf-manager-ftp-last-modify-datetime" ).val();
+                date = last_modify.substr( 0, 10 );
+                time_h = last_modify.substr( 11, 2 );
+                time_m = last_modify.substr( 14, 2 );
+                time_s = last_modify.substr( 17, 2 );
+            }else if( date_way == 'Current' ){
+                date = system_current.substr( 0, 10 );
+                time_h = system_current.substr( 11, 2 );
+                time_m = system_current.substr( 14, 2 );
+                time_s = system_current.substr( 17, 2 );
+            }
+            $(this).find(".bsk-pdfm-date-time-date").val( date );
+            $(this).find(".bsk-pdfm-date-time-hour").val( time_h );
+            $(this).find(".bsk-pdfm-date-time-minute").val( time_m );
+            $(this).find(".bsk-pdfm-date-time-second").val( time_s );
+        });
+    });
 	$("#bsk_pdf_manager_add_by_ftp_save_button_ID").click(function(){
 		//check selected files
 		var selected_files = new Array();

@@ -20,12 +20,12 @@ CREATE TABLE `jupiter_terms` (
   PRIMARY KEY (`term_id`),
   KEY `slug` (`slug`(191)),
   KEY `name` (`name`(191))
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `jupiter_terms` WRITE;
 /*!40000 ALTER TABLE `jupiter_terms` DISABLE KEYS */;
-INSERT INTO `jupiter_terms` VALUES (1,'Uncategorized','uncategorized',0),(2,'Navigation','navigation',0),(3,'Publications','pub',0),(4,'Events','events',0),(5,'Main','main',0),(6,'members','members',0),(7,'post-format-image','post-format-image',0),(8,'Local Tournaments','local_tournaments',0),(9,'Monthly meeting','monthly-meeting',0),(10,'members','members',0),(11,'public','public',0);
+INSERT INTO `jupiter_terms` VALUES (1,'Uncategorized','uncategorized',0),(2,'Navigation','navigation',0),(3,'Publications','pub',0),(4,'Events','events',0),(5,'Main','main',0),(6,'members','members',0),(7,'post-format-image','post-format-image',0),(8,'Local Tournaments','local_tournaments',0),(9,'Monthly meeting','monthly-meeting',0),(10,'members','members',0),(11,'public','public',0),(12,'Sunshine Coast Region','sunshine-coast-region',0),(13,'Range Croquet Club Event','range-croquet-club-event',0);
 /*!40000 ALTER TABLE `jupiter_terms` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -97,7 +97,11 @@ class BSKPDFM_Dashboard_PDF {
 		$sql = 'SELECT * FROM '.$wpdb->prefix.BSKPDFManager::$_cats_tbl_name;
 		$categories = $wpdb->get_results( $sql );
 		
-		$pdf_date = date('Y-m-d', current_time('timestamp'));
+		$pdf_date_time = date('Y-m-d H:i:s', current_time('timestamp'));
+        $pdf_date = substr( $pdf_date_time, 0, 10 );
+        $pdf_time_h = substr( $pdf_date_time, 11, 2 );
+        $pdf_time_m = substr( $pdf_date_time, 14, 2 );
+        $pdf_time_s = substr( $pdf_date_time, 17, 2 );
 		$pdf_obj_array = array();
         $pdf_categories_array = array();
 		if ($pdf_id > 0){
@@ -106,7 +110,11 @@ class BSKPDFM_Dashboard_PDF {
 			$pdfs_obj_array = $wpdb->get_results( $sql );
 			if (count($pdfs_obj_array) > 0){
 				$pdf_obj_array = (array)$pdfs_obj_array[0];
-				$pdf_date = date('Y-m-d', strtotime($pdf_obj_array['last_date']));
+				$pdf_date_time = $pdf_obj_array['last_date'];
+                $pdf_date = substr( $pdf_date_time, 0, 10 );
+                $pdf_time_h = substr( $pdf_date_time, 11, 2 );
+                $pdf_time_m = substr( $pdf_date_time, 14, 2 );
+                $pdf_time_s = substr( $pdf_date_time, 17, 2 );
 			}
 		}
 		
@@ -211,8 +219,19 @@ class BSKPDFM_Dashboard_PDF {
                 <div style="width: 20%; height: 160px; float: left; vertical-align: middle; display: table;">
                     <span style="vertical-align:middle; display: table-cell;">Description:</span>
                 </div>
-                <div style="width: 75%; height: 160px; float: left; padding-left: 5px;">
-                    <textarea name="pdf_description" id="pdf_description_id" maxlength="512" style="width:85%; height: 150px;" disabled /><?php echo $description ?></textarea>
+                <div style="width: 75%; float: left; padding-left: 5px;">
+                    <?php 
+                        //name="pdf_description" name="pdf_description" id="pdf_description_id" maxlength="512" style="width:85%; height: 150px;"
+                        $settings = array( 
+                                            'media_buttons' => false,
+                                            'editor_height' => 150,
+                                            'wpautop' => false,
+                                         );
+                        $description = '<p>Description only support in Pro version</p>';
+                        $description .= '<p><a style="color: #ff5b00;" href="https://www.bannersky.com/document/bsk-pdf-manager-documentatio-v2/how-to-upgrade-to-pro-version/" target="_blank" rel="noopener">Upgrade to Pro</a></p>';
+                        wp_editor( $description, 'pdf_description', $settings );
+                    ?>
+                    <div style="clear: both;"></div>
                 </div>
                 <div style="clear: both;"></div>
             </div>
@@ -330,16 +349,21 @@ class BSKPDFM_Dashboard_PDF {
                 <div style="clear:both;"></div>
             </div>
             <?php } ?>
-            <p>
-                <span class="bsk-pdfm-field-label">Date:</span>
+            <p class="bsk-pdfm-pdf-date-time-section" id="bsk_pdfm_date_time_section_ID">
+                <span class="bsk-pdfm-field-label">Date&amp;Time:</span>
                 <span class="bsk-pdf-field">
-                    <input type="text" name="pdf_date" id="pdf_date_id" value="<?php echo $pdf_date ?>" class="bsk-date"/>
+                    <input type="text" name="pdf_date" value="<?php echo $pdf_date ?>" class="bsk-date bsk-pdfm-date-time-date"/>
+                    <span>@</span>
+                    <input type="number" name="pdf_date_hour" class="bsk-pdfm-date-time-hour" value="<?php echo $pdf_time_h; ?>" min="0" max="24" step="1" disabled />
+                    <span>:</span>
+                    <input type="number" name="pdf_date_minute" class="bsk-pdfm-date-time-minute" value="<?php echo $pdf_time_m; ?>" min="0" max="60" step="1" disabled />
+                    <span>:</span>
+                    <input type="number" name="pdf_date_second" class="bsk-pdfm-date-time-second" value="<?php echo $pdf_time_s; ?>" min="0" max="60" step="1" disabled />
                     <span id="bsk_pdfm_lastmodified_section_ID" style="display: inline-block;">
                         <label style="display: inline-block; width: auto; margin-left: 20px;">
-                            <input type="checkbox" name="pdf_date_use_file_last_modified" id="pdf_date_use_file_last_modify_ID" value="Yes" disabled /> Use file last modified
+                            <input type="checkbox" id="pdf_date_use_file_last_modify_chk_ID" value="Yes" disabled /> Use file last modified
                         </label>
                         <span id="bsk_pdfm_lastmodified_text_ID"></span>
-                        <input type="hidden" name="bsk_pdfm_lastmodified_val" id="bsk_pdfm_lastmodified_val_ID" value="" />
                     </span>
                 </span>
             </p>

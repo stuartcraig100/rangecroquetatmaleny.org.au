@@ -4,7 +4,7 @@
  * Plugin URI: https://xnau.com/wordpress-plugins/participants-database
  * Description: Plugin for managing a database of participants, members or volunteers
  * Author: Roland Barker, xnau webdesign
- * Version: 1.9.2
+ * Version: 1.9.3.1
  * Author URI: https://xnau.com
  * License: GPL3
  * Text Domain: participants-database
@@ -1365,12 +1365,11 @@ class Participants_Db extends PDb_Base {
   public static function get_column_atts( $filter = 'new' )
   {
     global $wpdb;
-    
-    $where = 'WHERE g.mode IN ("' . implode( '","', array_keys(PDb_Manage_Fields::group_display_modes()) ) . '") ';
 
     if ( is_array( $filter ) ) {
-      $where .= 'AND v.name IN ("' . implode( '","', $filter ) . '")';
+      $where = 'WHERE v.name IN ("' . implode( '","', $filter ) . '")';
     } else {
+      $where = 'WHERE g.mode IN ("' . implode( '","', array_keys(PDb_Manage_Fields::group_display_modes()) ) . '") ';
       switch ( $filter ) {
 
         case 'signup':
@@ -1706,13 +1705,15 @@ class Participants_Db extends PDb_Base {
     }
     // set the insert status value
     self::$insert_status = $action;
+    
+    $db_table = self::apply_filters('process_form_table', self::$participants_table );
 
     switch ( $action ) {
 
       case 'update':
-        $sql = 'UPDATE ' . self::$participants_table . ' SET ';
+        $sql = 'UPDATE ' . $db_table . ' SET ';
         
-        if ( !$currently_importing_csv || ( $currently_importing_csv && !PDb_Date_Parse::is_mysql_timestamp( @$post['date_updated'] ) ) ) {
+        if ( !$currently_importing_csv || ( $currently_importing_csv && ( !isset($post['date_updated']) || !PDb_Date_Parse::is_mysql_timestamp( @$post['date_updated'] ) ) ) ) {
           $sql .= ' `date_updated` = NOW(), ';
         }
         
@@ -1720,12 +1721,12 @@ class Participants_Db extends PDb_Base {
         break;
 
       case 'insert':
-        $sql = 'INSERT INTO ' . self::$participants_table . ' SET ';
+        $sql = 'INSERT INTO ' . $db_table . ' SET ';
 
-        if ( !PDb_Date_Parse::is_mysql_timestamp( @$post['date_recorded'] ) ) {
+        if ( !isset($post['date_recorded']) || !PDb_Date_Parse::is_mysql_timestamp( @$post['date_recorded'] ) ) {
           $sql .= ' `date_recorded` = NOW(), ';
         }
-        if ( !PDb_Date_Parse::is_mysql_timestamp( @$post['date_updated'] ) ) {
+        if ( !isset($post['date_updated']) || !PDb_Date_Parse::is_mysql_timestamp( @$post['date_updated'] ) ) {
           $sql .= ' `date_updated` = NOW(), ';
         }
         $where = '';
@@ -1979,10 +1980,9 @@ class Participants_Db extends PDb_Base {
        * Nulls are added as true nulls
        */
       if ( $new_value !== false ) {
-
-        if ( $new_value !== null ) {
-          $new_values[] = $new_value;
-        }
+        
+        $new_values[] = $new_value;
+        
         $column_data[] = "`" . $column->name . "` = " . ( $new_value === null ? "NULL" : "%s" );
       }
     } // columns
@@ -2002,7 +2002,7 @@ class Participants_Db extends PDb_Base {
      * 
      * add in any missing default values
      */
-    if ( $action === 'insert' ) {
+    if ( $action === 'insert' && self::apply_filters( 'process_form_fill_default_values', true ) ) {
       $default_record = self::get_default_record( $currently_importing_csv === false );
       unset( $default_record['private_id'], $default_record['date_recorded'], $default_record['date_updated'] );
       foreach ( $default_record as $name => $value ) {
@@ -2014,6 +2014,23 @@ class Participants_Db extends PDb_Base {
         }
       }
     }
+    
+    // filter for controlling the columns and values in the query
+    if ( has_filter( self::$prefix . 'process_form_query_column_data' ) ) {
+      /**
+       * provides a way to alter the data structure before going into the query
+       * 
+       * @filter pdb-process_form_query_column_data
+       * @param array as $insert_template => $value
+       * @return array
+       */
+      $data = self::apply_filters( 'process_form_query_column_data', array_combine($column_data, $new_values) );
+      $column_data = array_keys($data);
+      $new_values = array_values($data);
+    }
+    
+    // remove null values from the values array
+    $new_values = array_filter($new_values, function ($v) { return ! is_null($v); } );
 
     // add in the column names
     $sql .= implode( ', ', $column_data );
@@ -2461,8 +2478,8 @@ class Participants_Db extends PDb_Base {
   /**
    * adds a blank field type record
    * 
-   * @global object $wpdb
-   * @param array $params the setup paramters for the new field
+   * @global wpdb $wpdb
+   * @param array $params the setup parameters for the new field
    * @return boolean 
    */
   public static function add_blank_field( $params )

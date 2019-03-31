@@ -1,0 +1,485 @@
+0000.000 (0) Opened log file at time: Sun, 31 Mar 2019 01:27:05 +0000 on https://rangecroquetatmaleny.org.au
+0000.002 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.16.10 WP: 5.1.1 PHP: 7.2.16 (litespeed, Linux s11.cpcloud.com.au 3.10.0-962.3.2.lve1.5.24.9.el7.x86_64 #1 SMP Wed Feb 13 08:24:50 EST 2019 x86_64) MySQL: 10.2.22-MariaDB-cll-lve WPLANG: en_US Server: LiteSpeed safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 37.3M | 38.3M) multisite: N openssl: OpenSSL 1.0.2k  26 Jan 2017 mcrypt: N LANG:  ZipArchive::addFile: Y
+0000.061 (0) Free space on disk containing Updraft's temporary directory: 1042869.3 MB
+0000.063 (0) Tasks: Backup files: 1 (schedule: daily) Backup DB:  (schedule: daily)
+0000.064 (0) Processed schedules. Combining jobs from identical schedules. Tasks now: Backup files: 1 Backup DB: 1
+0000.070 (0) Requesting semaphore lock (fd) (apparently via scheduler: last_scheduled_action_called_at=1553904586, seconds_ago=91039)
+0000.071 (0) Set semaphore last lock (fd) time to 2019-03-31 01:27:05
+0000.072 (0) Semaphore lock (fd) complete
+0000.084 (0) Backup run: resumption=0, nonce=66bb7164439c, file_nonce=66bb7164439c begun at=1553995625 (0s ago), job type=backup
+0000.085 (0) Scheduling a resumption (1) after 376 seconds (1553996001) in case this run gets aborted
+0000.150 (0) Checking if we have a zip executable available
+0000.151 (0) Testing: /usr/bin/zip
+0000.159 (0) Output: zip warning: binziptest/test.zip not found or empty
+0000.160 (0) Output: adding: binziptest/subdir1/	(in=0) (out=0) (stored 0%)
+0000.161 (0) Output: adding: binziptest/subdir1/subdir2/	(in=0) (out=0) (stored 0%)
+0000.161 (0) Output: adding: binziptest/subdir1/subdir2/test.html	(in=131) (out=107) (deflated 18%)
+0000.162 (0) Output: total bytes=131, compressed=107 -> 18% savings
+0000.169 (0) Output: adding: binziptest/subdir1/subdir2/test2.html	(in=138) (out=113) (deflated 18%)
+0000.170 (0) Output: total bytes=269, compressed=220 -> 18% savings
+0000.225 (0) Working binary zip found: /usr/bin/zip
+0000.226 (0) Zip engine: found/will use a binary zip: /usr/bin/zip
+0000.226 (0) Creation of backups of directories: beginning
+0000.251 (0) Beginning creation of dump of plugins (split every: 400 MB)
+0000.446 (0) Total entities for the zip file: 678 directories, 4170 files (0 skipped as non-modified), 86.5 MB
+0000.451 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 100 files added (on-disk size: 0 KB)
+0000.454 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 200 files added (on-disk size: 0 KB)
+0000.458 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 300 files added (on-disk size: 0 KB)
+0000.462 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 400 files added (on-disk size: 0 KB)
+0000.466 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 500 files added (on-disk size: 0 KB)
+0000.466 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (16.3 MB, 4170 files batched, 501 (501) added so far); re-opening (prior size: 0 KB)
+0011.621 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: size is now: 5.30 MB
+0011.627 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 600 files added (on-disk size: 5450.5 KB)
+0011.631 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 700 files added (on-disk size: 5450.5 KB)
+0011.635 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 800 files added (on-disk size: 5450.5 KB)
+0011.639 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 900 files added (on-disk size: 5450.5 KB)
+0011.643 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 1000 files added (on-disk size: 5450.5 KB)
+0011.643 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (2.6 MB, 4170 files batched, 501 (1002) added so far); re-opening (prior size: 5450.5 KB)
+0015.546 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: size is now: 6.70 MB
+0015.552 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 1100 files added (on-disk size: 6850 KB)
+0015.556 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 1200 files added (on-disk size: 6850 KB)
+0015.560 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 1300 files added (on-disk size: 6850 KB)
+0015.564 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 1400 files added (on-disk size: 6850 KB)
+0015.568 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 1500 files added (on-disk size: 6850 KB)
+0015.568 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (15 MB, 4170 files batched, 501 (1503) added so far); re-opening (prior size: 6850 KB)
+0027.538 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: size is now: 11.40 MB
+0027.544 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 1600 files added (on-disk size: 11677.1 KB)
+0027.547 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 1700 files added (on-disk size: 11677.1 KB)
+0027.551 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 1800 files added (on-disk size: 11677.1 KB)
+0027.555 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 1900 files added (on-disk size: 11677.1 KB)
+0027.559 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 2000 files added (on-disk size: 11677.1 KB)
+0027.560 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (9.2 MB, 4170 files batched, 501 (2004) added so far); re-opening (prior size: 11677.1 KB)
+0038.912 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: size is now: 15.00 MB
+0038.918 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 2100 files added (on-disk size: 15398.4 KB)
+0038.922 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 2200 files added (on-disk size: 15398.4 KB)
+0038.925 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 2300 files added (on-disk size: 15398.4 KB)
+0038.929 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 2400 files added (on-disk size: 15398.4 KB)
+0038.933 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 2500 files added (on-disk size: 15398.4 KB)
+0038.934 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (12.5 MB, 4170 files batched, 501 (2505) added so far); re-opening (prior size: 15398.4 KB)
+0053.725 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: size is now: 18.80 MB
+0053.730 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 2600 files added (on-disk size: 19242.8 KB)
+0053.734 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 2700 files added (on-disk size: 19242.8 KB)
+0053.738 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 2800 files added (on-disk size: 19242.8 KB)
+0053.742 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 2900 files added (on-disk size: 19242.8 KB)
+0053.746 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 3000 files added (on-disk size: 19242.8 KB)
+0053.746 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (10.9 MB, 4170 files batched, 501 (3006) added so far); re-opening (prior size: 19242.8 KB)
+0068.727 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: size is now: 24.20 MB
+0068.733 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 3100 files added (on-disk size: 24824.3 KB)
+0068.737 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 3200 files added (on-disk size: 24824.3 KB)
+0068.741 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 3300 files added (on-disk size: 24824.3 KB)
+0068.745 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 3400 files added (on-disk size: 24824.3 KB)
+0068.749 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 3500 files added (on-disk size: 24824.3 KB)
+0068.749 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (15.5 MB, 4170 files batched, 501 (3507) added so far); re-opening (prior size: 24824.3 KB)
+0092.691 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 3600 files added (on-disk size: 29125.4 KB)
+0092.695 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 3700 files added (on-disk size: 29125.4 KB)
+0092.699 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 3800 files added (on-disk size: 29125.4 KB)
+0092.703 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 3900 files added (on-disk size: 29125.4 KB)
+0092.707 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 4000 files added (on-disk size: 29125.4 KB)
+0092.708 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (2.6 MB, 4170 files batched, 501 (4008) added so far); re-opening (prior size: 29125.4 KB)
+0111.958 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip.tmp: 4100 files added (on-disk size: 30054.5 KB)
+0128.538 (0) Created plugins zip (0) - 30688 KB in 128.2 s (239.3 KB/s) (sha1: 416de8f63fb93084d77944c1c73b13439b9d210a, sha256: 25058648073c522929faff3ee246eebfdebf01d760f85f8c4122a6eef4ff72e6)
+0128.540 (0) Beginning creation of dump of themes (split every: 400 MB)
+0128.635 (0) Total entities for the zip file: 236 directories, 1263 files (0 skipped as non-modified), 3.6 MB
+0128.640 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 100 files added (on-disk size: 0 KB)
+0128.644 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 200 files added (on-disk size: 0 KB)
+0128.647 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 300 files added (on-disk size: 0 KB)
+0128.651 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 400 files added (on-disk size: 0 KB)
+0128.655 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 500 files added (on-disk size: 0 KB)
+0128.656 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (0.1 MB, 1263 files batched, 501 (501) added so far); re-opening (prior size: 0 KB)
+0129.349 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: size is now: 0.20 MB
+0129.355 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 600 files added (on-disk size: 252.6 KB)
+0129.359 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 700 files added (on-disk size: 252.6 KB)
+0129.363 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 800 files added (on-disk size: 252.6 KB)
+0129.367 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 900 files added (on-disk size: 252.6 KB)
+0129.371 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 1000 files added (on-disk size: 252.6 KB)
+0129.371 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (1.9 MB, 1263 files batched, 501 (1002) added so far); re-opening (prior size: 252.6 KB)
+0130.736 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: size is now: 0.70 MB
+0130.742 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 1100 files added (on-disk size: 750.7 KB)
+0130.746 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: 1200 files added (on-disk size: 750.7 KB)
+0133.850 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip.tmp: size is now: 1.20 MB
+0133.872 (0) Created themes zip (0) - 1232.9 KB in 5.3 s (233.2 KB/s) (sha1: 5064644dfd186dcd0429dbe40c66f639615a8c17, sha256: a2384f393b31ef06c81f3ac639ee0a79ccbf7c8462936a7d63456f0ad9494074)
+0133.874 (0) Exclusion option setting (uploads): backup*,*backups,backwpup*,wp-clone,snapshots
+0133.874 (0) Looking for candidates to backup in: /home/rangecro/public_html/wp-content/uploads
+0133.875 (0) finding files: 2018: adding to list (1)
+0133.875 (0) finding files: 2019: adding to list (2)
+0133.876 (0) finding files: bsk-pdf-manager: adding to list (3)
+0133.876 (0) finding files: jupiterx: adding to list (4)
+0133.877 (0) finding files: participants-database: adding to list (5)
+0133.878 (0) finding files: revisr-backups: skipping: excluded by options (glob)
+0133.878 (0) finding files: smack_uci_uploads: adding to list (6)
+0133.879 (0) Beginning creation of dump of uploads (split every: 400 MB)
+0133.931 (0) Total entities for the zip file: 21 directories, 102 files (0 skipped as non-modified), 76.7 MB
+0133.933 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 25 MB added on this batch (29.7 MB, 102 files batched, 36 (36) added so far); re-opening (prior size: 0 KB)
+0161.755 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-uploads.zip.tmp: size is now: 29.40 MB
+0161.760 (0) A useful amount of data was added after this amount of zip processing: 28.1 s (normalised: 23.7 s, rate: 1080.1 KB/s)
+0161.762 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 25 MB added on this batch (25 MB, 102 files batched, 37 (73) added so far); re-opening (prior size: 30127.2 KB)
+0202.762 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-uploads.zip.tmp: size is now: 54.40 MB
+0202.763 (0) A useful amount of data was added after this amount of zip processing: 41.1 s (normalised: 41.1 s, rate: 623.5 KB/s)
+0202.766 (0) Zip: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-uploads.zip.tmp: 100 files added (on-disk size: 55754.7 KB)
+0248.952 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-uploads.zip.tmp: size is now: 75.60 MB
+0250.103 (0) Created uploads zip (0) - 77460.6 KB in 116.2 s (666.7 KB/s) (sha1: 9e3709836428d5620b8c9f8f19b2f01a7cd16e13, sha256: 2c77319cd1de0d570aded9b7be77573ee36ff2eacccc05d50799991cdc349e5d)
+0250.135 (0) Beginning backup of other directories found in the content directory (index: 0)
+0250.136 (0) Exclusion option setting (others): upgrade,cache,updraft,backup*,*backups,mysql.sql,debug.log
+0250.136 (0) Looking for candidates to backup in: /home/rangecro/public_html/wp-content
+0250.137 (0) finding files: plugins: skipping: this is the plugins directory
+0250.137 (0) finding files: themes: skipping: this is the themes directory
+0250.138 (0) finding files: upgrade: skipping: excluded by options
+0250.138 (0) finding files: uploads: skipping: this is the uploads directory
+0250.139 (0) finding files: index.php: adding to list (1)
+0250.139 (0) finding files: updraft: skipping: this is the updraft directory
+0250.189 (0) Total entities for the zip file: 0 directories, 1 files (0 skipped as non-modified), 0 MB
+0250.226 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-others.zip.tmp: size is now: 0.00 MB
+0250.231 (0) Created others zip (0) - 0.2 KB in 0 s (4.3 KB/s) (sha1: 7701c04c42f2fbdf99f82bc5c42664fd35b9c0ff, sha256: 7d95d9a92cb2a645c44de7de9592a490f3db301bdfa9e69b8b37c6382e5b44cf)
+0250.234 (0) Saving backup status to database (elements: 8)
+0250.238 (0) Beginning creation of database dump (WordPress DB)
+0250.240 (0) Testing potential mysqldump binary: /usr/bin/mysqldump
+0250.271 (0) Output: /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;\n/*!40103 SET TIME_ZONE='+00:00' */;\n/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;\n/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;\n/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;\n/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;\nDROP TABLE IF EXISTS `jupiter_options`;\n/*!40101 SET @saved_cs_client     = @@character_set_client */;\n/*!40101 SET character_set_client = utf8 */ (truncated - 1245 bytes total)
+0250.274 (0) Working binary mysqldump found: /usr/bin/mysqldump
+0250.279 (0) Table jupiter_options: Total expected rows (approximate): 700
+0250.293 (0) Table jupiter_options: Total rows added: 696 in 0.01 seconds
+0250.294 (0) Table jupiter_options: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_options.table.gz - 27.8 KB)
+0250.297 (0) Table jupiter_users: Total expected rows (approximate): 2
+0250.300 (0) Table jupiter_users: Total rows added: 2 in 0.00 seconds
+0250.300 (0) Table jupiter_users: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_users.table.gz - 0.6 KB)
+0250.303 (0) Table jupiter_usermeta: Total expected rows (approximate): 46
+0250.306 (0) Table jupiter_usermeta: Total rows added: 46 in 0.00 seconds
+0250.307 (0) Table jupiter_usermeta: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_usermeta.table.gz - 2 KB)
+0250.310 (0) Table jupiter_commentmeta: Total expected rows (approximate): 0
+0250.312 (0) Table jupiter_commentmeta: Total rows added: 0 in 0.00 seconds
+0250.313 (0) Table jupiter_commentmeta: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_commentmeta.table.gz - 0.4 KB)
+0250.316 (0) Table jupiter_comments: Total expected rows (approximate): 0
+0250.318 (0) Table jupiter_comments: Total rows added: 0 in 0.00 seconds
+0250.318 (0) Table jupiter_comments: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_comments.table.gz - 0.5 KB)
+0250.321 (0) Table jupiter_links: Total expected rows (approximate): 0
+0250.323 (0) Table jupiter_links: Total rows added: 0 in 0.00 seconds
+0250.324 (0) Table jupiter_links: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_links.table.gz - 0.4 KB)
+0250.327 (0) Table jupiter_postmeta: Total expected rows (approximate): 1974
+0250.340 (0) Table jupiter_postmeta: Total rows added: 1974 in 0.01 seconds
+0250.342 (0) Table jupiter_postmeta: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_postmeta.table.gz - 20.1 KB)
+0250.345 (0) Table jupiter_posts: Total expected rows (approximate): 230
+0250.355 (0) Table jupiter_posts: Total rows added: 230 in 0.01 seconds
+0250.356 (0) Table jupiter_posts: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_posts.table.gz - 16.1 KB)
+0250.359 (0) Table jupiter_term_relationships: Total expected rows (approximate): 166
+0250.362 (0) Table jupiter_term_relationships: Total rows added: 166 in 0.00 seconds
+0250.363 (0) Table jupiter_term_relationships: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_term_relationships.table.gz - 0.8 KB)
+0250.366 (0) Table jupiter_term_taxonomy: Total expected rows (approximate): 13
+0250.368 (0) Table jupiter_term_taxonomy: Total rows added: 13 in 0.00 seconds
+0250.369 (0) Table jupiter_term_taxonomy: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_term_taxonomy.table.gz - 0.6 KB)
+0250.372 (0) Table jupiter_termmeta: Total expected rows (approximate): 0
+0250.374 (0) Table jupiter_termmeta: Total rows added: 0 in 0.00 seconds
+0250.375 (0) Table jupiter_termmeta: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_termmeta.table.gz - 0.4 KB)
+0250.378 (0) Table jupiter_terms: Total expected rows (approximate): 13
+0250.381 (0) Table jupiter_terms: Total rows added: 13 in 0.00 seconds
+0250.381 (0) Table jupiter_terms: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_terms.table.gz - 0.6 KB)
+0250.385 (0) Table jupiter_bsk_pdf_manager_cats: Total expected rows (approximate): 5
+0250.387 (0) Table jupiter_bsk_pdf_manager_cats: Total rows added: 5 in 0.00 seconds
+0250.388 (0) Table jupiter_bsk_pdf_manager_cats: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_bsk_pdf_manager_cats.table.gz - 0.5 KB)
+0250.392 (0) Table jupiter_bsk_pdf_manager_pdfs: Total expected rows (approximate): 16
+0250.394 (0) Table jupiter_bsk_pdf_manager_pdfs: Total rows added: 16 in 0.00 seconds
+0250.395 (0) Table jupiter_bsk_pdf_manager_pdfs: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_bsk_pdf_manager_pdfs.table.gz - 1 KB)
+0250.398 (0) Table jupiter_bsk_pdf_manager_relationships: Total expected rows (approximate): 16
+0250.403 (0) Table jupiter_bsk_pdf_manager_relationships: Total rows added: 16 in 0.00 seconds
+0250.404 (0) Table jupiter_bsk_pdf_manager_relationships: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_bsk_pdf_manager_relationships.table.gz - 0.4 KB)
+0250.407 (0) Table jupiter_duplicator_packages: Total expected rows (approximate): 0
+0250.409 (0) Table jupiter_duplicator_packages: Total rows added: 0 in 0.00 seconds
+0250.410 (0) Table jupiter_duplicator_packages: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_duplicator_packages.table.gz - 0.4 KB)
+0250.413 (0) Table jupiter_em_bookings: Total expected rows (approximate): 0
+0250.415 (0) Table jupiter_em_bookings: Total rows added: 0 in 0.00 seconds
+0250.416 (0) Table jupiter_em_bookings: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_bookings.table.gz - 0.5 KB)
+0250.421 (0) Table jupiter_em_events: Total expected rows (approximate): 63
+0250.431 (0) Table jupiter_em_events: Total rows added: 63 in 0.01 seconds
+0250.432 (0) Table jupiter_em_events: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_events.table.gz - 3.3 KB)
+0250.435 (0) Table jupiter_em_locations: Total expected rows (approximate): 7
+0250.438 (0) Table jupiter_em_locations: Total rows added: 7 in 0.00 seconds
+0250.439 (0) Table jupiter_em_locations: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_locations.table.gz - 0.9 KB)
+0250.442 (0) Table jupiter_em_meta: Total expected rows (approximate): 4
+0250.445 (0) Table jupiter_em_meta: Total rows added: 4 in 0.00 seconds
+0250.445 (0) Table jupiter_em_meta: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_meta.table.gz - 0.5 KB)
+0250.448 (0) Table jupiter_em_tickets: Total expected rows (approximate): 0
+0250.450 (0) Table jupiter_em_tickets: Total rows added: 0 in 0.00 seconds
+0250.451 (0) Table jupiter_em_tickets: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_tickets.table.gz - 0.4 KB)
+0250.454 (0) Table jupiter_em_tickets_bookings: Total expected rows (approximate): 0
+0250.456 (0) Table jupiter_em_tickets_bookings: Total rows added: 0 in 0.00 seconds
+0250.456 (0) Table jupiter_em_tickets_bookings: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_tickets_bookings.table.gz - 0.4 KB)
+0250.459 (0) Table jupiter_participants_database: Total expected rows (approximate): 1
+0250.462 (0) Table jupiter_participants_database: Total rows added: 1 in 0.00 seconds
+0250.463 (0) Table jupiter_participants_database: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_participants_database.table.gz - 0.6 KB)
+0250.466 (0) Table jupiter_participants_database_fields: Total expected rows (approximate): 19
+0250.469 (0) Table jupiter_participants_database_fields: Total rows added: 19 in 0.00 seconds
+0250.469 (0) Table jupiter_participants_database_fields: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_participants_database_fields.table.gz - 1.4 KB)
+0250.473 (0) Table jupiter_participants_database_groups: Total expected rows (approximate): 4
+0250.475 (0) Table jupiter_participants_database_groups: Total rows added: 4 in 0.00 seconds
+0250.476 (0) Table jupiter_participants_database_groups: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_participants_database_groups.table.gz - 0.5 KB)
+0250.479 (0) Table jupiter_revisr: Total expected rows (approximate): 33
+0250.482 (0) Table jupiter_revisr: Total rows added: 33 in 0.00 seconds
+0250.483 (0) Table jupiter_revisr: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_revisr.table.gz - 1.1 KB)
+0250.486 (0) Table jupiter_sm_sessions: Total expected rows (approximate): 0
+0250.488 (0) Table jupiter_sm_sessions: Total rows added: 0 in 0.00 seconds
+0250.488 (0) Table jupiter_sm_sessions: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_sm_sessions.table.gz - 0.4 KB)
+0250.492 (0) Table jupiter_wpgmza: Total expected rows (approximate): 1
+0250.494 (0) Table jupiter_wpgmza: Total rows added: 1 in 0.00 seconds
+0250.495 (0) Table jupiter_wpgmza: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza.table.gz - 0.5 KB)
+0250.498 (0) Table jupiter_wpgmza_categories: Total expected rows (approximate): 0
+0250.501 (0) Table jupiter_wpgmza_categories: Total rows added: 0 in 0.00 seconds
+0250.501 (0) Table jupiter_wpgmza_categories: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_categories.table.gz - 0.3 KB)
+0250.504 (0) Table jupiter_wpgmza_category_maps: Total expected rows (approximate): 0
+0250.506 (0) Table jupiter_wpgmza_category_maps: Total rows added: 0 in 0.00 seconds
+0250.507 (0) Table jupiter_wpgmza_category_maps: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_category_maps.table.gz - 0.3 KB)
+0250.510 (0) Table jupiter_wpgmza_circles: Total expected rows (approximate): 0
+0250.512 (0) Table jupiter_wpgmza_circles: Total rows added: 0 in 0.00 seconds
+0250.512 (0) Table jupiter_wpgmza_circles: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_circles.table.gz - 0.3 KB)
+0250.515 (0) Table jupiter_wpgmza_maps: Total expected rows (approximate): 1
+0250.518 (0) Table jupiter_wpgmza_maps: Total rows added: 1 in 0.00 seconds
+0250.519 (0) Table jupiter_wpgmza_maps: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_maps.table.gz - 0.9 KB)
+0250.522 (0) Table jupiter_wpgmza_nominatim_geocode_cache: Total expected rows (approximate): 1
+0250.524 (0) Table jupiter_wpgmza_nominatim_geocode_cache: Total rows added: 1 in 0.00 seconds
+0250.525 (0) Table jupiter_wpgmza_nominatim_geocode_cache: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_nominatim_geocode_cache.table.gz - 0.8 KB)
+0250.528 (0) Table jupiter_wpgmza_polygon: Total expected rows (approximate): 0
+0250.530 (0) Table jupiter_wpgmza_polygon: Total rows added: 0 in 0.00 seconds
+0250.530 (0) Table jupiter_wpgmza_polygon: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_polygon.table.gz - 0.4 KB)
+0250.534 (0) Table jupiter_wpgmza_polylines: Total expected rows (approximate): 0
+0250.536 (0) Table jupiter_wpgmza_polylines: Total rows added: 0 in 0.00 seconds
+0250.536 (0) Table jupiter_wpgmza_polylines: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_polylines.table.gz - 0.3 KB)
+0250.539 (0) Table jupiter_wpgmza_rectangles: Total expected rows (approximate): 0
+0250.541 (0) Table jupiter_wpgmza_rectangles: Total rows added: 0 in 0.00 seconds
+0250.542 (0) Table jupiter_wpgmza_rectangles: finishing file (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_rectangles.table.gz - 0.3 KB)
+0250.543 (0) Skipping table (lacks our prefix (jupiter_)): smackuci_events
+0250.544 (0) Skipping table (lacks our prefix (jupiter_)): smackuci_history
+0250.544 (0) Skipping table (lacks our prefix (jupiter_)): wp_ultimate_csv_importer_log_values
+0250.545 (0) Skipping table (lacks our prefix (jupiter_)): wp_ultimate_csv_importer_manageshortcodes
+0250.546 (0) Skipping table (lacks our prefix (jupiter_)): wp_ultimate_csv_importer_shortcodes_statusrel
+0250.547 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_options.table.gz (1/41): adding to final database dump
+0250.553 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_users.table.gz (2/41): adding to final database dump
+0250.554 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_usermeta.table.gz (3/41): adding to final database dump
+0250.555 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_commentmeta.table.gz (4/41): adding to final database dump
+0250.555 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_comments.table.gz (5/41): adding to final database dump
+0250.556 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_links.table.gz (6/41): adding to final database dump
+0250.557 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_postmeta.table.gz (7/41): adding to final database dump
+0250.562 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_posts.table.gz (8/41): adding to final database dump
+0250.567 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_term_relationships.table.gz (9/41): adding to final database dump
+0250.567 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_term_taxonomy.table.gz (10/41): adding to final database dump
+0250.568 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_termmeta.table.gz (11/41): adding to final database dump
+0250.569 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_terms.table.gz (12/41): adding to final database dump
+0250.569 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_bsk_pdf_manager_cats.table.gz (13/41): adding to final database dump
+0250.570 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_bsk_pdf_manager_pdfs.table.gz (14/41): adding to final database dump
+0250.571 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_bsk_pdf_manager_relationships.table.gz (15/41): adding to final database dump
+0250.571 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_duplicator_packages.table.gz (16/41): adding to final database dump
+0250.572 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_bookings.table.gz (17/41): adding to final database dump
+0250.573 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_events.table.gz (18/41): adding to final database dump
+0250.574 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_locations.table.gz (19/41): adding to final database dump
+0250.575 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_meta.table.gz (20/41): adding to final database dump
+0250.575 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_tickets.table.gz (21/41): adding to final database dump
+0250.576 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_em_tickets_bookings.table.gz (22/41): adding to final database dump
+0250.577 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_participants_database.table.gz (23/41): adding to final database dump
+0250.577 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_participants_database_fields.table.gz (24/41): adding to final database dump
+0250.578 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_participants_database_groups.table.gz (25/41): adding to final database dump
+0250.579 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_revisr.table.gz (26/41): adding to final database dump
+0250.580 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_sm_sessions.table.gz (27/41): adding to final database dump
+0250.580 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza.table.gz (28/41): adding to final database dump
+0250.581 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_categories.table.gz (29/41): adding to final database dump
+0250.582 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_category_maps.table.gz (30/41): adding to final database dump
+0250.582 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_circles.table.gz (31/41): adding to final database dump
+0250.583 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_maps.table.gz (32/41): adding to final database dump
+0250.584 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_nominatim_geocode_cache.table.gz (33/41): adding to final database dump
+0250.584 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_polygon.table.gz (34/41): adding to final database dump
+0250.586 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_polylines.table.gz (35/41): adding to final database dump
+0250.586 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db-table-jupiter_wpgmza_rectangles.table.gz (36/41): adding to final database dump
+0250.588 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db.gz: finished writing out complete database file (72 KB)
+0250.594 (0) Total database tables backed up: 36 (backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db.gz, size: 79341, sha256)
+0250.599 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+0250.599 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+0250.600 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+0250.601 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-others.zip: others: This file has not yet been successfully uploaded: will queue
+0250.601 (0) backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db.gz: db: This file has not yet been successfully uploaded: will queue
+0250.602 (0) Saving backup history. Total backup size: 106.9 MB
+0250.604 (0) Requesting upload of the files that have not yet been successfully uploaded (5)
+0250.606 (0) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+0250.607 (0) Beginning dispatch of backup to remote (googledrive) (instance identifier s-d7e2a6983dc1a1f92d0036043f39f5c7)
+0255.834 (0) Google Drive: quota usage: used=474.3 MB, total=15360 MB, available=14885.7 MB
+0255.835 (0) Google Drive: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip: Attempting to upload to Google Drive (into folder id: 10Zfr19kDUQkefCGA98tAWHEbfXZim7BW)
+0257.618 (0) Googledrive chunked upload: 3.3 % uploaded (1048576)
+0258.414 (0) Googledrive chunked upload: 6.7 % uploaded (2097152)
+0259.243 (0) Googledrive chunked upload: 10 % uploaded (3145728)
+0259.981 (0) Googledrive chunked upload: 13.3 % uploaded (4194304)
+0260.752 (0) Googledrive chunked upload: 16.7 % uploaded (5242880)
+0261.577 (0) Googledrive chunked upload: 20 % uploaded (6291456)
+0262.314 (0) Googledrive chunked upload: 23.4 % uploaded (7340032)
+0263.300 (0) Googledrive chunked upload: 26.7 % uploaded (8388608)
+0264.035 (0) Googledrive chunked upload: 30 % uploaded (9437184)
+0264.816 (0) Googledrive chunked upload: 33.4 % uploaded (10485760)
+0265.603 (0) Googledrive chunked upload: 36.7 % uploaded (11534336)
+0266.372 (0) Googledrive chunked upload: 40 % uploaded (12582912)
+0267.144 (0) Googledrive chunked upload: 43.4 % uploaded (13631488)
+0268.109 (0) Googledrive chunked upload: 46.7 % uploaded (14680064)
+0269.070 (0) Googledrive chunked upload: 50.1 % uploaded (15728640)
+0269.792 (0) Googledrive chunked upload: 53.4 % uploaded (16777216)
+0270.623 (0) Googledrive chunked upload: 56.7 % uploaded (17825792)
+0271.444 (0) Googledrive chunked upload: 60.1 % uploaded (18874368)
+0272.278 (0) Googledrive chunked upload: 63.4 % uploaded (19922944)
+0273.091 (0) Googledrive chunked upload: 66.7 % uploaded (20971520)
+0273.875 (0) Googledrive chunked upload: 70.1 % uploaded (22020096)
+0274.617 (0) Googledrive chunked upload: 73.4 % uploaded (23068672)
+0275.573 (0) Googledrive chunked upload: 76.7 % uploaded (24117248)
+0276.421 (0) Googledrive chunked upload: 80.1 % uploaded (25165824)
+0277.186 (0) Googledrive chunked upload: 83.4 % uploaded (26214400)
+0277.942 (0) Googledrive chunked upload: 86.8 % uploaded (27262976)
+0278.896 (0) Googledrive chunked upload: 90.1 % uploaded (28311552)
+0279.869 (0) Googledrive chunked upload: 93.4 % uploaded (29360128)
+0280.942 (0) Googledrive chunked upload: 96.8 % uploaded (30408704)
+0283.541 (0) Googledrive chunked upload: 100 % uploaded (30408704)
+0283.543 (0) Google Drive: OK: Archive backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip uploaded in 27.71 seconds
+0283.544 (0) Recording as successfully uploaded: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip
+0283.551 (0) Deleting local file: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-plugins.zip: OK
+0284.046 (0) Google Drive: quota usage: used=504.3 MB, total=15360 MB, available=14855.7 MB
+0284.047 (0) Google Drive: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip: Attempting to upload to Google Drive (into folder id: 10Zfr19kDUQkefCGA98tAWHEbfXZim7BW)
+0285.712 (0) Googledrive chunked upload: 83.1 % uploaded (1048576)
+0287.919 (0) Googledrive chunked upload: 100 % uploaded (1048576)
+0287.921 (0) Google Drive: OK: Archive backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip uploaded in 3.87 seconds
+0287.922 (0) Recording as successfully uploaded: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip
+0287.923 (0) Deleting local file: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-themes.zip: OK
+0288.503 (0) Google Drive: quota usage: used=505.5 MB, total=15360 MB, available=14854.5 MB
+0288.504 (0) Google Drive: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-uploads.zip: Attempting to upload to Google Drive (into folder id: 10Zfr19kDUQkefCGA98tAWHEbfXZim7BW)
+0291.507 (0) Googledrive chunked upload: 1.3 % uploaded (1048576)
+0292.230 (0) Googledrive chunked upload: 2.6 % uploaded (2097152)
+0292.967 (0) Googledrive chunked upload: 4 % uploaded (3145728)
+0293.955 (0) Googledrive chunked upload: 5.3 % uploaded (4194304)
+0294.790 (0) Googledrive chunked upload: 6.6 % uploaded (5242880)
+0295.739 (0) Googledrive chunked upload: 7.9 % uploaded (6291456)
+0296.544 (0) Googledrive chunked upload: 9.3 % uploaded (7340032)
+0297.290 (0) Googledrive chunked upload: 10.6 % uploaded (8388608)
+0298.053 (0) Googledrive chunked upload: 11.9 % uploaded (9437184)
+0298.845 (0) Googledrive chunked upload: 13.2 % uploaded (10485760)
+0299.794 (0) Googledrive chunked upload: 14.5 % uploaded (11534336)
+0300.538 (0) Googledrive chunked upload: 15.9 % uploaded (12582912)
+0301.433 (0) Googledrive chunked upload: 17.2 % uploaded (13631488)
+0302.215 (0) Googledrive chunked upload: 18.5 % uploaded (14680064)
+0303.157 (0) Googledrive chunked upload: 19.8 % uploaded (15728640)
+0303.931 (0) Googledrive chunked upload: 21.2 % uploaded (16777216)
+0304.658 (0) Googledrive chunked upload: 22.5 % uploaded (17825792)
+0305.599 (0) Googledrive chunked upload: 23.8 % uploaded (18874368)
+0306.358 (0) Googledrive chunked upload: 25.1 % uploaded (19922944)
+0307.337 (0) Googledrive chunked upload: 26.4 % uploaded (20971520)
+0308.069 (0) Googledrive chunked upload: 27.8 % uploaded (22020096)
+0309.045 (0) Googledrive chunked upload: 29.1 % uploaded (23068672)
+0309.808 (0) Googledrive chunked upload: 30.4 % uploaded (24117248)
+0310.756 (0) Googledrive chunked upload: 31.7 % uploaded (25165824)
+0311.473 (0) Googledrive chunked upload: 33 % uploaded (26214400)
+0312.487 (0) Googledrive chunked upload: 34.4 % uploaded (27262976)
+0313.458 (0) Googledrive chunked upload: 35.7 % uploaded (28311552)
+0314.406 (0) Googledrive chunked upload: 37 % uploaded (29360128)
+0315.233 (0) Googledrive chunked upload: 38.3 % uploaded (30408704)
+0315.990 (0) Googledrive chunked upload: 39.7 % uploaded (31457280)
+0316.848 (0) Googledrive chunked upload: 41 % uploaded (32505856)
+0317.676 (0) Googledrive chunked upload: 42.3 % uploaded (33554432)
+0318.451 (0) Googledrive chunked upload: 43.6 % uploaded (34603008)
+0319.159 (0) Googledrive chunked upload: 44.9 % uploaded (35651584)
+0320.104 (0) Googledrive chunked upload: 46.3 % uploaded (36700160)
+0321.150 (0) Googledrive chunked upload: 47.6 % uploaded (37748736)
+0321.969 (0) Googledrive chunked upload: 48.9 % uploaded (38797312)
+0322.925 (0) Googledrive chunked upload: 50.2 % uploaded (39845888)
+0323.878 (0) Googledrive chunked upload: 51.6 % uploaded (40894464)
+0324.630 (0) Googledrive chunked upload: 52.9 % uploaded (41943040)
+0325.349 (0) Googledrive chunked upload: 54.2 % uploaded (42991616)
+0326.314 (0) Googledrive chunked upload: 55.5 % uploaded (44040192)
+0327.058 (0) Googledrive chunked upload: 56.8 % uploaded (45088768)
+0327.858 (0) Googledrive chunked upload: 58.2 % uploaded (46137344)
+0328.819 (0) Googledrive chunked upload: 59.5 % uploaded (47185920)
+0329.806 (0) Googledrive chunked upload: 60.8 % uploaded (48234496)
+0330.791 (0) The scheduled resumption is within 45 seconds - will reschedule
+0330.792 (0) Rescheduling resumption 1: moving to 421 seconds from now (1553996377)
+0330.794 (0) To decrease the likelihood of overlaps, increasing resumption interval to: 376 + 45 = 421
+0330.795 (0) Googledrive chunked upload: 62.1 % uploaded (49283072)
+0331.606 (0) Googledrive chunked upload: 63.5 % uploaded (50331648)
+0332.435 (0) Googledrive chunked upload: 64.8 % uploaded (51380224)
+0333.164 (0) Googledrive chunked upload: 66.1 % uploaded (52428800)
+0334.102 (0) Googledrive chunked upload: 67.4 % uploaded (53477376)
+0335.043 (0) Googledrive chunked upload: 68.7 % uploaded (54525952)
+0335.761 (0) Googledrive chunked upload: 70.1 % uploaded (55574528)
+0336.555 (0) Googledrive chunked upload: 71.4 % uploaded (56623104)
+0337.279 (0) Googledrive chunked upload: 72.7 % uploaded (57671680)
+0338.083 (0) Googledrive chunked upload: 74 % uploaded (58720256)
+0338.989 (0) Googledrive chunked upload: 75.4 % uploaded (59768832)
+0339.684 (0) Googledrive chunked upload: 76.7 % uploaded (60817408)
+0340.486 (0) Googledrive chunked upload: 78 % uploaded (61865984)
+0341.483 (0) Googledrive chunked upload: 79.3 % uploaded (62914560)
+0342.327 (0) Googledrive chunked upload: 80.6 % uploaded (63963136)
+0343.050 (0) Googledrive chunked upload: 82 % uploaded (65011712)
+0343.841 (0) Googledrive chunked upload: 83.3 % uploaded (66060288)
+0344.618 (0) Googledrive chunked upload: 84.6 % uploaded (67108864)
+0345.443 (0) Googledrive chunked upload: 85.9 % uploaded (68157440)
+0346.260 (0) Googledrive chunked upload: 87.2 % uploaded (69206016)
+0347.017 (0) Googledrive chunked upload: 88.6 % uploaded (70254592)
+0347.881 (0) Googledrive chunked upload: 89.9 % uploaded (71303168)
+0348.605 (0) Googledrive chunked upload: 91.2 % uploaded (72351744)
+0349.467 (0) Googledrive chunked upload: 92.5 % uploaded (73400320)
+0350.492 (0) Googledrive chunked upload: 93.9 % uploaded (74448896)
+0351.227 (0) Googledrive chunked upload: 95.2 % uploaded (75497472)
+0352.172 (0) Googledrive chunked upload: 96.5 % uploaded (76546048)
+0352.923 (0) Googledrive chunked upload: 97.8 % uploaded (77594624)
+0353.686 (0) Googledrive chunked upload: 99.1 % uploaded (78643200)
+0355.894 (0) Googledrive chunked upload: 100 % uploaded (78643200)
+0355.896 (0) Google Drive: OK: Archive backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-uploads.zip uploaded in 67.39 seconds
+0355.897 (0) Recording as successfully uploaded: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-uploads.zip
+0355.913 (0) Deleting local file: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-uploads.zip: OK
+0356.408 (0) Google Drive: quota usage: used=581.2 MB, total=15360 MB, available=14778.8 MB
+0356.409 (0) Google Drive: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-others.zip: Attempting to upload to Google Drive (into folder id: 10Zfr19kDUQkefCGA98tAWHEbfXZim7BW)
+0359.321 (0) Googledrive chunked upload: 100 % uploaded
+0359.324 (0) Google Drive: OK: Archive backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-others.zip uploaded in 2.91 seconds
+0359.324 (0) Recording as successfully uploaded: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-others.zip
+0359.326 (0) Deleting local file: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-others.zip: OK
+0359.857 (0) Google Drive: quota usage: used=581.2 MB, total=15360 MB, available=14778.8 MB
+0359.858 (0) Google Drive: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db.gz: Attempting to upload to Google Drive (into folder id: 10Zfr19kDUQkefCGA98tAWHEbfXZim7BW)
+0362.752 (0) Googledrive chunked upload: 100 % uploaded
+0362.754 (0) Google Drive: OK: Archive backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db.gz uploaded in 2.9 seconds
+0362.755 (0) Recording as successfully uploaded: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db.gz
+0362.756 (0) Deleting local file: backup_2019-03-31-1127_Range_Croquet_Club_at_Maleny_66bb7164439c-db.gz: OK
+0362.758 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0362.759 (0) Number of backup sets in history: 3; groups (db): 1
+0362.760 (0) Examining (for databases) backup set with group_id=0, nonce=66bb7164439c, datestamp=1553995625 (Mar 31 2019 01:27:05)
+0362.760 (0) This backup set is the backup set just made, so will not be deleted.
+0362.760 (0) Examining (for databases) backup set with group_id=0, nonce=c2b9d0e37e15, datestamp=1553904586 (Mar 30 2019 00:09:46)
+0362.760 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0362.761 (0) Examining (for databases) backup set with group_id=0, nonce=e31e0a3c65ab, datestamp=1553853356 (Mar 29 2019 09:55:56)
+0362.761 (0) 1553853356: db: this set includes a database (backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-db.gz); db count is now 2
+0362.761 (0) 1553853356: db: over retain limit (2); will delete this database
+0362.761 (0) Delete file: backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-db.gz, service=googledrive
+0362.761 (0) Deleting local copy (backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-db.gz)
+0363.379 (0) Google Drive: backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-db.gz: Deletion failed: file was not found
+0363.381 (0) This backup set remains non-empty (f=1/d=0); will retain in history
+0363.382 (0) Number of backup sets in history: 3; groups (files): 1
+0363.382 (0) Examining (for files) backup set with nonce=66bb7164439c, datestamp=1553995625 (Mar 31 2019 01:27:05)
+0363.382 (0) This backup set is the backup set just made, so will not be deleted.
+0363.383 (0) This backup set is the backup set just made, so will not be deleted.
+0363.383 (0) This backup set is the backup set just made, so will not be deleted.
+0363.383 (0) This backup set is the backup set just made, so will not be deleted.
+0363.383 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0363.384 (0) Examining (for files) backup set with nonce=c2b9d0e37e15, datestamp=1553904586 (Mar 30 2019 00:09:46)
+0363.384 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0363.384 (0) Examining (for files) backup set with nonce=e31e0a3c65ab, datestamp=1553853356 (Mar 29 2019 09:55:56)
+0363.384 (0) plugins: over retain limit (2); will delete this file entity
+0363.384 (0) themes: over retain limit (2); will delete this file entity
+0363.384 (0) uploads: over retain limit (2); will delete this file entity
+0363.384 (0) others: over retain limit (2); will delete this file entity
+0363.384 (0) Delete file: backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-plugins.zip, service=googledrive
+0363.384 (0) Deleting local copy (backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-plugins.zip)
+0363.385 (0) Delete file: backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-themes.zip, service=googledrive
+0363.386 (0) Deleting local copy (backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-themes.zip)
+0363.386 (0) Delete file: backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-uploads.zip, service=googledrive
+0363.387 (0) Deleting local copy (backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-uploads.zip)
+0363.387 (0) Delete file: backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-others.zip, service=googledrive
+0363.388 (0) Deleting local copy (backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-others.zip)
+0363.997 (0) Google Drive: backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-plugins.zip: Deletion failed: file was not found
+0363.998 (0) Google Drive: backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-themes.zip: Deletion failed: file was not found
+0363.998 (0) Google Drive: backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-uploads.zip: Deletion failed: file was not found
+0363.999 (0) Google Drive: backup_2019-03-29-1955_Range_Croquet_Club_at_Maleny_e31e0a3c65ab-others.zip: Deletion failed: file was not found
+0364.000 (0) This backup set is now empty; will remove from history
+0364.001 (0) Deleting log file (log.e31e0a3c65ab.txt)
+0364.001 (0) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0364.004 (0) Resume backup (66bb7164439c, 0): finish run
+0364.005 (0) Decremented the semaphore (fd) by 1
+0364.006 (0) Semaphore (fd) unlocked
+0364.007 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0364.009 (0) Fetching RSS news feed
+0364.360 (0) Fetched RSS news feed; result is a: SimplePie
+0364.384 (0) Sending email ('Files and database (Full backup)') report (attachments: 0, size: 0 KB) to: stuar...
+0364.499 (0) The backup apparently succeeded and is now complete

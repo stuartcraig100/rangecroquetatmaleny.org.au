@@ -129,14 +129,14 @@ class BSKPDFManagerWidget extends WP_Widget {
         
         echo '<div class="bsk-pdfm-widget-output-container">';
         $str_body = BSKPDFM_Common_Display::display_pdfs_in_ul_or_ol(
-                                                                                                     $ul_or_ol,
-                                                                                                     false, //$only_li
-                                                                                                     'bsk-pdfm-pdfs-'.$ul_or_ol.'-list',
-                                                                                                     $sorted_pdf_results_array, 
-                                                                                                     $open_target_str, $nofollow_tag, 
-                                                                                                     $show_date, $date_format_str, $date_before_title,
-                                                                                                     'h3'
-                                                                                                    );
+                                                                     $ul_or_ol,
+                                                                     false, //$only_li
+                                                                     'bsk-pdfm-pdfs-'.$ul_or_ol.'-list',
+                                                                     $sorted_pdf_results_array, 
+                                                                     $open_target_str, $nofollow_tag, 
+                                                                     $show_date, $date_format_str, $date_before_title,
+                                                                     'h3'
+                                                                    );
         echo $str_body;
         
         //credit
@@ -171,7 +171,7 @@ class BSKPDFManagerWidget extends WP_Widget {
         $instance['pdfm_all_or_specific'] = $new_instance['pdfm_all_or_specific'];
         $instance['pdfm_specific_ids'] = strip_tags( $new_instance['pdfm_specific_ids'] );
         $instance['pdfm_order_by'] = $new_instance['pdfm_order_by'];
-        $instance['pdfm_order'] = $new_instance['pdfm_order_by'];
+        $instance['pdfm_order'] = $new_instance['pdfm_order'];
         $instance['pdfm_most_top_of'] = $new_instance['pdfm_most_top_of'];
         $instance['pdfm_show_date'] = $new_instance['pdfm_show_date'];
         $instance['pdfm_date_format_str'] = $new_instance['pdfm_date_format_str'];
@@ -225,7 +225,7 @@ class BSKPDFManagerWidget extends WP_Widget {
             $pdfm_ordered_list = isset( $instance['bsk_pdf_manager_show_ordered_list'] ) ? $instance['bsk_pdf_manager_show_ordered_list']  : 'NO';
         }
         
-        $widget_pro_tips_array = array( 'Exclude PDF ID',  'Featured image' );
+        $widget_pro_tips_array = array( 'Exclude PDF ID',  'Featured image', 'Order by Custom Order' );
     ?>
     <div class="bsk-pdfm-widget-setting-container bsk-pdfm-pdfs-widget">
         <?php $this->bsk_pdf_manager_show_pro_tip_box( $widget_pro_tips_array ); ?>
@@ -255,7 +255,7 @@ class BSKPDFManagerWidget extends WP_Widget {
             <select name="<?php echo $this->get_field_name( 'pdfm_order_by' ); ?>" class="bsk-pdfm-order-by">
                 <option value="IDS_SEQUENCE" <?php if( $pdfm_order_by == 'IDS_SEQUENCE' ) echo 'selected'; ?>>PDFs ID sequence</option>
                 <option value="title" <?php if( $pdfm_order_by == 'title' ) echo 'selected'; ?>>Title</option>
-                <option value="last_date" <?php if( $pdfm_order_by == 'last_date' ) echo 'selected'; ?>>Date</option>
+                <option value="date" <?php if( $pdfm_order_by == 'date' ) echo 'selected'; ?>>Date</option>
                 <option value="order_num" <?php if( $pdfm_order_by == 'order_num' ) echo 'selected'; ?>>Custom Order</option>
             </select>
         </p>

@@ -54,7 +54,9 @@ class BSKPDFM_Common_Data_Source {
                  implode( ' ', $where_case_array ).
                  $order_case.
                  $limit_case;
-        $sql = $wpdb->prepare( $sql, $prepare_values_array );
+        if( count($prepare_values_array) > 0 ){
+            $sql = $wpdb->prepare( $sql, $prepare_values_array );
+        }
         $results = $wpdb->get_results( $sql );
         if( !$results || !is_array( $results ) || count( $results ) < 1 ){
             return false;
@@ -131,7 +133,9 @@ class BSKPDFM_Common_Data_Source {
                  implode( ' ', $where_case_array ).
                  $order_case.
                  $limit_case;
-        $sql = $wpdb->prepare( $sql, $prepare_values_array );
+        if( count( $prepare_values_array ) > 0 ){
+            $sql = $wpdb->prepare( $sql, $prepare_values_array );
+        }
         $results = $wpdb->get_results( $sql );
         if( !$results || !is_array( $results ) || count( $results ) < 1 ){
             return false;
@@ -148,9 +152,9 @@ class BSKPDFM_Common_Data_Source {
          }
 
         return array( 
-                            'pdfs' => $pdf_by_category_array, 
-                            'categories_for_pdfs' => $categories_for_pdfs 
-                         );
+                        'pdfs' => $pdf_by_category_array, 
+                        'categories_for_pdfs' => $categories_for_pdfs 
+                     );
     }
     
     public static function bsk_pdfm_get_sub_cat( $parent_id, $cat_order_by, $cat_order ){
@@ -201,10 +205,10 @@ class BSKPDFM_Common_Data_Source {
     }
     
     public static function bsk_pdfm_organise_categories_id_sequence(  
-                                                                                                    $id_string, 
-                                                                                                    $cat_order_by_str, 
-                                                                                                    $cat_order_str 
-                                                                                                  ){
+                                                                    $id_string, 
+                                                                    $cat_order_by_str, 
+                                                                    $cat_order_str 
+                                                                  ){
         global $wpdb;
         
         if( trim($id_string) == "" ){

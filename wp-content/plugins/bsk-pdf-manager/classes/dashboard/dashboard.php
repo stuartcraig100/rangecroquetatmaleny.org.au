@@ -15,6 +15,7 @@ class BSKPDFM_Dashboard {
                                     'Description', 
                                     'Password', 
                                     'Empty Message',
+                                    'Time',
                                    );
     private static $_pro_tips_for_pdf = array( 
                                     'Custom order',
@@ -23,13 +24,18 @@ class BSKPDFM_Dashboard {
                                     'Description', 
                                     'WordPress Media Uploader', 
                                     'Featured Image',
+                                    'Bulk change date',
                                     'Date of file last modified',
+                                    'Time',
                                     'Publish Date',
                                     'Expiry Date',
                                     'Download Count',
                                    );
     private static $_pro_tips_for_pdf_bulk_change_category = array( 
                                     'Bulk change category',
+                                   );
+    private static $_pro_tips_for_pdf_bulk_change_date_time = array( 
+                                    'Bulk change date&amp;time',
                                    );
     private static $_pro_tips_for_add_by_ftp = array( 
                                     'Add by FTP',
@@ -201,9 +207,13 @@ class BSKPDFM_Dashboard {
 		
 		if ($lists_curr_view == 'list'){
 			global $wpdb;
+            
+            $bulk_action = isset($_POST['action']) ? $_POST['action'] : '';
+            if( isset($_POST['action2']) && $bulk_action == '' ){
+                $bulk_action = $_POST['action2'];
+            }
 			
-			if( (isset($_POST['action']) && $_POST['action'] == 'changecat') || 
-			    (isset($_POST['action2']) && $_POST['action2'] == 'changecat') ){
+			if( $bulk_action == 'changecat' ){
 				
 				$selected_PDFs = isset($_POST['bsk-pdf-manager-pdfs']) ? $_POST['bsk-pdf-manager-pdfs'] : '';
 				$selected_PDFs_to_hidden = '';
@@ -257,8 +267,146 @@ class BSKPDFM_Dashboard {
                 </p>
                 </form>
               </div>
-              <?php
-			}else{
+            <?php
+			}else if( $bulk_action == 'changedate' ){
+                $selected_PDFs = isset($_POST['bsk-pdf-manager-pdfs']) ? $_POST['bsk-pdf-manager-pdfs'] : '';
+				$selected_PDFs_to_hidden = '';
+                
+				$url_cat_parameter = isset($_REQUEST['cat']) ? '&cat='.$_REQUEST['cat'] : '';
+				$action_url = admin_url( 'admin.php?page='.self::$_bsk_pdfm_pro_pages['pdf'].$url_cat_parameter );
+            ?>
+            <div class="wrap">
+                <h2 style="margin-bottom: 20px;">Change Date&amp;Time</h2>
+                <?php $this->bsk_pdf_manager_show_pro_tip_box( self::$_pro_tips_for_pdf_bulk_change_date_time ); ?>
+                <form id="bsk_pdf_manager_pdfs_bulk_change_date_form_id" method="post" action="<?php echo $action_url; ?>" enctype="multipart/form-data">
+                <?php
+                
+                $pdfs_array_to_update = false;
+                
+				if( $selected_PDFs && is_array($selected_PDFs) && count($selected_PDFs) > 0 ){
+					global $wpdb;
+                    
+                    $pdfs_id_str = implode( ', ', $selected_PDFs );
+                    $sql = 'SELECT `id`, `title`, `file_name`, `last_date`, `by_media_uploader` '.
+                           'FROM `'.$wpdb->prefix.BSKPDFManager::$_pdfs_tbl_name.'` '.
+                           'WHERE `id` IN('.$pdfs_id_str.')';
+                    $pdfs_array_to_update = $wpdb->get_results( $sql );
+                }
+				?>
+                <div>
+                    <p style="font-weight: bold;">Set document's date&amp;time with:</p>
+                    <p>
+                        <span class="bsk-pdf-field">
+                            <label style="display: block;">
+                                <input type="radio" name="bsk_pdfm_bulk_change_date_way_raido" class="bsk-pdfm-bulk-change-date-way-raido" value="Current_Date" /> Current server date
+                            </label>
+                            <label style="display: block; margin-top: 10px;">
+                                <input type="radio" name="bsk_pdfm_bulk_change_date_way_raido" class="bsk-pdfm-bulk-change-date-way-raido" value="Current_Date_Time" /> Current server date&amp;time
+                            </label>
+                            <label style="display: block; margin-top: 10px;">
+                                <input type="radio" name="bsk_pdfm_bulk_change_date_way_raido" class="bsk-pdfm-bulk-change-date-way-raido" value="Document_Date_Time" checked /> Document's current date&amp;time
+                            </label>
+                        </span>
+                    </p>
+                    <table class="widefat bsk-pdfm-bulk-change-date-list-table" style="width:95%;">
+                        <thead>
+                            <tr>
+                                <td class="check-column" style="width:5%; padding-left:10px;"><input type='checkbox' /></td>
+                                <td style="width:5%;">ID</td>
+                                <td style="width:30%;">Title</td>
+                                <td style="width:30%;">File</td>
+                                <td style="width:30%;">Date&amp;Time</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if( count($pdfs_array_to_update) < 1 ){
+                            ?>
+                            <tr class="alternate">
+                                <td colspan="5">No valid PDF files found</td>
+                            </tr>
+                            <?php
+                            }else{
+                                $i = 1;
+                                foreach( $pdfs_array_to_update as $file_obj ){
+                                    $class_str = '';
+                                    if( $i % 2 == 1 ){
+                                        $class_str = ' class="alternate"';
+                                    }
+                                    if( $file_obj->by_media_uploader > 1 ){
+                                        $file_url = wp_get_attachment_url( $file_obj->by_media_uploader );
+                                        if( $file_url ){
+                                            $file_name_array = explode('wp-content', $file_url);
+                                            if( count($file_name_array) > 1 ){
+                                                $file_name_with_out_dir_structure = $file_name_array[count($file_name_array) - 1];
+                                            }
+                                            $file_str =  '<a href="'.$file_url.'" target="_blank" title="Open PDF">wp-content'.$file_name_with_out_dir_structure.'</a>';
+                                        }
+                                    }else if( $file_obj->file_name && file_exists(ABSPATH.$file_obj->file_name) ){
+                                        $file_url = site_url().'/'.$file_obj->file_name;
+                                        $file_str =  '<a href="'.$file_url.'" target="_blank" title="Open PDF">'.$file_obj->file_name.'</a>';
+                                    }else{
+                                        $file_str = $file_obj->file_name;
+                                        $file_str .= '<p><span style="color: #dc3232; font-weight:bold;">Missing file</span></p>';
+                                    }
+                            ?>
+                            <tr<?php echo $class_str; ?>>
+                                <td class="check-column" style="padding-left:18px;">
+                                    <input type='checkbox' name='bsk_pdfm_bulk_change_date_ids[]' value="<?php echo $file_obj->id; ?>" style="padding:0; margin:0;" checked />
+                                </td>
+                                <td><?php echo $file_obj->id; ?></td>
+                                <td><?php echo $file_obj->title; ?></td>
+                                <td><?php echo $file_str; ?></td>
+                                <?php
+                                $date = substr( $file_obj->last_date, 0, 10 );
+                                $time_h = substr( $file_obj->last_date, 11, 2 );
+                                $time_m = substr( $file_obj->last_date, 14, 2 );
+                                $time_s = substr( $file_obj->last_date, 17, 2 );
+                                ?>
+                                <td>
+                                    <input type="text" name="bsk_pdfm_bulk_change_date_dates[<?php echo $file_obj->id; ?>]" value="<?php echo $date; ?>" class="bsk-pdfm-date-time-date bsk-date" />
+                                    <span>@</span>
+                                    <input type="number" name="bsk_pdfm_bulk_change_date_hour[<?php echo $file_obj->id; ?>]" class="bsk-pdfm-date-time-hour" value="<?php echo $time_h; ?>" min="0" max="24" step="1" />
+                                    <span>:</span>
+                                    <input type="number" name="bsk_pdfm_bulk_change_date_minute[<?php echo $file_obj->id; ?>]" class="bsk-pdfm-date-time-minute" value="<?php echo $time_m; ?>" min="0" max="60" step="1"  />
+                                    <span>:</span>
+                                    <input type="number" name="bsk_pdfm_bulk_change_date_second[<?php echo $file_obj->id; ?>]" class="bsk-pdfm-date-time-second" value="<?php echo $time_s; ?>" min="0" max="60" step="1"  />
+                                    <input type="hidden" class="bsk-pdfm-bulk-change-date-document-self" value="<?php echo $file_obj->last_date; ?>" />
+                                </td>
+                            </tr>
+                        <?php
+                                $i++;
+                            }
+                        }
+                        ?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="check-column" style="padding-left:10px;"><input type='checkbox' /></td>
+                                <td>ID</td>
+                                <td>Title</td>
+                                <td>File</td>
+                                <td>Date&amp;Time</td>
+                            </tr>
+                        </tfoot>
+                        <input type="hidden" class="bsk-pdfm-bulk-change-date-current-server-date-time" value="<?php echo date('Y-m-d H:i:s', current_time('timestamp') ) ?>" />
+                    </table>
+                </div>
+                <?php
+				$_nonce = wp_create_nonce( 'bsk_pdf_manager_bulk_update_pdf_date_nonce' );
+				?>
+                <p style="margin-top: 20px;">
+				    <input type="hidden" name="_nonce" value="<?php echo $_nonce; ?>" />
+                	<input type="hidden" name="bsk_pdf_manager_action" id="bsk_pdf_manager_action_id" value="" />
+                	<input type="button" class="button-primary" value="Cancel" id="bsk_pdf_manager_pdfs_date_change_cancel_id" />
+                    <?php if( $pdfs_array_to_update && count($pdfs_array_to_update) > 0 ){ ?>
+                    <input type="button" class="button-primary" value="Submit" id="bsk_pdf_manager_pdfs_date_change_submit_id" style="margin-left: 15px;" disabled />
+					<?php } ?>
+                </p>
+                </form>
+            </div>
+            <?php
+            }else{
 				$bsk_pdfm_pdfs_list_page_url = admin_url( 'admin.php?page='.self::$_bsk_pdfm_pro_pages['pdf'] );
 				
 				$current_category_id = 0;

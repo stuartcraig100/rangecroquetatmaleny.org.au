@@ -4,7 +4,7 @@
 Plugin Name: BSK PDF Manager
 Plugin URI: http://www.bannersky.com/bsk-pdf-manager-pro/
 Description: Help you manage your PDF documents. PDF documents can be filter by category. Support short code to show special PDF documents or all PDF documents under  category. Widget supported.
-Version: 2.2.1
+Version: 2.3
 Author: BannerSky.com
 Author URI: http://www.bannersky.com/
 */
@@ -19,10 +19,11 @@ class BSKPDFManager {
 	public static $_pdfs_tbl_name = 'bsk_pdf_manager_pdfs';
     public static $_rels_tbl_name = 'bsk_pdf_manager_relationships';
     
-	public static $_PLUGIN_VERSION_ = '2.2.1';
+	public static $_PLUGIN_VERSION_ = '2.3';
 	private static $_plugin_db_version = '2.2';
 	private static $_plugin_saved_db_version_option = '_bsk_pdf_manager_db_ver_';
     private static $_plugin_db_rels_done_option = '_bsk_pdf_manager_rels_done_';
+    private static $_plugin_db_upgrading = '_bsk_pdf_manager_db_upgrading_';
 	public static $_upload_path = '';
 	public static $_upload_folder = 'bsk-pdf-manager/';
 	public static $_upload_folder_4_ftp = 'bsk-pdf-manager/ftp/';
@@ -121,7 +122,6 @@ class BSKPDFManager {
             self::$instance->bsk_pdf_create_upload_folder_and_set_secure();
 
             add_action( 'plugins_loaded', array(self::$instance, 'bsk_pdf_manager_update_database'), 10 );
-            add_action( 'plugins_loaded', array(self::$instance, 'bsk_pdf_manager_build_relationships'), 12 );
         }
         
 		return self::$instance;
@@ -371,6 +371,13 @@ class BSKPDFManager {
 			return;
 		}
 		
+        $is_upgrading = get_option( self::$_plugin_db_upgrading, false );
+        if( $is_upgrading ){
+            //already have instance doing upgrading so exit this one
+            return;
+        }
+        update_option( self::$_plugin_db_upgrading, true );
+        
 		global $wpdb;
 					
         //upgrade db version to 2.0
@@ -426,14 +433,17 @@ class BSKPDFManager {
 
             $sql = 'ALTER TABLE `'.$table_name.'` CHANGE `cat_title` `title` VARCHAR(512) NOT NULL;';
             $wpdb->query( $sql );
+            
+            $this->bsk_pdf_manager_build_relationships();
         }
         
-            $table_name = $wpdb->prefix . self::$_pdfs_tbl_name;
-            $sql = 'ALTER TABLE `'.$table_name.'` ADD `download_count` INT DEFAULT 0 AFTER `weekday`;';
-            $wpdb->query( $sql );
+        $table_name = $wpdb->prefix . self::$_pdfs_tbl_name;
+        $sql = 'ALTER TABLE `'.$table_name.'` ADD `download_count` INT DEFAULT 0 AFTER `weekday`;';
+        $wpdb->query( $sql );
         
         //upgrade to 2.2
 		update_option( self::$_plugin_saved_db_version_option, self::$_plugin_db_version );
+        delete_option( self::$_plugin_db_upgrading );
 	}
     
     function bsk_pdf_manager_build_relationships(){
@@ -509,6 +519,28 @@ class BSKPDFManager {
 		//copy file to upload foloder
 		if( !file_exists($_upload_folder_path.'/index.php') ){
 			copy( dirname(__FILE__).'/assets/index.php', $_upload_folder_path.'/index.php' );
+		}
+        
+        
+        //create folder for ftp upload
+		$_upload_folder_4_ftp_path = self::$_upload_path.self::$_upload_folder_4_ftp;
+		if ( !is_dir($_upload_folder_4_ftp_path) ) {
+			if ( !wp_mkdir_p( $_upload_folder_4_ftp_path ) ) {
+				self::$_plugin_admin_notice_message['upload_folder_missing_4_ftp']  = array( 'message' => 'Directory <strong>' . $_upload_folder_4_ftp_path . '</strong> can not be created. Please create it first yourself.',
+				                                                                                	'	  type' => 'ERROR');
+			}
+		}
+		
+		if ( !is_writeable( $_upload_folder_4_ftp_path ) ) {
+			$msg  = 'Directory <strong>' . $_upload_folder_4_ftp_path . '</strong> is not writeable ! ';
+			$msg .= 'Check <a href="http://codex.wordpress.org/Changing_File_Permissions">http://codex.wordpress.org/Changing_File_Permissions</a> for how to set the permission.';
+
+			self::$_plugin_admin_notice_message['upload_folder_not_writeable_4_ftp']  = array( 'message' => $msg,
+			                                                                                          		                 'type' => 'ERROR');
+		}
+        //copy file to upload foloder
+		if( !file_exists($_upload_folder_4_ftp_path.'/index.php') ){
+			copy( dirname(__FILE__).'/assets/index.php', $_upload_folder_4_ftp_path.'/index.php' );
 		}
 	}
     

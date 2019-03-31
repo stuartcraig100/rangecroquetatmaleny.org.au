@@ -81,6 +81,8 @@ class ACUI_Email_Options{
 
 		<br/>
 		<input class="button-primary" type="submit" value="<?php _e( 'Save email template and options', 'import-users-from-csv-with-meta'); ?>" id="save_mail_template_options"/>
+
+		<?php wp_nonce_field( 'codection-security', 'nonce' ); ?>
 		
 		<?php ACUI_Email_Template::email_templates_edit_form_after_editor(); ?>
 

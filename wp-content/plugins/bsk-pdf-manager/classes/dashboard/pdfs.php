@@ -122,7 +122,8 @@ class BSKPDFM_Dashboard_PDFs extends WP_List_Table {
     
         $actions = array( 
             'delete' => 'Delete',
-			'changecat' => 'Change Category'
+			'changecat' => 'Change Category',
+            'changedate' => 'Change Date'
         );
         
         return $actions;
@@ -241,7 +242,11 @@ class BSKPDFM_Dashboard_PDFs extends WP_List_Table {
 
                 $file_url = site_url().'/'.$pdf_record->file_name;
                 $file_str =  '<a href="'.$file_url.'" target="_blank" title="Open PDF">'.$pdf_record->file_name.'</a>';
+            }else{
+                $file_str = $pdf_record->file_name;
+                $file_str .= '<p><span style="color: #dc3232; font-weight:bold;">Missing file</span></p>';
             }
+            
 
             //category
 			$category_str = '';
